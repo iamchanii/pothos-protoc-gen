@@ -1,0 +1,1 @@
+# pothos-protoc-gen

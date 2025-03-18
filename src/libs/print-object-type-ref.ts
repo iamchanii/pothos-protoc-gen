@@ -142,7 +142,7 @@ export function printObjectTypeRef(f: GeneratedFile, message: DescMessage) {
         (field.fieldKind === 'list' && field.listKind === 'scalar')) &&
       isBigIntType(field.scalar)
     ) {
-      return [`String(${valueExpr})`];
+      return [`(${valueExpr})?.toString()`];
     }
     if (
       field.fieldKind === 'enum' ||

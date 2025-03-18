@@ -1,0 +1,48 @@
+# Project Intelligence: pothos-protoc-gen
+
+## Code Organization Patterns
+- The project follows a modular structure with clear separation of concerns
+- Each file in the `libs` directory has a specific responsibility
+- Naming conventions are consistent: collect-*, generate-*, print-*, etc.
+- TypeScript is used throughout with strict typing
+
+## File Naming Conventions
+- Files are named using kebab-case
+- File names reflect their primary function
+- Collection-related files are prefixed with `collect-`
+- Generation-related files are prefixed with `generate-`
+- Printing-related files are prefixed with `print-`
+
+## Code Style Preferences
+- ES Modules are used for imports/exports
+- Arrow functions are preferred for function expressions
+- TypeScript interfaces are used for type definitions
+- The codebase uses Biome for formatting and linting
+
+## Critical Implementation Paths
+- The main entry point is `src/index.ts`
+- The collection process starts with `collect.ts`
+- File generation happens in `generate-file-artifact.ts`
+- Type mapping is handled by various utility functions
+
+## Project-Specific Terminology
+- **Descriptor**: Protocol Buffer descriptor representing a message, enum, or service
+- **WKT**: Well-Known Types from Protocol Buffers (e.g., Timestamp, Duration)
+- **Pothos**: The GraphQL schema builder library that the generated code targets
+- **Protoc**: The Protocol Buffer compiler
+- **Plugin**: A protoc plugin that extends the compiler's functionality
+
+## Development Workflow
+- Use `pnpm` for package management
+- Build the project with `pnpm run build`
+- The project uses Lefthook for Git hooks
+
+## Known Challenges
+- Mapping between Protocol Buffer types and GraphQL types can be complex
+- Well-known type wrappers require special handling
+- Service method mapping requires configuration options
+
+## Evolution Notes
+- The project is designed to be a protoc plugin that generates Pothos GraphQL schema code
+- It focuses on maintaining type safety throughout the transformation process
+- The plugin is configurable through options passed to protoc

@@ -5,6 +5,7 @@ import {
   ScalarType,
 } from '@bufbuild/protobuf';
 import type { GeneratedFile, Printable } from '@bufbuild/protoplugin';
+import { pascalCase } from 'change-case';
 import { addDeprecatedReasonField } from './add-deprecated-reason-field.js';
 import { addDescriptionField } from './add-description-field.js';
 import { addNullableField } from './add-nullable-field.js';
@@ -51,10 +52,12 @@ export function printObjectTypeRef(f: GeneratedFile, message: DescMessage) {
 
   function getFieldResolveExpr(field: DescField): Printable {
     if (field.localName === 'id') {
+      const typeName = pascalCase(field.parent.typeName);
+
       return [
         '(parent) => ',
         importEncodeBase64(f),
-        '(`${parent.$typeName}:${String(parent.id)}`)',
+        `(\`${typeName}:\${String(parent.id)}\`)`,
       ];
     }
 

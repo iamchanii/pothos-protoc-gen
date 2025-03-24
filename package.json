@@ -1,6 +1,6 @@
 {
   "name": "pothos-protoc-gen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "license": "MIT",
   "type": "module",
@@ -12,9 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/iamchanii/pothos-protoc-gen.git"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "bin": {
     "pothos-protoc-gen": "./dist/index.js"
   },
@@ -40,12 +38,7 @@
     "typescript": "^5.8.2"
   },
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "@biomejs/biome",
-      "lefthook"
-    ],
-    "ignoredBuiltDependencies": [
-      "lefthook"
-    ]
+    "onlyBuiltDependencies": ["@biomejs/biome", "lefthook"],
+    "ignoredBuiltDependencies": ["lefthook"]
   }
 }

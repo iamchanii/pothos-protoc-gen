@@ -13,7 +13,10 @@ export function addNullableField(
   const hasValidateRulesMessage =
     checkValidateRulesMessageOptionExists(descriptor);
 
-  if (!isListField && hasValidateRulesMessage) {
+  const isIDField =
+    descriptor.kind === 'field' && descriptor.localName === 'id';
+
+  if ((!isListField && hasValidateRulesMessage) || isIDField) {
     f.print(indent, 'nullable: false as never,');
   }
 }

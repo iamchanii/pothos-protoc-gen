@@ -12,7 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/iamchanii/pothos-protoc-gen.git"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "bin": {
     "pothos-protoc-gen": "./dist/index.js"
   },
@@ -20,7 +22,10 @@
     "clean": "rm -rf dist",
     "build": "pnpm run clean && tsc",
     "prepublishOnly": "pnpm run build",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "author": "Chanhee Lee <contact@imch.dev>",
   "keywords": [],
@@ -35,10 +40,16 @@
     "@total-typescript/tsconfig": "^1.0.4",
     "@types/node": "^22.13.10",
     "lefthook": "^1.11.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitepress": "^1.6.3"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "lefthook"],
-    "ignoredBuiltDependencies": ["lefthook"]
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "lefthook"
+    ],
+    "ignoredBuiltDependencies": [
+      "lefthook"
+    ]
   }
 }

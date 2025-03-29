@@ -32,12 +32,14 @@ function printEnumTypeRef(schema: Schema<PluginOptions>, enum_: DescEnum) {
   f.print`  values: {`;
 
   for (const enumValue of enum_.values) {
-    f.print(f.jsDoc(enumValue, '    '));
-    f.print`    '${enumValue.localName}': {`;
-    f.print`      value: ${f.runtimeImportEnumFromJson}(${f.importSchema(enum_)}, ${JSON.stringify(enumValue.name)}),`;
-    f.print`      description: ${JSON.stringify(getDescriptorComments(enumValue))},`;
-    f.print`      deprecated: ${JSON.stringify(enumValue.deprecated)},`;
-    f.print`    },`;
+    const indent = '    '; // 4 spaces
+
+    f.print(f.jsDoc(enumValue, indent));
+    f.print`${indent}'${enumValue.localName}': {`;
+    f.print`${indent}  value: ${f.runtimeImportEnumFromJson}(${f.importSchema(enum_)}, ${JSON.stringify(enumValue.name)}),`;
+    f.print`${indent}  description: ${JSON.stringify(getDescriptorComments(enumValue))},`;
+    f.print`${indent}  deprecated: ${JSON.stringify(enumValue.deprecated)},`;
+    f.print`${indent}},`;
   }
 
   f.print`  } as const,`;

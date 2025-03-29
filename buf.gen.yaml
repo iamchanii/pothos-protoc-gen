@@ -4,7 +4,7 @@ plugins:
     include_imports: true
     include_wkt: true
     out: ./test/out
-  - local: ./src/plugin.ts
+  - local: ['./node_modules/.bin/tsx', './src/plugin.ts']
     out: ./test/out
     include_imports: true
     include_wkt: true

@@ -120,10 +120,10 @@ export const UserV1CreateUserResponseRef = builder
        * @generated from field: user.v1.User user = 1;
        */
       user: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'UserV1User',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.user,
       }),
     }),
   });
@@ -145,46 +145,46 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
      * @generated from field: string id = 1;
      */
     id: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.id,
     }),
     /**
      * @generated from field: string name = 2;
      */
     name: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.name,
     }),
     /**
      * @generated from field: string email = 3;
      */
     email: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.email,
     }),
     /**
      * @generated from field: user.v1.UserRole role = 4;
      */
     role: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'UserV1UserRole',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => enumFromJson(UserRoleSchema, parent.role),
     }),
     /**
      * @generated from field: user.v1.User.UserStatus status = 5;
      */
     status: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'UserV1User_UserStatus',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => enumFromJson(User_UserStatusSchema, parent.status),
     }),
     /**
      * Map type field
@@ -192,37 +192,41 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
      * @generated from field: map<string, string> metadata = 6;
      */
     metadata: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: ['StringMapEntry'],
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) =>
+        Object.entries(parent.metadata).map(([key, value]) => ({
+          key: String(key),
+          value: value,
+        })),
     }),
     /**
      * @generated from field: repeated string tags = 7;
      */
     tags: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: ['String'],
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.tags,
     }),
     /**
      * @generated from field: int64 created_at = 8;
      */
     createdAt: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.createdAt?.toString(),
     }),
     /**
      * @generated from field: int64 updated_at = 9;
      */
     updatedAt: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Main User message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.updatedAt?.toString(),
     }),
   }),
 });
@@ -244,10 +248,10 @@ export const UserV1GetUserResponseRef = builder
        * @generated from field: user.v1.User user = 1;
        */
       user: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'UserV1User',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.user,
       }),
     }),
   });
@@ -269,10 +273,10 @@ export const UserV1UpdateUserResponseRef = builder
        * @generated from field: user.v1.User user = 1;
        */
       user: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'UserV1User',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.user,
       }),
     }),
   });
@@ -294,10 +298,10 @@ export const UserV1DeleteUserResponseRef = builder
        * @generated from field: bool success = 1;
        */
       success: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'Boolean',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.success,
       }),
     }),
   });
@@ -319,28 +323,28 @@ export const UserV1ListUsersResponseRef = builder
        * @generated from field: repeated user.v1.User users = 1;
        */
       users: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: ['UserV1User'],
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.users,
       }),
       /**
        * @generated from field: string next_page_token = 2;
        */
       nextPageToken: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'String',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.nextPageToken,
       }),
       /**
        * @generated from field: int32 total_count = 3;
        */
       totalCount: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'Int',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.totalCount,
       }),
     }),
   });

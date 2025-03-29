@@ -69,7 +69,8 @@ export declare type Post = Message<'post.v1.Post'> & {
   /**
    * Metadata as key-value pairs
    *
-   * @generated from field: map<string, string> metadata = 9;
+   * @generated from field: map<string, string> metadata = 9 [deprecated = true];
+   * @deprecated
    */
   metadata: { [key: string]: string };
 

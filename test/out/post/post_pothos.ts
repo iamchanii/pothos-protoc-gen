@@ -176,46 +176,46 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
      * @generated from field: string id = 1;
      */
     id: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.id,
     }),
     /**
      * @generated from field: string title = 2;
      */
     title: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.title,
     }),
     /**
      * @generated from field: string content = 3;
      */
     content: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.content,
     }),
     /**
      * @generated from field: post.v1.PostStatus status = 4;
      */
     status: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'PostV1PostStatus',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => enumFromJson(PostStatusSchema, parent.status),
     }),
     /**
      * @generated from field: post.v1.PostCategory category = 5;
      */
     category: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'PostV1PostCategory',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => enumFromJson(PostCategorySchema, parent.category),
     }),
     /**
      * Reference to User
@@ -223,48 +223,53 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
      * @generated from field: string author_id = 6;
      */
     authorId: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'String',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.authorId,
     }),
     /**
      * @generated from field: google.protobuf.Timestamp created_at = 7;
      */
     createdAt: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'GoogleProtobufTimestamp',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.createdAt,
     }),
     /**
      * @generated from field: google.protobuf.Timestamp updated_at = 8;
      */
     updatedAt: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: 'GoogleProtobufTimestamp',
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.updatedAt,
     }),
     /**
      * Metadata as key-value pairs
      *
-     * @generated from field: map<string, string> metadata = 9;
+     * @generated from field: map<string, string> metadata = 9 [deprecated = true];
+     * @deprecated
      */
     metadata: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: ['StringMapEntry'],
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) =>
+        Object.entries(parent.metadata).map(([key, value]) => ({
+          key: String(key),
+          value: value,
+        })),
     }),
     /**
      * @generated from field: repeated string tags = 10;
      */
     tags: t.field({
-      type: "'' as never",
-      description: "'' as never",
-      deprecatedReason: "'' as never",
-      resolve: () => null,
+      type: ['String'],
+      description: 'Post message',
+      deprecatedReason: '',
+      resolve: (parent) => parent.tags,
     }),
   }),
 });
@@ -288,28 +293,28 @@ export const PostV1ListPostsResponseRef = builder
        * @generated from field: repeated post.v1.Post posts = 1;
        */
       posts: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: ['PostV1Post'],
+        description: 'List Posts Response',
+        deprecatedReason: '',
+        resolve: (parent) => parent.posts,
       }),
       /**
        * @generated from field: string next_page_token = 2;
        */
       nextPageToken: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'String',
+        description: 'List Posts Response',
+        deprecatedReason: '',
+        resolve: (parent) => parent.nextPageToken,
       }),
       /**
        * @generated from field: int32 total_count = 3;
        */
       totalCount: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'Int',
+        description: 'List Posts Response',
+        deprecatedReason: '',
+        resolve: (parent) => parent.totalCount,
       }),
     }),
   });
@@ -331,19 +336,19 @@ export const PostV1PostWithAuthorRef = builder
        * @generated from field: post.v1.Post post = 1;
        */
       post: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'PostV1Post',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.post,
       }),
       /**
        * @generated from field: user.v1.User author = 2;
        */
       author: t.field({
-        type: "'' as never",
-        description: "'' as never",
-        deprecatedReason: "'' as never",
-        resolve: () => null,
+        type: 'UserV1User',
+        description: '',
+        deprecatedReason: '',
+        resolve: (parent) => parent.author,
       }),
     }),
   });

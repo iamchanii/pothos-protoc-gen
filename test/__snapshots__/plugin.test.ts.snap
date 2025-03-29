@@ -530,7 +530,8 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
       resolve: (parent) => parent.updatedAt,
     }),
     /**
-     * @generated from field: map<string, string> metadata = 9;
+     * @generated from field: map<string, string> metadata = 9 [deprecated = true];
+     * @deprecated
      */
     metadata: t.field({
       type: ["StringMapEntry"],

@@ -42,7 +42,7 @@ message Post {
     string author_id = 6; // Reference to User
     google.protobuf.Timestamp created_at = 7;
     google.protobuf.Timestamp updated_at = 8;
-    map<string, string> metadata = 9; // Metadata as key-value pairs
+    map<string, string> metadata = 9 [deprecated = true]; // Metadata as key-value pairs
     repeated string tags = 10;
 }
 

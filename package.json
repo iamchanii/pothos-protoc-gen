@@ -20,7 +20,8 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "pnpm run clean && tsc",
+    "build": "pnpm run clean && tsc --project tsconfig.build.json",
+    "test": "vitest",
     "prepublishOnly": "pnpm run build",
     "prepare": "lefthook install",
     "docs:dev": "vitepress dev docs",

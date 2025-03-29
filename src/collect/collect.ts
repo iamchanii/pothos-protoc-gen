@@ -1,11 +1,11 @@
 import type { Schema } from '@bufbuild/protoplugin';
-import type { PluginOptions } from '../plugin-options.ts';
-import { collectAllEnums } from './collect-all-enums.ts';
-import { collectAllMapEntriesFromMessages } from './collect-all-map-entries-from-message.ts';
-import { collectAllMethodMessages } from './collect-all-method-messages.ts';
-import { collectAllMethods } from './collect-all-methods.ts';
-import { collectAllServices } from './collect-all-services.ts';
-import type { CollectedDescriptors } from './types.ts';
+import type { PluginOptions } from '../plugin-options.js';
+import { collectAllEnums } from './collect-all-enums.js';
+import { collectAllMapEntriesFromMessages } from './collect-all-map-entries-from-message.js';
+import { collectAllMethodMessages } from './collect-all-method-messages.js';
+import { collectAllMethods } from './collect-all-methods.js';
+import { collectAllServices } from './collect-all-services.js';
+import type { CollectedDescriptors } from './types.js';
 
 /**
  * Collects various descriptors from a Protobuf schema.

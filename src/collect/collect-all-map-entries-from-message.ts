@@ -1,6 +1,6 @@
 import type { DescMessage } from '@bufbuild/protobuf';
-import { ScalarTypeWrapper } from '../helpers/scalar-type-wrapper.ts';
-import type { MapEntry } from './types.ts';
+import { ScalarTypeWrapper } from '../helpers/scalar-type-wrapper.js';
+import type { MapEntry } from './types.js';
 
 /**
  * Collects all map entries from a collection of protocol buffer message descriptors.
@@ -23,7 +23,7 @@ import type { MapEntry } from './types.ts';
  */
 export function collectAllMapEntriesFromMessages(
   messages: Iterable<DescMessage>,
-  collection: Map<string, MapEntry>,
+  collection: Map<ScalarTypeWrapper | string, MapEntry>,
 ) {
   for (const message of messages) {
     for (const field of message.fields) {
@@ -35,7 +35,7 @@ export function collectAllMapEntriesFromMessages(
             case 'message':
               return field.message.typeName;
             case 'scalar':
-              return ScalarTypeWrapper.fromScalarType(field.scalar).toString();
+              return ScalarTypeWrapper.fromScalarType(field.scalar);
           }
         })();
 

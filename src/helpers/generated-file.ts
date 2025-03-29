@@ -4,20 +4,22 @@ import type {
   ImportSymbol,
   Schema,
 } from '@bufbuild/protoplugin';
-import type { PluginOptions } from '../plugin-options.ts';
+import type { PluginOptions } from '../plugin-options.js';
+import { extendGeneratedFile } from './extend-generated-file.js';
 
 const generatedFileMap = new Map<string, GeneratedFile>();
 
 /**
- * Retrieves or creates a generated TypeScript file for a given Protobuf descriptor file.
+ * Retrieves or creates a generated file for the given descriptor file.
  *
- * This function maintains a cache of generated files to avoid recreating them for the same
- * descriptor file. If the file doesn't exist in the cache, it creates a new one, sets up
- * common imports and utilities, then caches it for future use.
+ * @param schema - The schema object used to generate files
+ * @param file - The descriptor file for which to get a generated file
+ * @returns The generated file object
  *
- * @param schema - The schema object containing generation options and methods
- * @param file - The Protobuf descriptor file to generate TypeScript for
- * @returns A generated file object that can be used to add TypeScript code
+ * @remarks
+ * This function maintains a mapping between descriptor file names and their corresponding generated files.
+ * If a generated file for the given descriptor file already exists, it returns the existing file.
+ * Otherwise, it creates a new generated file, sets up its preamble, extends it, and adds it to the mapping.
  */
 export function getGeneratedFile(
   schema: Schema<PluginOptions>,
@@ -28,26 +30,10 @@ export function getGeneratedFile(
   if (generatedFile === undefined) {
     generatedFile = schema.generateFile(`${file.name}_pothos.ts`);
     generatedFile.preamble(file);
-
-    generatedFile.importBuilder = generatedFile!.import(
-      'builder',
-      schema.options.builderPath,
-    );
-
-    generatedFile.runtimeImportEnumFromJson = generatedFile!.import(
-      'enumFromJson',
-      '@bufbuild/protobuf',
-    );
+    extendGeneratedFile(schema, generatedFile);
 
     generatedFileMap.set(file.name, generatedFile);
   }
 
   return generatedFile;
-}
-
-declare module '@bufbuild/protoplugin' {
-  export interface GeneratedFile {
-    importBuilder: ImportSymbol;
-    runtimeImportEnumFromJson: ImportSymbol;
-  }
 }

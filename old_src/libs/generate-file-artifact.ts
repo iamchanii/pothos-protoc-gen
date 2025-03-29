@@ -59,20 +59,6 @@ export function generateFileArtifact({
       printInputConstructor(f, inputMessage);
     }
 
-    // printOutputTypeInterface(
-    //   f,
-    //   fileName,
-    //   [...enums, ...outputMessages],
-    //   outputEntries,
-    // );
-    //
-    // printInputTypeInterface(
-    //   f,
-    //   fileName,
-    //   [...enums, ...inputMessages],
-    //   inputEntries,
-    // );
-
     printContextInterface(f, fileName, [...services]);
 
     for (const method of methods) {

@@ -1,10 +1,33 @@
 import type { DescMessage } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import { getGeneratedFile } from '../helpers/generated-file.ts';
-import { getDescriptorComments } from '../helpers/get-descriptor-comments.ts';
-import { getDescriptorName } from '../helpers/get-descriptor-name.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+import { getGeneratedFile } from '../helpers/generated-file.js';
+import { getDescriptorComments } from '../helpers/get-descriptor-comments.js';
+import { getDescriptorName } from '../helpers/get-descriptor-name.js';
+import { getObjectFieldType } from '../helpers/get-field-type.js';
+import { getObjectFieldResolverExpression } from '../helpers/get-object-field-resolver-expression.js';
+import type { PluginOptions } from '../plugin-options.js';
 
+/**
+ * Prints a GraphQL object type reference for a given protocol buffer message descriptor.
+ *
+ * This function generates the necessary code to define a Pothos GraphQL object type reference
+ * that corresponds to a protocol buffer message type. It creates a constant that implements
+ * the object type with fields that match the protocol buffer message fields.
+ *
+ * @param schema - The schema containing plugin options for code generation
+ * @param message - The protocol buffer message descriptor to generate a GraphQL type for
+ *
+ * @remarks
+ * The function performs the following:
+ * - Gets the appropriate file for code generation
+ * - Creates a GraphQL object type reference with the message name
+ * - Adds description from the message comments
+ * - Adds a placeholder field named '_' (GraphQL doesn't support empty objects)
+ * - Adds all fields from the message with their types, descriptions, and resolvers
+ * - Handles deprecation markers
+ *
+ * The generated code uses the Pothos GraphQL schema builder pattern.
+ */
 function printObjectTypeRef(
   schema: Schema<PluginOptions>,
   message: DescMessage,
@@ -21,8 +44,8 @@ function printObjectTypeRef(
 
   for (const field of message.fields) {
     const indent = '    '; // 4 spaces
-    const fieldType = 'String';
-    const resolveExpression = '() => null';
+    const fieldType = getObjectFieldType(field);
+    const resolveExpression = getObjectFieldResolverExpression(f, field);
 
     f.print(f.jsDoc(field, indent));
     f.print`${indent}${field.localName}: t.field({`;

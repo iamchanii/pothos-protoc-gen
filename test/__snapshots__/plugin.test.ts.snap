@@ -105,10 +105,10 @@ export const UserV1CreateUserResponseRef = builder.objectRef<CreateUserResponse>
      * @generated from field: user.v1.User user = 1;
      */
     user: t.field({
-      type: "String",
+      type: "UserV1User",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.user,
     }),
   }),
 });
@@ -127,7 +127,7 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.id,
     }),
     /**
      * @generated from field: string name = 2;
@@ -136,7 +136,7 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.name,
     }),
     /**
      * @generated from field: string email = 3;
@@ -145,43 +145,43 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.email,
     }),
     /**
      * @generated from field: user.v1.UserRole role = 4;
      */
     role: t.field({
-      type: "String",
+      type: "UserV1UserRole",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => enumFromJson(UserRoleSchema, parent.role),
     }),
     /**
      * @generated from field: user.v1.User.UserStatus status = 5;
      */
     status: t.field({
-      type: "String",
+      type: "UserV1User_UserStatus",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => enumFromJson(User_UserStatusSchema, parent.status),
     }),
     /**
      * @generated from field: map<string, string> metadata = 6;
      */
     metadata: t.field({
-      type: "String",
+      type: ["StringMapEntry"],
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => Object.entries(parent.metadata).map(([key, value]) => ({ key: String(key), value: value })),
     }),
     /**
      * @generated from field: repeated string tags = 7;
      */
     tags: t.field({
-      type: "String",
+      type: ["String"],
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.tags,
     }),
     /**
      * @generated from field: int64 created_at = 8;
@@ -190,7 +190,7 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => (parent.createdAt)?.toString(),
     }),
     /**
      * @generated from field: int64 updated_at = 9;
@@ -199,7 +199,7 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => (parent.updatedAt)?.toString(),
     }),
   }),
 });
@@ -215,10 +215,10 @@ export const UserV1GetUserResponseRef = builder.objectRef<GetUserResponse>('User
      * @generated from field: user.v1.User user = 1;
      */
     user: t.field({
-      type: "String",
+      type: "UserV1User",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.user,
     }),
   }),
 });
@@ -234,10 +234,10 @@ export const UserV1UpdateUserResponseRef = builder.objectRef<UpdateUserResponse>
      * @generated from field: user.v1.User user = 1;
      */
     user: t.field({
-      type: "String",
+      type: "UserV1User",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.user,
     }),
   }),
 });
@@ -253,10 +253,10 @@ export const UserV1DeleteUserResponseRef = builder.objectRef<DeleteUserResponse>
      * @generated from field: bool success = 1;
      */
     success: t.field({
-      type: "String",
+      type: "Boolean",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.success,
     }),
   }),
 });
@@ -272,10 +272,10 @@ export const UserV1ListUsersResponseRef = builder.objectRef<ListUsersResponse>('
      * @generated from field: repeated user.v1.User users = 1;
      */
     users: t.field({
-      type: "String",
+      type: ["UserV1User"],
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.users,
     }),
     /**
      * @generated from field: string next_page_token = 2;
@@ -284,16 +284,16 @@ export const UserV1ListUsersResponseRef = builder.objectRef<ListUsersResponse>('
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.nextPageToken,
     }),
     /**
      * @generated from field: int32 total_count = 3;
      */
     totalCount: t.field({
-      type: "String",
+      type: "Int",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.totalCount,
     }),
   }),
 });
@@ -464,7 +464,7 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.id,
     }),
     /**
      * @generated from field: string title = 2;
@@ -473,7 +473,7 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.title,
     }),
     /**
      * @generated from field: string content = 3;
@@ -482,25 +482,25 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.content,
     }),
     /**
      * @generated from field: post.v1.PostStatus status = 4;
      */
     status: t.field({
-      type: "String",
+      type: "PostV1PostStatus",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => enumFromJson(PostStatusSchema, parent.status),
     }),
     /**
      * @generated from field: post.v1.PostCategory category = 5;
      */
     category: t.field({
-      type: "String",
+      type: "PostV1PostCategory",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => enumFromJson(PostCategorySchema, parent.category),
     }),
     /**
      * @generated from field: string author_id = 6;
@@ -509,43 +509,43 @@ export const PostV1PostRef = builder.objectRef<Post>('PostV1Post').implement({
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.authorId,
     }),
     /**
      * @generated from field: google.protobuf.Timestamp created_at = 7;
      */
     createdAt: t.field({
-      type: "String",
+      type: "GoogleProtobufTimestamp",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.createdAt,
     }),
     /**
      * @generated from field: google.protobuf.Timestamp updated_at = 8;
      */
     updatedAt: t.field({
-      type: "String",
+      type: "GoogleProtobufTimestamp",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.updatedAt,
     }),
     /**
      * @generated from field: map<string, string> metadata = 9;
      */
     metadata: t.field({
-      type: "String",
+      type: ["StringMapEntry"],
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => Object.entries(parent.metadata).map(([key, value]) => ({ key: String(key), value: value })),
     }),
     /**
      * @generated from field: repeated string tags = 10;
      */
     tags: t.field({
-      type: "String",
+      type: ["String"],
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.tags,
     }),
   }),
 });
@@ -561,10 +561,10 @@ export const PostV1ListPostsResponseRef = builder.objectRef<ListPostsResponse>('
      * @generated from field: repeated post.v1.Post posts = 1;
      */
     posts: t.field({
-      type: "String",
+      type: ["PostV1Post"],
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.posts,
     }),
     /**
      * @generated from field: string next_page_token = 2;
@@ -573,16 +573,16 @@ export const PostV1ListPostsResponseRef = builder.objectRef<ListPostsResponse>('
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.nextPageToken,
     }),
     /**
      * @generated from field: int32 total_count = 3;
      */
     totalCount: t.field({
-      type: "String",
+      type: "Int",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.totalCount,
     }),
   }),
 });
@@ -598,19 +598,19 @@ export const PostV1PostWithAuthorRef = builder.objectRef<PostWithAuthor>('PostV1
      * @generated from field: post.v1.Post post = 1;
      */
     post: t.field({
-      type: "String",
+      type: "PostV1Post",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.post,
     }),
     /**
      * @generated from field: user.v1.User author = 2;
      */
     author: t.field({
-      type: "String",
+      type: "UserV1User",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.author,
     }),
   }),
 });
@@ -640,16 +640,16 @@ export const GoogleProtobufTimestampRef = builder.objectRef<Timestamp>('GooglePr
       type: "String",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => (parent.seconds)?.toString(),
     }),
     /**
      * @generated from field: int32 nanos = 2;
      */
     nanos: t.field({
-      type: "String",
+      type: "Int",
       description: "",
       deprecatedReason: "",
-      resolve: () => null,
+      resolve: (parent) => parent.nanos,
     }),
   }),
 });

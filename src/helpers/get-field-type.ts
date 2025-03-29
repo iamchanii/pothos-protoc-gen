@@ -1,163 +1,105 @@
-import { type DescField, ScalarType } from '@bufbuild/protobuf';
+import type { DescField } from '@bufbuild/protobuf';
+import { getDescriptorName } from './get-descriptor-name.js';
 import {
+  getInputMapEntryTypeName,
+  getOutputMapEntryTypeName,
   getScalarMapEntryInputTypeName,
   getScalarMapEntryOutputTypeName,
-} from './generate-global-scalar-map-entries.js';
-import { getDescriptorName } from './get-descriptor-name.js';
+} from './get-map-entry-type-name.js';
 import { isWktWrapperDescriptor } from './is-wkt-wrapper-descriptor.js';
+import { mapProtoToGraphQLScalar } from './map-proto-to-graphql-scalar.js';
 import { mapWktMessageToGraphQLScalar } from './map-wkt-message-to-graphql-scalar.js';
 import { mapWktMessageToProtoScalar } from './map-wkt-message-to-proto-scalar.js';
-import { getInputMapEntryTypeName } from './print-input-map-entry-type-ref.js';
-import { getOutputMapEntryTypeName } from './print-output-map-entry-type-ref.js';
 
-export function mapProtoToGraphQLScalar(
-  protoScalar: ScalarType | undefined,
-): string {
-  switch (protoScalar) {
-    case ScalarType.DOUBLE:
-    case ScalarType.FLOAT:
-      return 'Float';
+/**
+ * Determines the GraphQL type for a given field descriptor based on its kind.
+ *
+ * @param field - The field descriptor containing type information
+ * @param type - Whether this field is for an input or object type
+ * @returns The appropriate GraphQL type representation
+ * @remarks
+ * This function handles different field kinds:
+ * - For scalar fields, it maps to the corresponding GraphQL scalar
+ * - For enum fields, it returns the enum descriptor name
+ * - For message fields, it returns either a mapped scalar (for WKT wrappers) or the message name
+ * - For list fields, it returns an array of the corresponding type
+ * - For map fields, it returns the appropriate map entry type
+ *
+ * When type is 'input', message fields will have 'Input' appended to their names and
+ * different map entry type functions are used.
+ */
+function getFieldType(field: DescField, type: 'input' | 'object') {
+  switch (field.fieldKind) {
+    case 'scalar':
+      return mapProtoToGraphQLScalar(field.scalar);
 
-    case ScalarType.INT32:
-    case ScalarType.UINT32:
-    case ScalarType.SINT32:
-    case ScalarType.FIXED32:
-    case ScalarType.SFIXED32:
-      return 'Int';
+    case 'enum':
+      return getDescriptorName(field.enum);
 
-    case ScalarType.INT64:
-    case ScalarType.UINT64:
-    case ScalarType.SINT64:
-    case ScalarType.FIXED64:
-    case ScalarType.SFIXED64:
-      return 'String';
+    case 'message':
+      return isWktWrapperDescriptor(field.message)
+        ? mapWktMessageToGraphQLScalar(field.message)
+        : getDescriptorName(
+            field.message,
+            type === 'input' ? 'Input' : undefined,
+          );
 
-    // 불리언 타입
-    case ScalarType.BOOL:
-      return 'Boolean';
+    case 'list':
+      switch (field.listKind) {
+        case 'scalar':
+          return [mapProtoToGraphQLScalar(field.scalar)];
+        case 'enum':
+          return [getDescriptorName(field.enum)];
+        case 'message':
+          return [
+            isWktWrapperDescriptor(field.message)
+              ? mapWktMessageToGraphQLScalar(field.message)
+              : getDescriptorName(
+                  field.message,
+                  type === 'input' ? 'Input' : undefined,
+                ),
+          ];
+        default:
+          throw new Error('Unreachable code');
+      }
 
-    // 문자열 타입
-    case ScalarType.STRING:
-      return 'String';
-
-    // 바이너리 데이터
-    case ScalarType.BYTES:
-      return 'String'; // 또는 'Upload' 또는 'Bytes' 커스텀 스칼라 사용 가능
-
-    // 미지원 또는 알 수 없는 타입
-    default:
-      return 'String'; // 기본값으로 String 사용
+    case 'map':
+      switch (field.mapKind) {
+        case 'scalar':
+          return [
+            (type === 'input'
+              ? getScalarMapEntryInputTypeName
+              : getScalarMapEntryOutputTypeName)(field.scalar),
+          ];
+        case 'message':
+          return [
+            isWktWrapperDescriptor(field.message)
+              ? (type === 'input'
+                  ? getScalarMapEntryInputTypeName
+                  : getScalarMapEntryOutputTypeName)(
+                  mapWktMessageToProtoScalar(field.message),
+                )
+              : getOutputMapEntryTypeName(field),
+          ];
+        case 'enum':
+          return [
+            (type === 'input'
+              ? getInputMapEntryTypeName
+              : getOutputMapEntryTypeName)(field),
+          ];
+        default:
+          throw new Error('Unreachable code');
+      }
   }
 }
 
+/**
+ * Retrieves the field type for an object based on the provided description field.
+ *
+ * @param field - The description field to extract type information from
+ * @returns The field type designated for object representation
+ * @remarks This is a specialized version of getFieldType that specifically handles object types
+ */
 export function getObjectFieldType(field: DescField) {
-  if (field.localName === 'id') {
-    return 'ID';
-  }
-
-  switch (field.fieldKind) {
-    case 'scalar':
-      return mapProtoToGraphQLScalar(field.scalar);
-    case 'list':
-      switch (field.listKind) {
-        case 'scalar':
-          return [mapProtoToGraphQLScalar(field.scalar)];
-        case 'enum':
-          return [getDescriptorName(field.enum)];
-        case 'message':
-          return [
-            isWktWrapperDescriptor(field.message)
-              ? mapWktMessageToGraphQLScalar(field.message)
-              : getDescriptorName(field.message),
-          ];
-      }
-      break;
-    case 'map':
-      switch (field.mapKind) {
-        case 'scalar':
-          return [getScalarMapEntryOutputTypeName(field.scalar)];
-        case 'message':
-          return [
-            isWktWrapperDescriptor(field.message)
-              ? getScalarMapEntryOutputTypeName(
-                  mapWktMessageToProtoScalar(field.message),
-                )
-              : getOutputMapEntryTypeName({
-                  field,
-                  message: field.parent,
-                }),
-          ];
-
-        case 'enum':
-          return [
-            getOutputMapEntryTypeName({
-              field,
-              message: field.parent,
-            }),
-          ];
-      }
-      break;
-    case 'enum':
-      return getDescriptorName(field.enum);
-    case 'message':
-      return isWktWrapperDescriptor(field.message)
-        ? mapWktMessageToGraphQLScalar(field.message)
-        : getDescriptorName(field.message);
-  }
-}
-
-export function getInputFieldType(field: DescField) {
-  if (field.localName === 'id') {
-    return 'ID';
-  }
-
-  switch (field.fieldKind) {
-    case 'scalar':
-      return mapProtoToGraphQLScalar(field.scalar);
-    case 'list':
-      switch (field.listKind) {
-        case 'scalar':
-          return [mapProtoToGraphQLScalar(field.scalar)];
-        case 'enum':
-          return [getDescriptorName(field.enum)];
-        case 'message':
-          return [
-            isWktWrapperDescriptor(field.message)
-              ? mapWktMessageToGraphQLScalar(field.message)
-              : getDescriptorName(field.message, 'Input'),
-          ];
-      }
-      break;
-    case 'map':
-      switch (field.mapKind) {
-        case 'scalar':
-          return [getScalarMapEntryInputTypeName(field.scalar)];
-        case 'message':
-          return [
-            isWktWrapperDescriptor(field.message)
-              ? getScalarMapEntryInputTypeName(
-                  mapWktMessageToProtoScalar(field.message),
-                )
-              : getInputMapEntryTypeName({
-                  field,
-                  message: field.parent,
-                }),
-          ];
-
-        case 'enum':
-          return [
-            getInputMapEntryTypeName({
-              field,
-              message: field.parent,
-            }),
-          ];
-      }
-      break;
-    case 'enum':
-      return getDescriptorName(field.enum);
-    case 'message':
-      return isWktWrapperDescriptor(field.message)
-        ? mapWktMessageToGraphQLScalar(field.message)
-        : getDescriptorName(field.message, 'Input');
-  }
+  return getFieldType(field, 'object');
 }

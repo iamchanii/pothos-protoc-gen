@@ -1,5 +1,5 @@
 import type { DescMessage, DescService } from '@bufbuild/protobuf';
-import { collectDependentMessages } from './collect-dependent-messages.ts';
+import { collectDependentMessages } from './collect-dependent-messages.js';
 
 /**
  * Collects all method messages of a specific type from a collection of services.

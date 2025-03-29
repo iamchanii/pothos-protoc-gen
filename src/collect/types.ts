@@ -6,6 +6,7 @@ import type {
   DescService,
   ScalarType,
 } from '@bufbuild/protobuf';
+import type { ScalarTypeWrapper } from '../helpers/scalar-type-wrapper.js';
 
 export interface MapEntry {
   descriptor: DescEnum | DescMessage | ScalarType;
@@ -17,7 +18,7 @@ export interface CollectedDescriptors {
   methods: Map<string, DescMethod>;
   enums: Map<string, DescEnum>;
   inputMessages: Map<string, DescMessage>;
-  inputMessageMapEntries: Map<string, MapEntry>;
+  inputMessageMapEntries: Map<ScalarTypeWrapper | string, MapEntry>;
   outputMessages: Map<string, DescMessage>;
-  outputMessageMapEntries: Map<string, MapEntry>;
+  outputMessageMapEntries: Map<ScalarTypeWrapper | string, MapEntry>;
 }

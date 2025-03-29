@@ -1,7 +1,7 @@
 # Getting Started
 
 <div align="center">
-  <img src="/logo.png" width="160">
+  <img src="/logo.svg" width="160">
 </div>
 
 **pothos-protoc-gen** is a [Buf plugin](https://buf.build/docs/cli/buf-plugins/overview/) that generates TypeScript code for creating a Protobuf-first GraphQL schema using [Pothos GraphQL](https://pothos-graphql.dev/).

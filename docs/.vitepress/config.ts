@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 
 export default defineConfig({
   title: 'pothos-protoc-gen',
+  base: '/pothos-protoc-gen/',
   themeConfig: {
     logo: '/logo.png',
 

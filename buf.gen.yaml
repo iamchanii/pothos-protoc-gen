@@ -1,0 +1,15 @@
+version: v2
+plugins:
+  - local: ./node_modules/.bin/protoc-gen-es
+    include_imports: true
+    include_wkt: true
+    out: ./test/out
+  - local: ./src/plugin.ts
+    out: ./test/out
+    include_imports: true
+    include_wkt: true
+    strategy: all
+    opt:
+      - builder_path=../builder
+inputs:
+  - directory: ./test/proto

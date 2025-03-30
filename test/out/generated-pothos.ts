@@ -4,6 +4,7 @@ import type { UserService } from './user_pb.js';
 
 export * from './user_pothos.js';
 export * from './post/post_pothos.js';
+export * from './google/protobuf/wrappers_pothos.js';
 export * from './google/protobuf/timestamp_pothos.js';
 export * from './google/protobuf/empty_pothos.js';
 export * from './generated-map-entries.js';

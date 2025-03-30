@@ -67,6 +67,13 @@ export declare type User = Message<'user.v1.User'> & {
    * @generated from field: int64 updated_at = 9;
    */
   updatedAt: bigint;
+
+  /**
+   * Field using StringValue well-known type
+   *
+   * @generated from field: google.protobuf.StringValue description = 10;
+   */
+  description?: string;
 };
 
 /**

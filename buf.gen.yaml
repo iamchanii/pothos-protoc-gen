@@ -11,6 +11,7 @@ plugins:
     strategy: all
     opt:
       - import_extension=js
+      - ts_nocheck=true
       - builder_path=../builder.js
 inputs:
   - directory: ./test/proto

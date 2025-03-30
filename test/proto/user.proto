@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package user.v1;
 
+import "google/protobuf/wrappers.proto";
+
 // User role enum type
 enum UserRole {
     ROLE_UNSPECIFIED = 0;
@@ -22,6 +24,9 @@ message User {
     repeated string tags = 7;
     int64 created_at = 8;
     int64 updated_at = 9;
+
+    // Field using StringValue well-known type
+    google.protobuf.StringValue description = 10;
 
     // User status enum type for filtering
     enum UserStatus {

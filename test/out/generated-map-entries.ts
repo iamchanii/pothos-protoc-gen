@@ -11,7 +11,7 @@ export const StringMapEntryRef = builder
   .implement({
     description: 'Key-value pair for the map field metadata of STRING.',
     fields: (t) => ({
-      key: t.exposeString('key', { nullable: true }),
+      key: t.exposeString('key', { nullable: false }),
       value: t.expose('value', { type: 'String', nullable: false }),
     }),
   });

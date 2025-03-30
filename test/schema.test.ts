@@ -279,7 +279,7 @@ test('Print schema', () => {
       category: PostV1PostCategory
       content: String
       createdAt: GoogleProtobufTimestamp
-      id: ID
+      id: ID!
 
       """Metadata as key-value pairs"""
       metadata: [StringMapEntry!] @deprecated(reason: "Deprecated. See the comments for more details.")
@@ -374,7 +374,7 @@ test('Print schema', () => {
 
     """Key-value pair for the map field metadata of STRING."""
     type StringMapEntry {
-      key: String
+      key: String!
       value: String!
     }
 
@@ -382,6 +382,18 @@ test('Print schema', () => {
     input StringMapEntryInput {
       key: String!
       value: String!
+    }
+
+    """Key-value pair for the map field groups of user.v1.Group."""
+    type String_UserV1GroupMapEntry {
+      key: String!
+      value: UserV1Group!
+    }
+
+    """Key-value pair for the map field groups of user.v1.Group."""
+    input String_UserV1GroupMapEntryInput {
+      key: String!
+      value: UserV1GroupInput!
     }
 
     """Create"""
@@ -444,7 +456,7 @@ test('Print schema', () => {
       Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
       """
       _: Boolean
-      id: ID
+      id: ID!
       name: String
       rawId: String
     }
@@ -456,18 +468,6 @@ test('Print schema', () => {
       _: Boolean
       id: String
       name: String
-    }
-
-    """Key-value pair for the map field groups of user.v1.Group."""
-    type UserV1Group_GroupsMapEntry {
-      key: String
-      value: UserV1Group!
-    }
-
-    """Key-value pair for the map field groups of user.v1.Group."""
-    input UserV1Group_GroupsMapEntryInput {
-      key: String!
-      value: UserV1GroupInput!
     }
 
     """List"""
@@ -528,8 +528,8 @@ test('Print schema', () => {
       """Field using StringValue well-known type"""
       description: String
       email: String
-      groups: [UserV1Group_GroupsMapEntry!]
-      id: ID
+      groups: [String_UserV1GroupMapEntry!]
+      id: ID!
 
       """Map type field"""
       metadata: [StringMapEntry!]
@@ -552,7 +552,7 @@ test('Print schema', () => {
       """Field using StringValue well-known type"""
       description: String
       email: String
-      groups: [UserV1Group_GroupsMapEntryInput!]
+      groups: [String_UserV1GroupMapEntryInput!]
       id: String
 
       """Map type field"""

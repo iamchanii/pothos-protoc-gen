@@ -103,3 +103,14 @@ function getFieldType(field: DescField, type: 'input' | 'object') {
 export function getObjectFieldType(field: DescField) {
   return getFieldType(field, 'object');
 }
+
+/**
+ * Retrieves the input field type for a given descriptor field
+ *
+ * @param field - The descriptor field to get the input type for
+ * @returns The field type appropriate for input usage
+ * @remarks This is a wrapper around the getFieldType function that specifically targets input field types
+ */
+export function getInputFieldType(field: DescField) {
+  return getFieldType(field, 'input');
+}

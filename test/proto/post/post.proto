@@ -96,6 +96,7 @@ message ListPostsResponse {
 // Get Post with Author
 message GetPostWithAuthorRequest {
     string id = 1;
+    user.v1.User author = 2;
 }
 
 message PostWithAuthor {

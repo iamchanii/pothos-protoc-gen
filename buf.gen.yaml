@@ -10,6 +10,7 @@ plugins:
     include_wkt: true
     strategy: all
     opt:
-      - builder_path=../builder
+      - import_extension=js
+      - builder_path=../builder.js
 inputs:
   - directory: ./test/proto

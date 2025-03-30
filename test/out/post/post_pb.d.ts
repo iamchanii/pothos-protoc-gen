@@ -290,6 +290,11 @@ export declare type GetPostWithAuthorRequest =
      * @generated from field: string id = 1;
      */
     id: string;
+
+    /**
+     * @generated from field: user.v1.User author = 2;
+     */
+    author?: User;
   };
 
 /**

@@ -37,3 +37,37 @@ export function getGeneratedFile(
 
   return generatedFile;
 }
+
+/**
+ * Creates a function that returns a reusable GeneratedFile for a specific filename.
+ * This helps in ensuring that the same file is not generated multiple times within a schema context.
+ *
+ * @param filename - The name of the file to be generated
+ * @returns A function that takes a schema and returns a GeneratedFile
+ * @remarks The generated file is created only once when the returned function is first called.
+ * Subsequent calls will return the same GeneratedFile instance.
+ */
+function createReusableGeneratedFile(filename: string) {
+  let generatedFile: GeneratedFile | undefined;
+
+  return [
+    (schema: Schema<PluginOptions>) => {
+      if (generatedFile === undefined) {
+        generatedFile = schema.generateFile(filename);
+        extendGeneratedFile(schema, generatedFile);
+      }
+
+      return generatedFile;
+    },
+    () => generatedFile !== undefined,
+  ] as const;
+}
+
+export const [
+  getPothosMapEntriesGeneratedFile,
+  isPothosMapEntriesGeneratedFileExists,
+] = createReusableGeneratedFile('generated-map-entries.ts');
+
+export const [getPothosIndexGeneratedFile] = createReusableGeneratedFile(
+  'generated-pothos.ts',
+);

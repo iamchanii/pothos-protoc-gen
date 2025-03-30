@@ -11,9 +11,12 @@ import { getComments } from '@bufbuild/protoplugin';
  */
 export function getDescriptorComments(descriptor: Exclude<AnyDesc, DescFile>) {
   const comment = getComments(descriptor);
-
-  return [comment.leading, comment.trailing]
+  const concatenatedComments = [comment.leading, comment.trailing]
     .filter(Boolean)
     .join('\n\n')
     .trim();
+
+  return concatenatedComments
+    ? JSON.stringify(concatenatedComments)
+    : 'undefined';
 }

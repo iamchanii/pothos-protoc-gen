@@ -27,8 +27,8 @@ function printEnumTypeRef(schema: Schema<PluginOptions>, enum_: DescEnum) {
   const enumTypeRefName = `${enumName}Ref`;
 
   f.print(f.jsDoc(enum_));
-  f.print`${f.export('const', enumTypeRefName)} = ${f.importBuilder}.enumType('${enumName}', {`;
-  f.print`  description: ${JSON.stringify(getDescriptorComments(enum_))},`;
+  f.print`${f.export('const', enumTypeRefName)} = ${f.importPothosBuilder}.enumType('${enumName}', {`;
+  f.print`  description: ${getDescriptorComments(enum_)},`;
   f.print`  values: {`;
 
   for (const enumValue of enum_.values) {
@@ -36,8 +36,8 @@ function printEnumTypeRef(schema: Schema<PluginOptions>, enum_: DescEnum) {
 
     f.print(f.jsDoc(enumValue, indent));
     f.print`${indent}'${enumValue.localName}': {`;
-    f.print`${indent}  value: ${f.runtimeImportEnumFromJson}(${f.importSchema(enum_)}, ${JSON.stringify(enumValue.name)}),`;
-    f.print`${indent}  description: ${JSON.stringify(getDescriptorComments(enumValue))},`;
+    f.print`${indent}  value: ${f.importEnumFromJson}(${f.importSchema(enum_)}, ${JSON.stringify(enumValue.name)}),`;
+    f.print`${indent}  description: ${getDescriptorComments(enumValue)},`;
     f.print`${indent}  deprecated: ${JSON.stringify(enumValue.deprecated)},`;
     f.print`${indent}},`;
   }

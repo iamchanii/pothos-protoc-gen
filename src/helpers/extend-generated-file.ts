@@ -12,21 +12,28 @@ import type { PluginOptions } from '../plugin-options.js';
  * @param f - The generated file to extend
  *
  * @remarks
- * This function sets up two important imports on the generated file:
+ * This function sets up important imports on the generated file:
  * 1. Imports the GraphQL schema builder from the configured builder path
  * 2. Imports the enumFromJson utility from @bufbuild/protobuf for enum handling
+ * 3. Imports the Client type from @connectrpc/connect for RPC client integration
  */
 export function extendGeneratedFile(
   schema: Schema<PluginOptions>,
   f: GeneratedFile,
 ) {
-  f.importBuilder = f.import('builder', schema.options.builderPath);
-  f.runtimeImportEnumFromJson = f.import('enumFromJson', '@bufbuild/protobuf');
+  f.importPothosBuilder = f.import('builder', schema.options.builderPath);
+  f.importEnumFromJson = f.import('enumFromJson', '@bufbuild/protobuf');
+  f.importConnectRpcClientType = f.import(
+    'Client',
+    '@connectrpc/connect',
+    true,
+  );
 }
 
 declare module '@bufbuild/protoplugin' {
   export interface GeneratedFile {
-    importBuilder: ImportSymbol;
-    runtimeImportEnumFromJson: ImportSymbol;
+    importPothosBuilder: ImportSymbol;
+    importEnumFromJson: ImportSymbol;
+    importConnectRpcClientType: ImportSymbol;
   }
 }

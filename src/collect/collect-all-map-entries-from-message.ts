@@ -1,5 +1,5 @@
-import type { DescMessage } from '@bufbuild/protobuf';
-import { ScalarTypeWrapper } from '../helpers/scalar-type-wrapper.js';
+import { type DescMessage, ScalarType } from '@bufbuild/protobuf';
+import { pascalCase } from 'change-case';
 import type { MapEntry } from './types.js';
 
 /**
@@ -19,11 +19,11 @@ import type { MapEntry } from './types.js';
  * The descriptor name is determined differently based on the map kind:
  * - For 'enum': Uses the enum's type name
  * - For 'message': Uses the message's type name
- * - For 'scalar': Uses the string representation of the ScalarTypeWrapper
+ * - For 'scalar': Uses the pascal-cased string representation of the ScalarType
  */
 export function collectAllMapEntriesFromMessages(
   messages: Iterable<DescMessage>,
-  collection: Map<ScalarTypeWrapper | string, MapEntry>,
+  collection: Map<string, MapEntry>,
 ) {
   for (const message of messages) {
     for (const field of message.fields) {
@@ -35,7 +35,7 @@ export function collectAllMapEntriesFromMessages(
             case 'message':
               return field.message.typeName;
             case 'scalar':
-              return ScalarTypeWrapper.fromScalarType(field.scalar);
+              return pascalCase(ScalarType[field.scalar]);
           }
         })();
 

@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package board.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "user.proto";  // Import the user.v1 package for author information
+
+// Top-level enum representing the status of a post.
+enum PostStatus {
+  UNKNOWN    = 0;
+  DRAFT      = 1;
+  PUBLISHED  = 2;
+  ARCHIVED   = 3;
+}
+
+// Message representing a post on the board.
+message Post {
+  string id = 1;
+  string title = 2;
+  user.v1.User author = 3;  // Author information imported from user.v1 package
+  string content = 4;
+  google.protobuf.Timestamp created_at = 5;
+  PostStatus status = 6;
+
+  // Map field with scalar value type.
+  // Maps tag names to view counts.
+  map<string, int32> view_counts = 7;
+
+  // Map field with enum value type.
+  // Maps reaction types to post status (e.g., indicating mood or context).
+  map<string, PostStatus> reaction_statuses = 8;
+
+  // Address field with message value type.
+  Attachment attachment = 9 [deprecated = true];  // Deprecated field, should not be used in new code.
+
+  // Map field with message value type.
+  // Maps attachment IDs to attachment details.
+  map<string, Attachment> attachments = 10;
+
+  // Nested message representing an attachment to the post.
+  message Attachment {
+    string url = 1;
+    string description = 2;
+
+    // Nested enum for attachment type.
+    enum AttachmentType {
+      IMAGE    = 0;
+      VIDEO    = 1;
+      DOCUMENT = 2;
+    }
+    AttachmentType type = 3;
+  }
+}
+
+// Message representing a comment on a post.
+message Comment {
+  string id = 1;
+  // Reference to the post this comment belongs to.
+  string post_id = 2;
+  user.v1.User author = 3;  // Author information imported from user.v1 package
+  string content = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// Message for querying posts.
+message PostQuery {
+  string keyword = 1;
+  int32 page_number = 2;
+  int32 results_per_page = 3;
+  google.protobuf.Timestamp start_date = 4;
+  google.protobuf.Timestamp end_date = 5;
+}
+
+// Message representing a list of posts.
+message PostList {
+  repeated Post posts = 1;
+  int32 total_posts = 2;
+}
+
+// Service for board operations.
+service BoardService {
+  // Retrieves a single post.
+  rpc GetPost(google.protobuf.Empty) returns (Post);
+
+  // Retrieves a list of posts based on query parameters.
+  rpc ListPosts(PostQuery) returns (PostList);
+
+  // Creates a new post.
+  rpc CreatePost(Post) returns (Post);
+
+  // Deletes a post.
+  rpc DeletePost(Post) returns (google.protobuf.Empty);
+
+  // Adds a comment to a post.
+  rpc AddComment(Comment) returns (Comment);
+}

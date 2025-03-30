@@ -1,5 +1,4 @@
-import { type DescField, ScalarType } from '@bufbuild/protobuf';
-import { pascalCase } from 'change-case';
+import type { DescField, ScalarType } from '@bufbuild/protobuf';
 import { getDescriptorName } from './get-descriptor-name.js';
 import { mapProtoToGraphQLScalar } from './map-proto-to-graphql-scalar.js';
 
@@ -48,7 +47,7 @@ export function getInputMapEntryTypeName(field: DescField) {
  * a type name suitable for map entries containing scalar values.
  */
 export function getScalarMapEntryOutputTypeName(scalarType: ScalarType) {
-  const scalarName = pascalCase(ScalarType[scalarType]);
+  const scalarName = mapProtoToGraphQLScalar(scalarType);
   return `${scalarName}MapEntry`;
 }
 

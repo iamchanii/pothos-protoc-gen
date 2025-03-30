@@ -8,7 +8,7 @@ test('Generate files', () => {
   const request = makeCodeGenerateRequest(
     makePluginParameter({
       builderPath: '../builder',
-      includeServices: new Set(['post.v1.PostService']),
+      includeServices: new Set(['board.v1.BoardService']),
     }),
   );
   const response = pothosProtocGenPlugin.run(request);

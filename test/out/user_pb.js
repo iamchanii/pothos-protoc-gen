@@ -3,13 +3,14 @@
 /* eslint-disable */
 
 import { enumDesc, fileDesc, messageDesc, serviceDesc, tsEnum } from "@bufbuild/protobuf/codegenv1";
-import { file_google_protobuf_wrappers } from "./google/protobuf/wrappers_pb";
+import { file_google_protobuf_timestamp } from "./google/protobuf/timestamp_pb";
+import { file_google_protobuf_empty } from "./google/protobuf/empty_pb";
 
 /**
  * Describes the file user.proto.
  */
 export const file_user = /*@__PURE__*/
-  fileDesc("Cgp1c2VyLnByb3RvEgd1c2VyLnYxIpEECgRVc2VyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSDQoFZW1haWwYAyABKAkSHwoEcm9sZRgEIAEoDjIRLnVzZXIudjEuVXNlclJvbGUSKAoGc3RhdHVzGAUgASgOMhgudXNlci52MS5Vc2VyLlVzZXJTdGF0dXMSLQoIbWV0YWRhdGEYBiADKAsyGy51c2VyLnYxLlVzZXIuTWV0YWRhdGFFbnRyeRIMCgR0YWdzGAcgAygJEhIKCmNyZWF0ZWRfYXQYCCABKAMSEgoKdXBkYXRlZF9hdBgJIAEoAxIxCgtkZXNjcmlwdGlvbhgKIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRIpCgZncm91cHMYCyADKAsyGS51c2VyLnYxLlVzZXIuR3JvdXBzRW50cnkaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBGj0KC0dyb3Vwc0VudHJ5EgsKA2tleRgBIAEoCRIdCgV2YWx1ZRgCIAEoCzIOLnVzZXIudjEuR3JvdXA6AjgBImIKClVzZXJTdGF0dXMSFgoSU1RBVFVTX1VOU1BFQ0lGSUVEEAASEQoNU1RBVFVTX0FDVElWRRABEhMKD1NUQVRVU19JTkFDVElWRRACEhQKEFNUQVRVU19TVVNQRU5ERUQQAyIhCgVHcm91cBIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJIswBChFDcmVhdGVVc2VyUmVxdWVzdBIMCgRuYW1lGAEgASgJEg0KBWVtYWlsGAIgASgJEh8KBHJvbGUYAyABKA4yES51c2VyLnYxLlVzZXJSb2xlEjoKCG1ldGFkYXRhGAQgAygLMigudXNlci52MS5DcmVhdGVVc2VyUmVxdWVzdC5NZXRhZGF0YUVudHJ5EgwKBHRhZ3MYBSADKAkaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIjEKEkNyZWF0ZVVzZXJSZXNwb25zZRIbCgR1c2VyGAEgASgLMg0udXNlci52MS5Vc2VyIhwKDkdldFVzZXJSZXF1ZXN0EgoKAmlkGAEgASgJIi4KD0dldFVzZXJSZXNwb25zZRIbCgR1c2VyGAEgASgLMg0udXNlci52MS5Vc2VyIr0CChFVcGRhdGVVc2VyUmVxdWVzdBIKCgJpZBgBIAEoCRIRCgRuYW1lGAIgASgJSACIAQESEgoFZW1haWwYAyABKAlIAYgBARIkCgRyb2xlGAQgASgOMhEudXNlci52MS5Vc2VyUm9sZUgCiAEBEi0KBnN0YXR1cxgFIAEoDjIYLnVzZXIudjEuVXNlci5Vc2VyU3RhdHVzSAOIAQESOgoIbWV0YWRhdGEYBiADKAsyKC51c2VyLnYxLlVwZGF0ZVVzZXJSZXF1ZXN0Lk1ldGFkYXRhRW50cnkSDAoEdGFncxgHIAMoCRovCg1NZXRhZGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCBwoFX25hbWVCCAoGX2VtYWlsQgcKBV9yb2xlQgkKB19zdGF0dXMiMQoSVXBkYXRlVXNlclJlc3BvbnNlEhsKBHVzZXIYASABKAsyDS51c2VyLnYxLlVzZXIiHwoRRGVsZXRlVXNlclJlcXVlc3QSCgoCaWQYASABKAkiJQoSRGVsZXRlVXNlclJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgiogEKEExpc3RVc2Vyc1JlcXVlc3QSEQoJcGFnZV9zaXplGAEgASgFEhIKCnBhZ2VfdG9rZW4YAiABKAkSLQoGc3RhdHVzGAMgASgOMhgudXNlci52MS5Vc2VyLlVzZXJTdGF0dXNIAIgBARIkCgRyb2xlGAQgASgOMhEudXNlci52MS5Vc2VyUm9sZUgBiAEBQgkKB19zdGF0dXNCBwoFX3JvbGUiXwoRTGlzdFVzZXJzUmVzcG9uc2USHAoFdXNlcnMYASADKAsyDS51c2VyLnYxLlVzZXISFwoPbmV4dF9wYWdlX3Rva2VuGAIgASgJEhMKC3RvdGFsX2NvdW50GAMgASgFKk8KCFVzZXJSb2xlEhQKEFJPTEVfVU5TUEVDSUZJRUQQABIOCgpST0xFX0FETUlOEAESDQoJUk9MRV9VU0VSEAISDgoKUk9MRV9HVUVTVBADMuQCCgtVc2VyU2VydmljZRJFCgpDcmVhdGVVc2VyEhoudXNlci52MS5DcmVhdGVVc2VyUmVxdWVzdBobLnVzZXIudjEuQ3JlYXRlVXNlclJlc3BvbnNlEjwKB0dldFVzZXISFy51c2VyLnYxLkdldFVzZXJSZXF1ZXN0GhgudXNlci52MS5HZXRVc2VyUmVzcG9uc2USRQoKVXBkYXRlVXNlchIaLnVzZXIudjEuVXBkYXRlVXNlclJlcXVlc3QaGy51c2VyLnYxLlVwZGF0ZVVzZXJSZXNwb25zZRJFCgpEZWxldGVVc2VyEhoudXNlci52MS5EZWxldGVVc2VyUmVxdWVzdBobLnVzZXIudjEuRGVsZXRlVXNlclJlc3BvbnNlEkIKCUxpc3RVc2VycxIZLnVzZXIudjEuTGlzdFVzZXJzUmVxdWVzdBoaLnVzZXIudjEuTGlzdFVzZXJzUmVzcG9uc2ViBnByb3RvMw", [file_google_protobuf_wrappers]);
+  fileDesc("Cgp1c2VyLnByb3RvEgd1c2VyLnYxIr0FCgRVc2VyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIwoGc3RhdHVzGAMgASgOMhMudXNlci52MS5Vc2VyU3RhdHVzEi4KCmNyZWF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjQKDGxvZ2luX2NvdW50cxgFIAMoCzIeLnVzZXIudjEuVXNlci5Mb2dpbkNvdW50c0VudHJ5EjwKEGFjY291bnRfc2V0dGluZ3MYBiADKAsyIi51c2VyLnYxLlVzZXIuQWNjb3VudFNldHRpbmdzRW50cnkSKgoHYWRkcmVzcxgHIAEoCzIVLnVzZXIudjEuVXNlci5BZGRyZXNzQgIYARIvCglhZGRyZXNzZXMYCCADKAsyHC51c2VyLnYxLlVzZXIuQWRkcmVzc2VzRW50cnkaMgoQTG9naW5Db3VudHNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAU6AjgBGksKFEFjY291bnRTZXR0aW5nc0VudHJ5EgsKA2tleRgBIAEoCRIiCgV2YWx1ZRgCIAEoDjITLnVzZXIudjEuVXNlclN0YXR1czoCOAEaRwoOQWRkcmVzc2VzRW50cnkSCwoDa2V5GAEgASgJEiQKBXZhbHVlGAIgASgLMhUudXNlci52MS5Vc2VyLkFkZHJlc3M6AjgBGqoBCgdBZGRyZXNzEg4KBnN0cmVldBgBIAEoCRIMCgRjaXR5GAIgASgJEg0KBXN0YXRlGAMgASgJEhMKC3Bvc3RhbF9jb2RlGAQgASgJEi8KBHR5cGUYBSABKA4yIS51c2VyLnYxLlVzZXIuQWRkcmVzcy5BZGRyZXNzVHlwZSIsCgtBZGRyZXNzVHlwZRIICgRIT01FEAASCAoEV09SSxABEgkKBU9USEVSEAIirQEKCVVzZXJRdWVyeRITCgtzZWFyY2hfdGVybRgBIAEoCRITCgtwYWdlX251bWJlchgCIAEoBRIYChByZXN1bHRzX3Blcl9wYWdlGAMgASgFEi4KCnN0YXJ0X2RhdGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI9CghVc2VyTGlzdBIcCgV1c2VycxgBIAMoCzINLnVzZXIudjEuVXNlchITCgt0b3RhbF91c2VycxgCIAEoBSo/CgpVc2VyU3RhdHVzEgsKB1VOS05PV04QABIKCgZBQ1RJVkUQARIMCghJTkFDVElWRRACEgoKBkJBTk5FRBADMtQBCgtVc2VyU2VydmljZRIwCgdHZXRVc2VyEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gg0udXNlci52MS5Vc2VyEjIKCUxpc3RVc2VycxISLnVzZXIudjEuVXNlclF1ZXJ5GhEudXNlci52MS5Vc2VyTGlzdBIqCgpDcmVhdGVVc2VyEg0udXNlci52MS5Vc2VyGg0udXNlci52MS5Vc2VyEjMKCkRlbGV0ZVVzZXISDS51c2VyLnYxLlVzZXIaFi5nb29nbGUucHJvdG9idWYuRW1wdHliBnByb3RvMw", [file_google_protobuf_timestamp, file_google_protobuf_empty]);
 
 /**
  * Describes the message user.v1.User.
@@ -19,112 +20,56 @@ export const UserSchema = /*@__PURE__*/
   messageDesc(file_user, 0);
 
 /**
- * Describes the enum user.v1.User.UserStatus.
+ * Describes the message user.v1.User.Address.
+ * Use `create(User_AddressSchema)` to create a new message.
  */
-export const User_UserStatusSchema = /*@__PURE__*/
-  enumDesc(file_user, 0, 0);
+export const User_AddressSchema = /*@__PURE__*/
+  messageDesc(file_user, 0, 0);
 
 /**
- * User status enum type for filtering
+ * Describes the enum user.v1.User.Address.AddressType.
+ */
+export const User_Address_AddressTypeSchema = /*@__PURE__*/
+  enumDesc(file_user, 0, 0, 0);
+
+/**
+ * Nested enum within Address for address type.
  *
- * @generated from enum user.v1.User.UserStatus
+ * @generated from enum user.v1.User.Address.AddressType
  */
-export const User_UserStatus = /*@__PURE__*/
-  tsEnum(User_UserStatusSchema);
+export const User_Address_AddressType = /*@__PURE__*/
+  tsEnum(User_Address_AddressTypeSchema);
 
 /**
- * Describes the message user.v1.Group.
- * Use `create(GroupSchema)` to create a new message.
+ * Describes the message user.v1.UserQuery.
+ * Use `create(UserQuerySchema)` to create a new message.
  */
-export const GroupSchema = /*@__PURE__*/
+export const UserQuerySchema = /*@__PURE__*/
   messageDesc(file_user, 1);
 
 /**
- * Describes the message user.v1.CreateUserRequest.
- * Use `create(CreateUserRequestSchema)` to create a new message.
+ * Describes the message user.v1.UserList.
+ * Use `create(UserListSchema)` to create a new message.
  */
-export const CreateUserRequestSchema = /*@__PURE__*/
+export const UserListSchema = /*@__PURE__*/
   messageDesc(file_user, 2);
 
 /**
- * Describes the message user.v1.CreateUserResponse.
- * Use `create(CreateUserResponseSchema)` to create a new message.
+ * Describes the enum user.v1.UserStatus.
  */
-export const CreateUserResponseSchema = /*@__PURE__*/
-  messageDesc(file_user, 3);
-
-/**
- * Describes the message user.v1.GetUserRequest.
- * Use `create(GetUserRequestSchema)` to create a new message.
- */
-export const GetUserRequestSchema = /*@__PURE__*/
-  messageDesc(file_user, 4);
-
-/**
- * Describes the message user.v1.GetUserResponse.
- * Use `create(GetUserResponseSchema)` to create a new message.
- */
-export const GetUserResponseSchema = /*@__PURE__*/
-  messageDesc(file_user, 5);
-
-/**
- * Describes the message user.v1.UpdateUserRequest.
- * Use `create(UpdateUserRequestSchema)` to create a new message.
- */
-export const UpdateUserRequestSchema = /*@__PURE__*/
-  messageDesc(file_user, 6);
-
-/**
- * Describes the message user.v1.UpdateUserResponse.
- * Use `create(UpdateUserResponseSchema)` to create a new message.
- */
-export const UpdateUserResponseSchema = /*@__PURE__*/
-  messageDesc(file_user, 7);
-
-/**
- * Describes the message user.v1.DeleteUserRequest.
- * Use `create(DeleteUserRequestSchema)` to create a new message.
- */
-export const DeleteUserRequestSchema = /*@__PURE__*/
-  messageDesc(file_user, 8);
-
-/**
- * Describes the message user.v1.DeleteUserResponse.
- * Use `create(DeleteUserResponseSchema)` to create a new message.
- */
-export const DeleteUserResponseSchema = /*@__PURE__*/
-  messageDesc(file_user, 9);
-
-/**
- * Describes the message user.v1.ListUsersRequest.
- * Use `create(ListUsersRequestSchema)` to create a new message.
- */
-export const ListUsersRequestSchema = /*@__PURE__*/
-  messageDesc(file_user, 10);
-
-/**
- * Describes the message user.v1.ListUsersResponse.
- * Use `create(ListUsersResponseSchema)` to create a new message.
- */
-export const ListUsersResponseSchema = /*@__PURE__*/
-  messageDesc(file_user, 11);
-
-/**
- * Describes the enum user.v1.UserRole.
- */
-export const UserRoleSchema = /*@__PURE__*/
+export const UserStatusSchema = /*@__PURE__*/
   enumDesc(file_user, 0);
 
 /**
- * User role enum type
+ * Top-level enum for user status.
  *
- * @generated from enum user.v1.UserRole
+ * @generated from enum user.v1.UserStatus
  */
-export const UserRole = /*@__PURE__*/
-  tsEnum(UserRoleSchema);
+export const UserStatus = /*@__PURE__*/
+  tsEnum(UserStatusSchema);
 
 /**
- * User Service with CRUD operations
+ * Service with multiple RPC calls.
  *
  * @generated from service user.v1.UserService
  */

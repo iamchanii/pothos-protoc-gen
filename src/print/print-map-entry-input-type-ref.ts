@@ -16,19 +16,18 @@ import type { PluginOptions } from '../plugin-options.js';
  *
  * This function creates an input reference type that represents a key-value pair
  * for a map field in a Protocol Buffer schema. It handles both object descriptors
- * and primitive types for the map value.
+ * and scalar types for the map value.
  *
  * @param schema - The schema containing plugin options and configuration.
  * @param mapEntry - The map entry information containing field and descriptor details.
- * @returns Nothing; the function prints the generated code to the appropriate file.
  *
  * @remarks
  * The generated input type will have two fields:
  * - `key`: A required string field
- * - `value`: A required field of the appropriate type based on the descriptor
+ * - `value`: A required field whose type depends on the descriptor type
  *
- * The function determines the correct import path and type name based on whether
- * the descriptor is an object or a primitive type.
+ * The function outputs the generated code to the appropriate file, either a message-specific
+ * generated file or the shared map entries file, depending on the descriptor type.
  */
 function printMapEntryInputTypeRef(
   schema: Schema<PluginOptions>,
@@ -47,7 +46,10 @@ function printMapEntryInputTypeRef(
       : mapProtoToPrimitiveType(mapEntry.descriptor);
   const valueType =
     typeof mapEntry.descriptor === 'object'
-      ? getDescriptorName(mapEntry.descriptor, 'Input')
+      ? getDescriptorName(
+          mapEntry.descriptor,
+          mapEntry.descriptor.kind === 'message' ? 'Input' : undefined,
+        )
       : mapProtoToGraphQLScalar(mapEntry.descriptor);
 
   f.print(f.jsDoc(mapEntry.field));

@@ -18,3 +18,8 @@ When building GraphQL APIs that work with Protocol Buffers, manually creating Gr
 - **Simplifying updates**: When your Protobuf definitions change, regenerate your code to keep everything in sync
 
 This approach provides a clean, type-safe bridge between your Protocol Buffer services and GraphQL API, while minimizing manual code maintenance.
+
+## Example
+
+Check out the GraphQL Schema file created with this plugin. [View example schema](https://github.com/iamchanii/pothos-protoc-gen/blob/main/test/schema.graphql).
+

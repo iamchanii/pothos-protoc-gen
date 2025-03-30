@@ -9,6 +9,8 @@ import type {
   GenMessage,
   GenService,
 } from '@bufbuild/protobuf/codegenv1';
+import type { EmptySchema } from './google/protobuf/empty_pb';
+import type { Timestamp } from './google/protobuf/timestamp_pb';
 
 /**
  * Describes the file user.proto.
@@ -16,7 +18,7 @@ import type {
 export declare const file_user: GenFile;
 
 /**
- * Main User message
+ * Message representing a user.
  *
  * @generated from message user.v1.User
  */
@@ -32,53 +34,44 @@ export declare type User = Message<'user.v1.User'> & {
   name: string;
 
   /**
-   * @generated from field: string email = 3;
+   * @generated from field: user.v1.UserStatus status = 3;
    */
-  email: string;
+  status: UserStatus;
 
   /**
-   * @generated from field: user.v1.UserRole role = 4;
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
    */
-  role: UserRole;
+  createdAt?: Timestamp;
 
   /**
-   * @generated from field: user.v1.User.UserStatus status = 5;
-   */
-  status: User_UserStatus;
-
-  /**
-   * Map type field
+   * Map field with scalar value type.
    *
-   * @generated from field: map<string, string> metadata = 6;
+   * @generated from field: map<string, int32> login_counts = 5;
    */
-  metadata: { [key: string]: string };
+  loginCounts: { [key: string]: number };
 
   /**
-   * @generated from field: repeated string tags = 7;
-   */
-  tags: string[];
-
-  /**
-   * @generated from field: int64 created_at = 8;
-   */
-  createdAt: bigint;
-
-  /**
-   * @generated from field: int64 updated_at = 9;
-   */
-  updatedAt: bigint;
-
-  /**
-   * Field using StringValue well-known type
+   * Map field with enum value type.
    *
-   * @generated from field: google.protobuf.StringValue description = 10;
+   * @generated from field: map<string, user.v1.UserStatus> account_settings = 6;
    */
-  description?: string;
+  accountSettings: { [key: string]: UserStatus };
 
   /**
-   * @generated from field: map<string, user.v1.Group> groups = 11;
+   * Address field with message value type.
+   * Deprecated field, should not be used in new code.
+   *
+   * @generated from field: user.v1.User.Address address = 7 [deprecated = true];
+   * @deprecated
    */
-  groups: { [key: string]: Group };
+  address?: User_Address;
+
+  /**
+   * Map field with message value type.
+   *
+   * @generated from field: map<string, user.v1.User.Address> addresses = 8;
+   */
+  addresses: { [key: string]: User_Address };
 };
 
 /**
@@ -88,394 +81,207 @@ export declare type User = Message<'user.v1.User'> & {
 export declare const UserSchema: GenMessage<User>;
 
 /**
- * User status enum type for filtering
+ * Nested message representing an address.
  *
- * @generated from enum user.v1.User.UserStatus
+ * @generated from message user.v1.User.Address
  */
-export enum User_UserStatus {
+export declare type User_Address = Message<'user.v1.User.Address'> & {
   /**
-   * @generated from enum value: STATUS_UNSPECIFIED = 0;
+   * @generated from field: string street = 1;
    */
-  STATUS_UNSPECIFIED = 0,
+  street: string;
 
   /**
-   * @generated from enum value: STATUS_ACTIVE = 1;
+   * @generated from field: string city = 2;
    */
-  STATUS_ACTIVE = 1,
+  city: string;
 
   /**
-   * @generated from enum value: STATUS_INACTIVE = 2;
+   * @generated from field: string state = 3;
    */
-  STATUS_INACTIVE = 2,
+  state: string;
 
   /**
-   * @generated from enum value: STATUS_SUSPENDED = 3;
+   * @generated from field: string postal_code = 4;
    */
-  STATUS_SUSPENDED = 3,
+  postalCode: string;
+
+  /**
+   * @generated from field: user.v1.User.Address.AddressType type = 5;
+   */
+  type: User_Address_AddressType;
+};
+
+/**
+ * Describes the message user.v1.User.Address.
+ * Use `create(User_AddressSchema)` to create a new message.
+ */
+export declare const User_AddressSchema: GenMessage<User_Address>;
+
+/**
+ * Nested enum within Address for address type.
+ *
+ * @generated from enum user.v1.User.Address.AddressType
+ */
+export enum User_Address_AddressType {
+  /**
+   * @generated from enum value: HOME = 0;
+   */
+  HOME = 0,
+
+  /**
+   * @generated from enum value: WORK = 1;
+   */
+  WORK = 1,
+
+  /**
+   * @generated from enum value: OTHER = 2;
+   */
+  OTHER = 2,
 }
 
 /**
- * Describes the enum user.v1.User.UserStatus.
+ * Describes the enum user.v1.User.Address.AddressType.
  */
-export declare const User_UserStatusSchema: GenEnum<User_UserStatus>;
+export declare const User_Address_AddressTypeSchema: GenEnum<User_Address_AddressType>;
 
 /**
- * @generated from message user.v1.Group
- */
-export declare type Group = Message<'user.v1.Group'> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * @generated from field: string name = 2;
-   */
-  name: string;
-};
-
-/**
- * Describes the message user.v1.Group.
- * Use `create(GroupSchema)` to create a new message.
- */
-export declare const GroupSchema: GenMessage<Group>;
-
-/**
- * Create
+ * Message for querying users. References User indirectly.
  *
- * @generated from message user.v1.CreateUserRequest
+ * @generated from message user.v1.UserQuery
  */
-export declare type CreateUserRequest = Message<'user.v1.CreateUserRequest'> & {
+export declare type UserQuery = Message<'user.v1.UserQuery'> & {
   /**
-   * @generated from field: string name = 1;
+   * @generated from field: string search_term = 1;
    */
-  name: string;
+  searchTerm: string;
 
   /**
-   * @generated from field: string email = 2;
+   * @generated from field: int32 page_number = 2;
    */
-  email: string;
+  pageNumber: number;
 
   /**
-   * @generated from field: user.v1.UserRole role = 3;
+   * @generated from field: int32 results_per_page = 3;
    */
-  role: UserRole;
+  resultsPerPage: number;
 
   /**
-   * @generated from field: map<string, string> metadata = 4;
+   * @generated from field: google.protobuf.Timestamp start_date = 4;
    */
-  metadata: { [key: string]: string };
+  startDate?: Timestamp;
 
   /**
-   * @generated from field: repeated string tags = 5;
+   * @generated from field: google.protobuf.Timestamp end_date = 5;
    */
-  tags: string[];
+  endDate?: Timestamp;
 };
 
 /**
- * Describes the message user.v1.CreateUserRequest.
- * Use `create(CreateUserRequestSchema)` to create a new message.
+ * Describes the message user.v1.UserQuery.
+ * Use `create(UserQuerySchema)` to create a new message.
  */
-export declare const CreateUserRequestSchema: GenMessage<CreateUserRequest>;
+export declare const UserQuerySchema: GenMessage<UserQuery>;
 
 /**
- * @generated from message user.v1.CreateUserResponse
- */
-export declare type CreateUserResponse =
-  Message<'user.v1.CreateUserResponse'> & {
-    /**
-     * @generated from field: user.v1.User user = 1;
-     */
-    user?: User;
-  };
-
-/**
- * Describes the message user.v1.CreateUserResponse.
- * Use `create(CreateUserResponseSchema)` to create a new message.
- */
-export declare const CreateUserResponseSchema: GenMessage<CreateUserResponse>;
-
-/**
- * Read
+ * Message representing a list of users.
  *
- * @generated from message user.v1.GetUserRequest
+ * @generated from message user.v1.UserList
  */
-export declare type GetUserRequest = Message<'user.v1.GetUserRequest'> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-};
-
-/**
- * Describes the message user.v1.GetUserRequest.
- * Use `create(GetUserRequestSchema)` to create a new message.
- */
-export declare const GetUserRequestSchema: GenMessage<GetUserRequest>;
-
-/**
- * @generated from message user.v1.GetUserResponse
- */
-export declare type GetUserResponse = Message<'user.v1.GetUserResponse'> & {
-  /**
-   * @generated from field: user.v1.User user = 1;
-   */
-  user?: User;
-};
-
-/**
- * Describes the message user.v1.GetUserResponse.
- * Use `create(GetUserResponseSchema)` to create a new message.
- */
-export declare const GetUserResponseSchema: GenMessage<GetUserResponse>;
-
-/**
- * Update
- *
- * @generated from message user.v1.UpdateUserRequest
- */
-export declare type UpdateUserRequest = Message<'user.v1.UpdateUserRequest'> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * @generated from field: optional string name = 2;
-   */
-  name?: string;
-
-  /**
-   * @generated from field: optional string email = 3;
-   */
-  email?: string;
-
-  /**
-   * @generated from field: optional user.v1.UserRole role = 4;
-   */
-  role?: UserRole;
-
-  /**
-   * @generated from field: optional user.v1.User.UserStatus status = 5;
-   */
-  status?: User_UserStatus;
-
-  /**
-   * @generated from field: map<string, string> metadata = 6;
-   */
-  metadata: { [key: string]: string };
-
-  /**
-   * @generated from field: repeated string tags = 7;
-   */
-  tags: string[];
-};
-
-/**
- * Describes the message user.v1.UpdateUserRequest.
- * Use `create(UpdateUserRequestSchema)` to create a new message.
- */
-export declare const UpdateUserRequestSchema: GenMessage<UpdateUserRequest>;
-
-/**
- * @generated from message user.v1.UpdateUserResponse
- */
-export declare type UpdateUserResponse =
-  Message<'user.v1.UpdateUserResponse'> & {
-    /**
-     * @generated from field: user.v1.User user = 1;
-     */
-    user?: User;
-  };
-
-/**
- * Describes the message user.v1.UpdateUserResponse.
- * Use `create(UpdateUserResponseSchema)` to create a new message.
- */
-export declare const UpdateUserResponseSchema: GenMessage<UpdateUserResponse>;
-
-/**
- * Delete
- *
- * @generated from message user.v1.DeleteUserRequest
- */
-export declare type DeleteUserRequest = Message<'user.v1.DeleteUserRequest'> & {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id: string;
-};
-
-/**
- * Describes the message user.v1.DeleteUserRequest.
- * Use `create(DeleteUserRequestSchema)` to create a new message.
- */
-export declare const DeleteUserRequestSchema: GenMessage<DeleteUserRequest>;
-
-/**
- * @generated from message user.v1.DeleteUserResponse
- */
-export declare type DeleteUserResponse =
-  Message<'user.v1.DeleteUserResponse'> & {
-    /**
-     * @generated from field: bool success = 1;
-     */
-    success: boolean;
-  };
-
-/**
- * Describes the message user.v1.DeleteUserResponse.
- * Use `create(DeleteUserResponseSchema)` to create a new message.
- */
-export declare const DeleteUserResponseSchema: GenMessage<DeleteUserResponse>;
-
-/**
- * List
- *
- * @generated from message user.v1.ListUsersRequest
- */
-export declare type ListUsersRequest = Message<'user.v1.ListUsersRequest'> & {
-  /**
-   * @generated from field: int32 page_size = 1;
-   */
-  pageSize: number;
-
-  /**
-   * @generated from field: string page_token = 2;
-   */
-  pageToken: string;
-
-  /**
-   * Enum fields for filtering
-   *
-   * @generated from field: optional user.v1.User.UserStatus status = 3;
-   */
-  status?: User_UserStatus;
-
-  /**
-   * @generated from field: optional user.v1.UserRole role = 4;
-   */
-  role?: UserRole;
-};
-
-/**
- * Describes the message user.v1.ListUsersRequest.
- * Use `create(ListUsersRequestSchema)` to create a new message.
- */
-export declare const ListUsersRequestSchema: GenMessage<ListUsersRequest>;
-
-/**
- * @generated from message user.v1.ListUsersResponse
- */
-export declare type ListUsersResponse = Message<'user.v1.ListUsersResponse'> & {
+export declare type UserList = Message<'user.v1.UserList'> & {
   /**
    * @generated from field: repeated user.v1.User users = 1;
    */
   users: User[];
 
   /**
-   * @generated from field: string next_page_token = 2;
+   * @generated from field: int32 total_users = 2;
    */
-  nextPageToken: string;
-
-  /**
-   * @generated from field: int32 total_count = 3;
-   */
-  totalCount: number;
+  totalUsers: number;
 };
 
 /**
- * Describes the message user.v1.ListUsersResponse.
- * Use `create(ListUsersResponseSchema)` to create a new message.
+ * Describes the message user.v1.UserList.
+ * Use `create(UserListSchema)` to create a new message.
  */
-export declare const ListUsersResponseSchema: GenMessage<ListUsersResponse>;
+export declare const UserListSchema: GenMessage<UserList>;
 
 /**
- * User role enum type
+ * Top-level enum for user status.
  *
- * @generated from enum user.v1.UserRole
+ * @generated from enum user.v1.UserStatus
  */
-export enum UserRole {
+export enum UserStatus {
   /**
-   * @generated from enum value: ROLE_UNSPECIFIED = 0;
+   * @generated from enum value: UNKNOWN = 0;
    */
-  ROLE_UNSPECIFIED = 0,
+  UNKNOWN = 0,
 
   /**
-   * @generated from enum value: ROLE_ADMIN = 1;
+   * @generated from enum value: ACTIVE = 1;
    */
-  ROLE_ADMIN = 1,
+  ACTIVE = 1,
 
   /**
-   * @generated from enum value: ROLE_USER = 2;
+   * @generated from enum value: INACTIVE = 2;
    */
-  ROLE_USER = 2,
+  INACTIVE = 2,
 
   /**
-   * @generated from enum value: ROLE_GUEST = 3;
+   * @generated from enum value: BANNED = 3;
    */
-  ROLE_GUEST = 3,
+  BANNED = 3,
 }
 
 /**
- * Describes the enum user.v1.UserRole.
+ * Describes the enum user.v1.UserStatus.
  */
-export declare const UserRoleSchema: GenEnum<UserRole>;
+export declare const UserStatusSchema: GenEnum<UserStatus>;
 
 /**
- * User Service with CRUD operations
+ * Service with multiple RPC calls.
  *
  * @generated from service user.v1.UserService
  */
 export declare const UserService: GenService<{
   /**
-   * Create a new user
-   *
-   * @generated from rpc user.v1.UserService.CreateUser
-   */
-  createUser: {
-    methodKind: 'unary';
-    input: typeof CreateUserRequestSchema;
-    output: typeof CreateUserResponseSchema;
-  };
-  /**
-   * Get a user by ID
+   * Retrieves a single user.
    *
    * @generated from rpc user.v1.UserService.GetUser
    */
   getUser: {
     methodKind: 'unary';
-    input: typeof GetUserRequestSchema;
-    output: typeof GetUserResponseSchema;
+    input: typeof EmptySchema;
+    output: typeof UserSchema;
   };
   /**
-   * Update an existing user
-   *
-   * @generated from rpc user.v1.UserService.UpdateUser
-   */
-  updateUser: {
-    methodKind: 'unary';
-    input: typeof UpdateUserRequestSchema;
-    output: typeof UpdateUserResponseSchema;
-  };
-  /**
-   * Delete a user
-   *
-   * @generated from rpc user.v1.UserService.DeleteUser
-   */
-  deleteUser: {
-    methodKind: 'unary';
-    input: typeof DeleteUserRequestSchema;
-    output: typeof DeleteUserResponseSchema;
-  };
-  /**
-   * List users with optional filtering
+   * Retrieves a list of users based on query parameters.
    *
    * @generated from rpc user.v1.UserService.ListUsers
    */
   listUsers: {
     methodKind: 'unary';
-    input: typeof ListUsersRequestSchema;
-    output: typeof ListUsersResponseSchema;
+    input: typeof UserQuerySchema;
+    output: typeof UserListSchema;
+  };
+  /**
+   * Creates a new user.
+   *
+   * @generated from rpc user.v1.UserService.CreateUser
+   */
+  createUser: {
+    methodKind: 'unary';
+    input: typeof UserSchema;
+    output: typeof UserSchema;
+  };
+  /**
+   * Deletes a user.
+   *
+   * @generated from rpc user.v1.UserService.DeleteUser
+   */
+  deleteUser: {
+    methodKind: 'unary';
+    input: typeof UserSchema;
+    output: typeof EmptySchema;
   };
 }>;

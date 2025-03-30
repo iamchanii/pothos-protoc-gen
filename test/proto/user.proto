@@ -2,123 +2,80 @@ syntax = "proto3";
 
 package user.v1;
 
-import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
-// User role enum type
-enum UserRole {
-    ROLE_UNSPECIFIED = 0;
-    ROLE_ADMIN = 1;
-    ROLE_USER = 2;
-    ROLE_GUEST = 3;
+// Top-level enum for user status.
+enum UserStatus {
+  UNKNOWN  = 0;
+  ACTIVE   = 1;
+  INACTIVE = 2;
+  BANNED   = 3;
 }
 
-
-// Main User message
+// Message representing a user.
 message User {
-    string id = 1;
-    string name = 2;
-    string email = 3;
-    UserRole role = 4;
-    UserStatus status = 5;
-    map<string, string> metadata = 6; // Map type field
-    repeated string tags = 7;
-    int64 created_at = 8;
-    int64 updated_at = 9;
+  string id = 1;
+  string name = 2;
+  UserStatus status = 3;
+  google.protobuf.Timestamp created_at = 4;
 
-    // Field using StringValue well-known type
-    google.protobuf.StringValue description = 10;
+  // Map field with scalar value type.
+  map<string, int32> login_counts = 5;
 
-    // User status enum type for filtering
-    enum UserStatus {
-        STATUS_UNSPECIFIED = 0;
-        STATUS_ACTIVE = 1;
-        STATUS_INACTIVE = 2;
-        STATUS_SUSPENDED = 3;
+  // Map field with enum value type.
+  map<string, UserStatus> account_settings = 6;
+
+  // Address field with message value type.
+  // Deprecated field, should not be used in new code.
+  Address address = 7 [deprecated = true];
+
+  // Map field with message value type.
+  map<string, Address> addresses = 8;
+
+  // Nested message representing an address.
+  message Address {
+    string street = 1;
+    string city = 2;
+    string state = 3;
+    string postal_code = 4;
+
+    // Nested enum within Address for address type.
+    enum AddressType {
+      HOME  = 0;
+      WORK  = 1;
+      OTHER = 2;
     }
-
-    map<string, Group> groups = 11;
+    AddressType type = 5;
+  }
 }
 
-message Group {
-    string id = 1;
-    string name = 2;
+// Message for querying users. References User indirectly.
+message UserQuery {
+  string search_term = 1;
+  int32 page_number = 2;
+  int32 results_per_page = 3;
+  google.protobuf.Timestamp start_date = 4;
+  google.protobuf.Timestamp end_date = 5;
 }
 
-// Create
-message CreateUserRequest {
-    string name = 1;
-    string email = 2;
-    UserRole role = 3;
-    map<string, string> metadata = 4;
-    repeated string tags = 5;
+// Message representing a list of users.
+message UserList {
+  repeated User users = 1;
+  int32 total_users = 2;
 }
 
-message CreateUserResponse {
-    User user = 1;
-}
-
-// Read
-message GetUserRequest {
-    string id = 1;
-}
-
-message GetUserResponse {
-    User user = 1;
-}
-
-// Update
-message UpdateUserRequest {
-    string id = 1;
-    optional string name = 2;
-    optional string email = 3;
-    optional UserRole role = 4;
-    optional User.UserStatus status = 5;
-    map<string, string> metadata = 6;
-    repeated string tags = 7;
-}
-
-message UpdateUserResponse {
-    User user = 1;
-}
-
-// Delete
-message DeleteUserRequest {
-    string id = 1;
-}
-
-message DeleteUserResponse {
-    bool success = 1;
-}
-
-// List
-message ListUsersRequest {
-    int32 page_size = 1;
-    string page_token = 2;
-    // Enum fields for filtering
-    optional User.UserStatus status = 3;
-    optional UserRole role = 4;
-}
-
-message ListUsersResponse {
-    repeated User users = 1;
-    string next_page_token = 2;
-    int32 total_count = 3;
-}
-
-// User Service with CRUD operations
+// Service with multiple RPC calls.
 service UserService {
-    // Create a new user
-    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
-    
-    // Get a user by ID
-    rpc GetUser(GetUserRequest) returns (GetUserResponse);
-    
-    // Update an existing user
-    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
-    
-    // Delete a user
-    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
-    
-    // List users with optional filtering
-    rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  // Retrieves a single user.
+  rpc GetUser(google.protobuf.Empty) returns (User);
+
+  // Retrieves a list of users based on query parameters.
+  rpc ListUsers(UserQuery) returns (UserList);
+
+  // Creates a new user.
+  rpc CreateUser(User) returns (User);
+
+  // Deletes a user.
+  rpc DeleteUser(User) returns (google.protobuf.Empty);
 }

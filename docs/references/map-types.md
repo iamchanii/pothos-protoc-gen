@@ -29,23 +29,14 @@ Where:
   - If the message/enum has a parent: `{PascalCasedParentTypeName}_{PascalCasedMessageOrEnumName}`
   - If the message/enum has no parent: `{PascalCasedTypeName}`
 
-## Map Entry Object Types
+## Map Entry Types
 
-For GraphQL object types (output types), each map entry is represented as an object with:
+Each map entry is represented as an object with:
 
 - `key`: The key type from the Protocol Buffer map
 - `value`: The value type from the Protocol Buffer map
 
 These types are used when returning map data in queries and mutations.
-
-## Map Entry Input Types
-
-For GraphQL input types, a similar structure is used:
-
-- `key`: The key type from the Protocol Buffer map
-- `value`: The value type from the Protocol Buffer map
-
-These types are used when providing map data as arguments to queries and mutations.
 
 ## Example
 

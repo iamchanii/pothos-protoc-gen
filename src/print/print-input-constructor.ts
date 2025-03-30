@@ -1,9 +1,9 @@
 import type { DescField, DescMessage } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import { getGeneratedFile } from '../helpers/generated-file.ts';
-import { getDescriptorName } from '../helpers/get-descriptor-name.ts';
-import { getInputConstructorName } from '../helpers/get-input-constructor-name.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+import { getGeneratedFile } from '../helpers/generated-file.js';
+import { getDescriptorName } from '../helpers/get-descriptor-name.js';
+import { getInputConstructorName } from '../helpers/get-input-constructor-name.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Generates an input constructor function for the given message type.

@@ -29,6 +29,14 @@ import { mapWktMessageToProtoScalar } from './map-wkt-message-to-proto-scalar.js
  * different map entry type functions are used.
  */
 function getFieldType(field: DescField, type: 'input' | 'object') {
+  const getScalarMapEntryTypeName =
+    type === 'input'
+      ? getScalarMapEntryInputTypeName
+      : getScalarMapEntryOutputTypeName;
+
+  const getMapEntryTypeName =
+    type === 'input' ? getInputMapEntryTypeName : getOutputMapEntryTypeName;
+
   switch (field.fieldKind) {
     case 'scalar':
       return mapProtoToGraphQLScalar(field.scalar);
@@ -66,27 +74,20 @@ function getFieldType(field: DescField, type: 'input' | 'object') {
     case 'map':
       switch (field.mapKind) {
         case 'scalar':
-          return [
-            (type === 'input'
-              ? getScalarMapEntryInputTypeName
-              : getScalarMapEntryOutputTypeName)(field.scalar),
-          ];
-        case 'message':
-          return [
-            isWktWrapperDescriptor(field.message)
-              ? (type === 'input'
-                  ? getScalarMapEntryInputTypeName
-                  : getScalarMapEntryOutputTypeName)(
-                  mapWktMessageToProtoScalar(field.message),
-                )
-              : getOutputMapEntryTypeName(field),
-          ];
+          return [getScalarMapEntryTypeName(field.scalar)];
+        case 'message': {
+          if (isWktWrapperDescriptor(field.message)) {
+            return [
+              getScalarMapEntryTypeName(
+                mapWktMessageToProtoScalar(field.message),
+              ),
+            ];
+          }
+
+          return [getMapEntryTypeName(field)];
+        }
         case 'enum':
-          return [
-            (type === 'input'
-              ? getInputMapEntryTypeName
-              : getOutputMapEntryTypeName)(field),
-          ];
+          return [getMapEntryTypeName(field)];
         default:
           throw new Error('Unreachable code');
       }

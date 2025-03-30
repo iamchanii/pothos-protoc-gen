@@ -21,6 +21,36 @@ test('Print schema', () => {
     }
 
     """
+    Wrapper message for \`string\`.
+
+     The JSON representation for \`StringValue\` is JSON string.
+    """
+    type GoogleProtobufStringValue {
+      """
+      Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
+      """
+      _: Boolean
+
+      """The string value."""
+      value: String
+    }
+
+    """
+    Wrapper message for \`string\`.
+
+     The JSON representation for \`StringValue\` is JSON string.
+    """
+    input GoogleProtobufStringValueInput {
+      """
+      Fake field because GraphQL does not support empty input. Do not use, It does nothing.
+      """
+      _: Boolean
+
+      """The string value."""
+      value: String
+    }
+
+    """
     A Timestamp represents a point in time independent of any time zone or local
      calendar, encoded as a count of seconds and fractions of seconds at
      nanosecond resolution. The count is relative to an epoch at UTC midnight on
@@ -249,10 +279,11 @@ test('Print schema', () => {
       category: PostV1PostCategory
       content: String
       createdAt: GoogleProtobufTimestamp
-      id: String
+      id: ID
 
       """Metadata as key-value pairs"""
       metadata: [StringMapEntry!] @deprecated(reason: "Deprecated. See the comments for more details.")
+      rawId: String
       status: PostV1PostStatus
       tags: [String!]
       title: String
@@ -408,6 +439,37 @@ test('Print schema', () => {
       user: UserV1User
     }
 
+    type UserV1Group {
+      """
+      Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
+      """
+      _: Boolean
+      id: ID
+      name: String
+      rawId: String
+    }
+
+    input UserV1GroupInput {
+      """
+      Fake field because GraphQL does not support empty input. Do not use, It does nothing.
+      """
+      _: Boolean
+      id: String
+      name: String
+    }
+
+    """Key-value pair for the map field groups of user.v1.Group."""
+    type UserV1Group_GroupsMapEntry {
+      key: String
+      value: UserV1Group!
+    }
+
+    """Key-value pair for the map field groups of user.v1.Group."""
+    input UserV1Group_GroupsMapEntryInput {
+      key: String!
+      value: UserV1GroupInput!
+    }
+
     """List"""
     input UserV1ListUsersRequestInput {
       """
@@ -462,12 +524,17 @@ test('Print schema', () => {
       """
       _: Boolean
       createdAt: String
+
+      """Field using StringValue well-known type"""
+      description: String
       email: String
-      id: String
+      groups: [UserV1Group_GroupsMapEntry!]
+      id: ID
 
       """Map type field"""
       metadata: [StringMapEntry!]
       name: String
+      rawId: String
       role: UserV1UserRole
       status: UserV1User_UserStatus
       tags: [String!]
@@ -481,7 +548,11 @@ test('Print schema', () => {
       """
       _: Boolean
       createdAt: String
+
+      """Field using StringValue well-known type"""
+      description: String
       email: String
+      groups: [UserV1Group_GroupsMapEntryInput!]
       id: String
 
       """Map type field"""

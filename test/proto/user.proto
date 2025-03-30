@@ -35,6 +35,13 @@ message User {
         STATUS_INACTIVE = 2;
         STATUS_SUSPENDED = 3;
     }
+
+    map<string, Group> groups = 11;
+}
+
+message Group {
+    string id = 1;
+    string name = 2;
 }
 
 // Create

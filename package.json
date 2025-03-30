@@ -1,6 +1,6 @@
 {
   "name": "pothos-protoc-gen",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "pothos-protoc-gen is a Buf plugin that generates TypeScript code for creating a Protobuf-first GraphQL schema using Pothos GraphQL.",
   "license": "MIT",
   "type": "module",
@@ -16,7 +16,7 @@
     "dist"
   ],
   "bin": {
-    "pothos-protoc-gen": "./dist/index.js"
+    "pothos-protoc-gen": "./dist/plugin.js"
   },
   "scripts": {
     "clean": "rm -rf dist",
@@ -34,7 +34,6 @@
     "@bufbuild/protobuf": "^2.2.3",
     "@bufbuild/protoplugin": "^2.2.3",
     "change-case": "^5.4.4",
-    "dedent": "^1.5.3",
     "remeda": "^2.21.2"
   },
   "devDependencies": {

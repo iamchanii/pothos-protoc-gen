@@ -1,7 +1,7 @@
 import type { DescFile } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import { getPothosIndexGeneratedFile } from '../helpers/generated-file.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+import { getPothosIndexGeneratedFile } from '../helpers/generated-file.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Generates import statements for all the provided descriptor files.

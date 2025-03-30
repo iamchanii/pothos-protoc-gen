@@ -19,13 +19,15 @@ For scalar value types:
 - Map entry input types: `{ScalarTypeName}MapEntryInput`
 
 For message or enum value types:
-- Map entry object types (output types): `{DescriptorName}_{FieldName}MapEntry`
-- Map entry input types: `{DescriptorName}_{FieldName}MapEntryInput`
+- Map entry object types (output types): `{MapKeyType}_{DescriptorName}MapEntry`
+- Map entry input types: `{MapKeyType}_{DescriptorName}MapEntryInput`
 
 Where:
 - `ScalarTypeName` is the Pascal-cased GraphQL scalar type name
-- `DescriptorName` is the full path of the message or enum type
-- `FieldName` is the Pascal-cased field name
+- `MapKeyType` is the scalar type used for the map key (e.g., String, Int)
+- `DescriptorName` is determined by the following rules:
+  - If the message/enum has a parent: `{PascalCasedParentTypeName}_{PascalCasedMessageOrEnumName}`
+  - If the message/enum has no parent: `{PascalCasedTypeName}`
 
 ## Map Entry Object Types
 
@@ -66,8 +68,8 @@ The plugin will generate:
 
 1. A `StringMapEntry` object type for the `attributes` field (since it uses string values)
 2. A `StringMapEntryInput` input type for the `attributes` field
-3. An `Address_AttributesMapEntry` object type for the `addresses` field (since it uses message values)
-4. An `Address_AttributesMapEntryInput` input type for the `addresses` field
+3. A `String_AddressMapEntry` object type for the `addresses` field (since it uses message values with string keys)
+4. A `String_AddressMapEntryInput` input type for the `addresses` field
 5. The `User` type will have the fields properly typed as arrays of these entry types
 
 This approach allows for typed key-value operations while maintaining compatibility with GraphQL's type system.

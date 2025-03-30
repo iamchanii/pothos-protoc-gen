@@ -1,11 +1,11 @@
 import type { DescMessage } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import { getGeneratedFile } from '../helpers/generated-file.ts';
-import { getDescriptorComments } from '../helpers/get-descriptor-comments.ts';
-import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.ts';
-import { getDescriptorName } from '../helpers/get-descriptor-name.ts';
-import { getInputFieldType } from '../helpers/get-field-type.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+import { getGeneratedFile } from '../helpers/generated-file.js';
+import { getDescriptorComments } from '../helpers/get-descriptor-comments.js';
+import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.js';
+import { getDescriptorName } from '../helpers/get-descriptor-name.js';
+import { getInputFieldType } from '../helpers/get-field-type.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Generates an input type reference for a Protocol Buffer message.

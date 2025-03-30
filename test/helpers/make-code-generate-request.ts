@@ -3,12 +3,14 @@ import {
   CodeGeneratorRequestSchema,
   file_google_protobuf_empty,
   file_google_protobuf_timestamp,
+  file_google_protobuf_wrappers,
 } from '@bufbuild/protobuf/wkt';
 import { file_post_post } from '../out/post/post_pb.js';
 import { file_user } from '../out/user_pb.js';
 import { makePluginParameter } from './make-plugin-paramter.js';
 
 const fileDescriptors = [
+  file_google_protobuf_wrappers,
   file_google_protobuf_empty,
   file_google_protobuf_timestamp,
   file_user,

@@ -1,5 +1,6 @@
 import { type DescMessage, ScalarType } from '@bufbuild/protobuf';
 import { pascalCase } from 'change-case';
+import { mapProtoToGraphQLScalar } from '../helpers/map-proto-to-graphql-scalar.js';
 import type { MapEntry } from './types.js';
 
 /**
@@ -39,6 +40,8 @@ export function collectAllMapEntriesFromMessages(
           }
         })();
 
+        const descriptorKey = `${mapProtoToGraphQLScalar(field.mapKey)}:${descriptorName}`;
+
         const descriptor = (() => {
           switch (field.mapKind) {
             case 'enum':
@@ -50,7 +53,7 @@ export function collectAllMapEntriesFromMessages(
           }
         })();
 
-        collection.set(descriptorName, { descriptor, field });
+        collection.set(descriptorKey, { descriptor, field });
       }
     }
   }

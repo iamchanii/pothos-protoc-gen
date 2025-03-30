@@ -2,7 +2,7 @@ import type { DescMessage } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
 import { getGeneratedFile } from '../helpers/generated-file.js';
 import { getDescriptorComments } from '../helpers/get-descriptor-comments.js';
-import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.ts';
+import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.js';
 import { getDescriptorName } from '../helpers/get-descriptor-name.js';
 import { getObjectFieldType } from '../helpers/get-field-type.js';
 import { getObjectFieldResolverExpression } from '../helpers/get-object-field-resolver-expression.js';
@@ -26,6 +26,9 @@ import type { PluginOptions } from '../plugin-options.js';
  * - Adds a placeholder field named '_' (GraphQL doesn't support empty objects)
  * - Adds all fields from the message with their types, descriptions, and resolvers
  * - Handles deprecation markers
+ * - Processes 'id' fields specially when options allow:
+ *   - Encodes IDs to Base64 format when disableProcessIdField is false
+ *   - Adds a rawId field with the original ID value when disableAddRawIdField is false
  *
  * The generated code uses the Pothos GraphQL schema builder pattern.
  */
@@ -51,11 +54,26 @@ function printObjectTypeRef(
 
     f.print(f.jsDoc(field, indent));
     f.print`${indent}${field.localName}: t.field({`;
-    f.print`${indent}  type: ${JSON.stringify(fieldType)},`;
+
+    if (field.localName === 'id' && !schema.options.disableProcessIdField) {
+      f.print`${indent}  type: 'ID',`;
+      f.print`${indent}  nullable: false,`;
+      f.print`${indent}  resolve: (parent) => ${f.importPothosEnchodeBase64}(\`${typeName}:\${parent.id}\`),`;
+    } else {
+      f.print`${indent}  type: ${JSON.stringify(fieldType)},`;
+      f.print`${indent}  resolve: ${resolveExpression},`;
+    }
+
     f.print`${indent}  description: ${getDescriptorComments(field)},`;
     f.print`${indent}  deprecationReason: ${getDescriptorDeprecationReason(field)},`;
-    f.print`${indent}  resolve: ${resolveExpression},`;
     f.print`${indent}}),`;
+
+    if (field.localName === 'id' && !schema.options.disableAddRawIdField) {
+      f.print`${indent}rawId: t.field({`;
+      f.print`${indent}  type: 'String',`;
+      f.print`${indent}  resolve: (parent) => String(parent.id),`;
+      f.print`${indent}}),`;
+    }
   }
 
   f.print`  }),`;

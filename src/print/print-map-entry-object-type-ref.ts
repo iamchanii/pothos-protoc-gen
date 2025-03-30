@@ -1,14 +1,15 @@
 import { ScalarType } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import type { MapEntry } from '../collect/types.ts';
+import type { MapEntry } from '../collect/types.js';
 import {
   getGeneratedFile,
   getPothosMapEntriesGeneratedFile,
-} from '../helpers/generated-file.ts';
-import { getOutputMapEntryTypeName } from '../helpers/get-map-entry-type-name.ts';
-import { mapProtoToGraphQLScalar } from '../helpers/map-proto-to-graphql-scalar.ts';
-import { mapProtoToPrimitiveType } from '../helpers/map-proto-to-primitive-type.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+} from '../helpers/generated-file.js';
+import { getDescriptorName } from '../helpers/get-descriptor-name.js';
+import { getOutputMapEntryTypeName } from '../helpers/get-map-entry-type-name.js';
+import { mapProtoToGraphQLScalar } from '../helpers/map-proto-to-graphql-scalar.js';
+import { mapProtoToPrimitiveType } from '../helpers/map-proto-to-primitive-type.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Prints a Pothos Object Type Reference for a map entry.
@@ -37,22 +38,21 @@ function printMapEntryObjectTypeRef(
       : getPothosMapEntriesGeneratedFile(schema);
   const typeName = getOutputMapEntryTypeName(mapEntry.field);
   const refName = `${typeName}Ref`;
-  const shape = `{ key: string, value: ${
+  const description = `Key-value pair for the map field ${mapEntry.field.localName} of ${typeof mapEntry.descriptor === 'object' ? mapEntry.descriptor.typeName : ScalarType[mapEntry.descriptor]}.`;
+  const shapeValueType =
     typeof mapEntry.descriptor === 'object'
       ? f.importShape(mapEntry.descriptor)
-      : mapProtoToPrimitiveType(mapEntry.descriptor)
-  } }`;
-  const description = `Key-value pair for the map field ${mapEntry.field.localName} of ${typeof mapEntry.descriptor === 'object' ? mapEntry.descriptor.typeName : ScalarType[mapEntry.descriptor]}.`;
+      : mapProtoToPrimitiveType(mapEntry.descriptor);
   const valueType =
     typeof mapEntry.descriptor === 'object'
-      ? f.importShape(mapEntry.descriptor)
+      ? getDescriptorName(mapEntry.descriptor)
       : mapProtoToGraphQLScalar(mapEntry.descriptor);
 
   f.print(f.jsDoc(mapEntry.field));
-  f.print`${f.export('const', refName)} = ${f.importPothosBuilder}.objectRef<${shape}>('${typeName}').implement({`;
+  f.print`${f.export('const', refName)} = ${f.importPothosBuilder}.objectRef<{ key: string; value: ${shapeValueType} }>('${typeName}').implement({`;
   f.print`  description: ${JSON.stringify(description)},`;
   f.print`  fields: t => ({`;
-  f.print`    key: t.exposeString('key', { nullable: true }),`;
+  f.print`    key: t.exposeString('key', { nullable: false }),`;
   f.print`    value: t.expose('value', { type: '${valueType}', nullable: false }),`;
   f.print`  }),`;
   f.print`});`;

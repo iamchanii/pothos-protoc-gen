@@ -1,6 +1,6 @@
 import type { PluginOptions } from '../../src/plugin-options.js';
 
-export function makePluginParameter(options: PluginOptions): string {
+export function makePluginParameter(options: Partial<PluginOptions>): string {
   const parameters: string[] = [];
 
   if (options.builderPath) {
@@ -23,6 +23,14 @@ export function makePluginParameter(options: PluginOptions): string {
     for (const method of options.mutationMethods) {
       parameters.push(`mutation_method=${method}`);
     }
+  }
+
+  if (options.disableProcessIdField) {
+    parameters.push('disable_process_id_field=true');
+  }
+
+  if (options.disableAddRawIdField) {
+    parameters.push('disable_add_raw_id_field=true');
   }
 
   return parameters.join(',');

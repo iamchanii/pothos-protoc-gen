@@ -13,11 +13,17 @@ import type { DescFile, DescService } from '@bufbuild/protobuf';
  */
 export function collectAllServices(
   file: DescFile,
-  includeServices: Set<string> | undefined,
+  includeServices: Set<string>,
   collection: Map<string, DescService>,
 ) {
   for (const service of file.services) {
-    if (includeServices?.has(service.name)) {
+    if (
+      includeServices.size > 0 &&
+      !(
+        includeServices.has(service.name) ||
+        includeServices.has(service.typeName)
+      )
+    ) {
       continue;
     }
 

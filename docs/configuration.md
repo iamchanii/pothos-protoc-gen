@@ -67,3 +67,37 @@ plugins:
       - include_service=UserService
       - include_service=product.ProductService
 ```
+
+## `disable_process_id_field`
+
+Optional. When set to `true`, disables the automatic processing of ID fields in the generated code. 
+
+By default, the plugin processes fields named 'id' by automatically transforming them into GraphQL's 'ID' scalar type. The transformation encodes the original ID value into a Base64 string in the format `typeName:originalId`. For example, if a `User` message has an ID of `123`, it would be encoded as `VXNlcjoxMjM=` (Base64 for "User:123"). This follows the GraphQL convention for globally unique identifiers.
+
+This encoding format is particularly beneficial when working with GraphQL clients that perform data normalization, such as Relay or Apollo Client. These clients can use the globally unique identifiers to efficiently cache and normalize data across your entire GraphQL schema, improving application performance and state management.
+
+### Example
+
+```yaml
+plugins:
+  - local: ./node_modules/.bin/pothos-protoc-gen
+    out: ./out
+    opt:
+      - disable_process_id_field=true
+```
+
+## `disable_add_raw_id_field`
+
+Optional. When set to `true`, prevents the plugin from adding raw ID fields to the generated GraphQL types. By default, the plugin adds raw ID fields to enhance the schema's functionality.
+
+When ID fields are processed (as described in `disable_process_id_field`), the original ID values are encoded into Base64 strings. The `rawId` field provides direct access to the original, unencoded ID value from the message. This is particularly useful when you need to reference the original ID for database queries, external API calls, or any scenario where you need the actual identifier value rather than the encoded GraphQL ID.
+
+### Example
+
+```yaml
+plugins:
+  - local: ./node_modules/.bin/pothos-protoc-gen
+    out: ./out
+    opt:
+      - disable_add_raw_id_field=true
+```

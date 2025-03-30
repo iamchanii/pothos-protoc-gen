@@ -8,5 +8,5 @@ test('Generate files', () => {
   const response = pothosProtocGenPlugin.run(request);
   const files = response.file.map(makeFileIntoJson);
 
-  expect(files).toMatchSnapshot('basic-plugin-run');
+  expect(files).toMatchSnapshot();
 });

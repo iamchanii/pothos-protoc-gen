@@ -1,11 +1,11 @@
 import type { DescService } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import { getPothosIndexGeneratedFile } from '../helpers/generated-file.ts';
+import { getPothosIndexGeneratedFile } from '../helpers/generated-file.js';
 import {
   getServiceFieldName,
   getServiceRequestHeadersFieldName,
-} from '../helpers/get-service-name.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+} from '../helpers/get-service-name.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Generates a Pothos GraphQL context interface for gRPC services.
@@ -28,6 +28,8 @@ export function printGeneratedPothosContext(
   f.print`${f.export('interface', 'GeneratedPothosContext')} {`;
 
   for (const service of services) {
+    if (service.methods.length === 0) continue;
+
     const indent = '  '; // 2 spaces
     const serviceFieldName = getServiceFieldName(service);
     const serviceRequestHeadersFieldName =

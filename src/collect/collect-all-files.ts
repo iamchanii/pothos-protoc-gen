@@ -1,5 +1,5 @@
 import type { DescFile } from '@bufbuild/protobuf';
-import type { CollectedDescriptors } from './types.ts';
+import type { CollectedDescriptors } from './types.js';
 
 /**
  * Collects all descriptor files from the given collection of descriptors.

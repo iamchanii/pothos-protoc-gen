@@ -10,21 +10,27 @@ import { mapProtoToGraphQLScalar } from './map-proto-to-graphql-scalar.js';
  * @returns A string representing the generated map entry type name
  *
  * @remarks
- * This function creates a map entry type name based on the field's type:
- * - For scalar fields: Uses the mapped GraphQL scalar type name and appends "MapEntry"
- * - For message/enum fields: Combines the descriptor name with the field's local name in
- *   PascalCase, joined with an underscore and suffixed with "MapEntry"
+ * This function creates a map entry type name based on the field's characteristics:
+ * - For scalar value fields: Uses the scalar type name and appends "MapEntry"
+ * - For message/enum value fields: Creates a name in the format "{KeyType}_{ValueType}MapEntry"
+ *   where KeyType is derived from the map key scalar type and ValueType from the message/enum type
+ *
+ * The generated type name is used to define GraphQL types that represent map entries
+ * in the schema generated from Protobuf definitions.
  */
 export function getOutputMapEntryTypeName(field: DescField) {
   const descriptorName = field.scalar
     ? mapProtoToGraphQLScalar(field.scalar)
     : getDescriptorName(field.message || field.enum);
 
-  const fieldName = pascalCase(field.localName);
+  const mapKeyName =
+    field.fieldKind === 'map'
+      ? mapProtoToGraphQLScalar(field.mapKey)
+      : (undefined as never);
 
   return field.scalar
     ? `${descriptorName}MapEntry`
-    : `${descriptorName}_${fieldName}MapEntry`;
+    : `${mapKeyName}_${descriptorName}MapEntry`;
 }
 
 export function getInputMapEntryTypeName(field: DescField) {

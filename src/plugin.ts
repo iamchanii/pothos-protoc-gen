@@ -1,23 +1,25 @@
+#! /usr/bin/env node
+
 import {
   type Schema,
   createEcmaScriptPlugin,
   runNodeJs,
 } from '@bufbuild/protoplugin';
 import pkg from '../package.json' with { type: 'json' };
-import { collectAllFiles } from './collect/collect-all-files.ts';
+import { collectAllFiles } from './collect/collect-all-files.js';
 import { collect } from './collect/collect.js';
-import { isPothosMapEntriesGeneratedFileExists } from './helpers/generated-file.ts';
+import { isPothosMapEntriesGeneratedFileExists } from './helpers/generated-file.js';
 import { type PluginOptions, parseOptions } from './plugin-options.js';
 import { createPrintEnumTypeRef } from './print/print-enum-type-ref.js';
-import { printFileImport } from './print/print-file-import.ts';
-import { printGeneratedPothosContext } from './print/print-generated-pothos-context.ts';
-import { createPrintInputConstructor } from './print/print-input-constructor.ts';
-import { createPrintInputTypeRef } from './print/print-input-type-ref.ts';
-import { createPrintMapEntryInputTypeRef } from './print/print-map-entry-input-type-ref.ts';
-import { createPrintMapEntryObjectTypeRef } from './print/print-map-entry-object-type-ref.ts';
-import { createPrintMethod } from './print/print-method.ts';
+import { printFileImport } from './print/print-file-import.js';
+import { printGeneratedPothosContext } from './print/print-generated-pothos-context.js';
+import { createPrintInputConstructor } from './print/print-input-constructor.js';
+import { createPrintInputTypeRef } from './print/print-input-type-ref.js';
+import { createPrintMapEntryInputTypeRef } from './print/print-map-entry-input-type-ref.js';
+import { createPrintMapEntryObjectTypeRef } from './print/print-map-entry-object-type-ref.js';
+import { createPrintMethod } from './print/print-method.js';
 import { createPrintObjectTypeRef } from './print/print-object-type-ref.js';
-import { printPothosMapEntriesImport } from './print/print-pothos-map-entries-import.ts';
+import { printPothosMapEntriesImport } from './print/print-pothos-map-entries-import.js';
 
 export const pothosProtocGenPlugin = createEcmaScriptPlugin<PluginOptions>({
   name: 'pothos-protoc-gen',

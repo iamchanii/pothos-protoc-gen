@@ -1,6 +1,6 @@
 import type { Schema } from '@bufbuild/protoplugin';
-import { getPothosIndexGeneratedFile } from '../helpers/generated-file.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+import { getPothosIndexGeneratedFile } from '../helpers/generated-file.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Prints an import statement for Pothos map entries in the generated code.

@@ -74,6 +74,11 @@ export declare type User = Message<'user.v1.User'> & {
    * @generated from field: google.protobuf.StringValue description = 10;
    */
   description?: string;
+
+  /**
+   * @generated from field: map<string, user.v1.Group> groups = 11;
+   */
+  groups: { [key: string]: Group };
 };
 
 /**
@@ -113,6 +118,27 @@ export enum User_UserStatus {
  * Describes the enum user.v1.User.UserStatus.
  */
 export declare const User_UserStatusSchema: GenEnum<User_UserStatus>;
+
+/**
+ * @generated from message user.v1.Group
+ */
+export declare type Group = Message<'user.v1.Group'> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message user.v1.Group.
+ * Use `create(GroupSchema)` to create a new message.
+ */
+export declare const GroupSchema: GenMessage<Group>;
 
 /**
  * Create

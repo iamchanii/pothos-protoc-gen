@@ -1,16 +1,16 @@
 import type { DescMethod } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
-import { getGeneratedFile } from '../helpers/generated-file.ts';
-import { getDescriptorComments } from '../helpers/get-descriptor-comments.ts';
-import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.ts';
-import { getDescriptorName } from '../helpers/get-descriptor-name.ts';
-import { getInputConstructorName } from '../helpers/get-input-constructor-name.ts';
-import { getMethodFieldName } from '../helpers/get-method-field-name.ts';
+import { getGeneratedFile } from '../helpers/generated-file.js';
+import { getDescriptorComments } from '../helpers/get-descriptor-comments.js';
+import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.js';
+import { getDescriptorName } from '../helpers/get-descriptor-name.js';
+import { getInputConstructorName } from '../helpers/get-input-constructor-name.js';
+import { getMethodFieldName } from '../helpers/get-method-field-name.js';
 import {
   getServiceFieldName,
   getServiceRequestHeadersFieldName,
-} from '../helpers/get-service-name.ts';
-import type { PluginOptions } from '../plugin-options.ts';
+} from '../helpers/get-service-name.js';
+import type { PluginOptions } from '../plugin-options.js';
 
 /**
  * Generates and prints a GraphQL field for a gRPC method.
@@ -92,24 +92,24 @@ function printMethod(schema: Schema<PluginOptions>, method: DescMethod) {
    * when generating a GraphQL schema from Protocol Buffers.
    */
   function checkMethodType(): 'query' | 'mutation' {
-    if (schema.options.queryMethods?.has(method.name)) {
+    if (schema.options.queryMethods.has(method.name)) {
       return 'query';
     }
 
     if (
-      schema.options.queryMethods?.has(
+      schema.options.queryMethods.has(
         `${method.parent.typeName}.${method.name}`,
       )
     ) {
       return 'query';
     }
 
-    if (schema.options.mutationMethods?.has(method.name)) {
+    if (schema.options.mutationMethods.has(method.name)) {
       return 'mutation';
     }
 
     if (
-      schema.options.mutationMethods?.has(
+      schema.options.mutationMethods.has(
         `${method.parent.typeName}.${method.name}`,
       )
     ) {

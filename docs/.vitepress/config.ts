@@ -16,6 +16,7 @@ export default defineConfig({
         items: [
           { text: 'Type Mapping', link: '/references/type-mapping' },
           { text: 'Map Types', link: '/references/map-types' },
+          { text: 'ID Field Handling', link: '/references/id-field' },
         ],
       },
     ],

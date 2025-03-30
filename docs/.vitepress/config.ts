@@ -2,8 +2,19 @@ import { defineConfig } from 'vitepress';
 
 export default defineConfig({
   title: 'pothos-protoc-gen',
+  description:
+    'pothos-protoc-gen is a Buf plugin that generates TypeScript code for creating a Protobuf-first GraphQL schema using Pothos GraphQL.',
   base: '/pothos-protoc-gen/',
-  head: [['link', { rel: 'icon', href: '/pothos-protoc-gen/logo.svg' }]],
+  head: [
+    [
+      'meta',
+      {
+        property: 'og:image',
+        content: 'https://iamchanii.github.io/pothos-protoc-gen/og-image.png',
+      },
+    ],
+    ['link', { rel: 'icon', href: '/pothos-protoc-gen/logo.svg' }],
+  ],
   themeConfig: {
     logo: '/logo.svg',
     sidebar: [

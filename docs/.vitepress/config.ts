@@ -10,7 +10,14 @@ export default defineConfig({
       { text: 'Getting Started', link: '/' },
       { text: 'Installation', link: '/installation' },
       { text: 'Configuration', link: '/configuration' },
-      { text: 'References', link: '/references' },
+      {
+        text: 'References',
+        link: '/references',
+        items: [
+          { text: 'Type Mapping', link: '/references/type-mapping' },
+          { text: 'Map Types', link: '/references/map-types' },
+        ],
+      },
     ],
 
     socialLinks: [

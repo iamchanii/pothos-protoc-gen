@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package post.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "user.proto"; // Assuming User proto is in this location
+
+// Post status enum
+enum PostStatus {
+    POST_STATUS_UNSPECIFIED = 0;
+    POST_STATUS_DRAFT = 1;
+    POST_STATUS_PUBLISHED = 2;
+    POST_STATUS_ARCHIVED = 3;
+}
+
+// Category enum for posts
+enum PostCategory {
+    POST_CATEGORY_UNSPECIFIED = 0;
+    POST_CATEGORY_TECHNOLOGY = 1;
+    POST_CATEGORY_HEALTH = 2;
+    POST_CATEGORY_TRAVEL = 3;
+    POST_CATEGORY_FOOD = 4;
+    POST_CATEGORY_LIFESTYLE = 5;
+}
+
+// Filter type for listing posts
+enum PostListFilter {
+    POST_LIST_FILTER_ALL = 0;
+    POST_LIST_FILTER_PUBLISHED = 1;
+    POST_LIST_FILTER_DRAFTS = 2;
+    POST_LIST_FILTER_ARCHIVED = 3;
+}
+
+// Post message
+message Post {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    PostStatus status = 4;
+    PostCategory category = 5;
+    string author_id = 6; // Reference to User
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    map<string, string> metadata = 9 [deprecated = true]; // Metadata as key-value pairs
+    repeated string tags = 10;
+}
+
+// Create Post Request
+message CreatePostRequest {
+    string title = 1;
+    string content = 2;
+    PostStatus status = 3;
+    PostCategory category = 4;
+    string author_id = 5;
+    map<string, string> metadata = 6;
+    repeated string tags = 7;
+}
+
+// Update Post Request
+message UpdatePostRequest {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    PostStatus status = 4;
+    PostCategory category = 5;
+    map<string, string> metadata = 6;
+    repeated string tags = 7;
+}
+
+// Get Post Request
+message GetPostRequest {
+    string id = 1;
+}
+
+// Delete Post Request
+message DeletePostRequest {
+    string id = 1;
+}
+
+// List Posts Request
+message ListPostsRequest {
+    int32 page_size = 1;
+    string page_token = 2;
+    PostListFilter filter = 3;
+    PostCategory category = 4;
+}
+
+// List Posts Response
+message ListPostsResponse {
+    repeated Post posts = 1;
+    string next_page_token = 2;
+    int32 total_count = 3;
+}
+
+// Get Post with Author
+message GetPostWithAuthorRequest {
+    string id = 1;
+    user.v1.User author = 2;
+}
+
+message PostWithAuthor {
+    Post post = 1;
+    user.v1.User author = 2;
+}
+
+// Post service
+service PostService {
+    // Create a new post
+    rpc CreatePost(CreatePostRequest) returns (Post);
+
+    // Get a post by ID
+    rpc GetPost(GetPostRequest) returns (Post);
+
+    // Update an existing post
+    rpc UpdatePost(UpdatePostRequest) returns (Post);
+
+    // Delete a post
+    rpc DeletePost(DeletePostRequest) returns (google.protobuf.Empty);
+
+    // List posts with filtering
+    rpc ListPosts(ListPostsRequest) returns (ListPostsResponse);
+
+    // Get post with author information
+    rpc GetPostWithAuthor(GetPostWithAuthorRequest) returns (PostWithAuthor);
+}

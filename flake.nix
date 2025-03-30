@@ -23,6 +23,7 @@
         deps = with pkgs; [
           nodejs_23
           pnpm_10
+          buf
         ];
       in
       {

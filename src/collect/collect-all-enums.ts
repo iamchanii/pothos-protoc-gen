@@ -20,7 +20,7 @@ export function collectAllEnums(
 ) {
   for (const message of messages) {
     for (const field of message.fields) {
-      if (field.fieldKind === 'enum' && field.enum) {
+      if (field.enum) {
         if (!collection.has(field.enum.typeName)) {
           collection.set(field.enum.typeName, field.enum);
         }

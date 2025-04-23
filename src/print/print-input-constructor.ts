@@ -1,8 +1,8 @@
 import type { DescField, DescMessage } from '@bufbuild/protobuf';
 import type { Schema } from '@bufbuild/protoplugin';
 import { getGeneratedFile } from '../helpers/generated-file.js';
-import { getDescriptorName } from '../helpers/get-descriptor-name.js';
 import { getInputConstructorName } from '../helpers/get-input-constructor-name.js';
+import { getInputConstructor } from '../helpers/get-input-constructor.js';
 import type { PluginOptions } from '../plugin-options.js';
 
 /**
@@ -84,7 +84,7 @@ function printInputConstructor(
           return [
             `input?.${field.localName} ? `,
             `input.${field.localName}.map(`,
-            getInputConstructor(field),
+            getInputConstructor(f, field),
             ') : null',
           ];
         }
@@ -94,7 +94,7 @@ function printInputConstructor(
       case 'message':
         return [
           `input?.${field.localName} ? `,
-          getInputConstructor(field),
+          getInputConstructor(f, field),
           `(input.${field.localName}) : null`,
         ];
 
@@ -104,7 +104,7 @@ function printInputConstructor(
             `input?.${field.localName} ? `,
             'Object.fromEntries(',
             `input?.${field.localName}?.map(({ key, value }) => [key, `,
-            getInputConstructor(field),
+            getInputConstructor(f, field),
             '(value)])',
             ')',
             ' : null',
@@ -119,41 +119,6 @@ function printInputConstructor(
           ' : null',
         ];
     }
-  }
-
-  /**
-   * Gets the constructor function for an input field's message type.
-   *
-   * @param field - The descriptor field for which to get the input constructor
-   * @returns The constructor name if in the same file, or an import symbol object if from another file
-   * @remarks
-   * If the field's message is in the same file as its parent, this returns just the constructor name.
-   * If the message is in a different file, this returns an import symbol object with name, from, and id properties.
-   * Throws an error if the field doesn't have a message property.
-   */
-  function getInputConstructor(field: DescField) {
-    if (!field.message) {
-      throw new Error('Invalid getInputConstructor used case.');
-    }
-
-    const constructorName = getInputConstructorName(field.message);
-
-    if (field.parent.file === field.message.file) {
-      return constructorName;
-    }
-
-    const importSymbol = f.importSchema(field.message);
-
-    Object.assign(importSymbol, {
-      name: constructorName,
-      from: importSymbol.from.replace(/_pb\.(.+)$/, '_pothos.$1'),
-    });
-
-    Object.assign(importSymbol, {
-      id: `import("${importSymbol.from}").${importSymbol.name}`,
-    });
-
-    return importSymbol;
   }
 }
 

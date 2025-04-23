@@ -4,7 +4,7 @@ import { getGeneratedFile } from '../helpers/generated-file.js';
 import { getDescriptorComments } from '../helpers/get-descriptor-comments.js';
 import { getDescriptorDeprecationReason } from '../helpers/get-descriptor-deprecation-reason.js';
 import { getDescriptorName } from '../helpers/get-descriptor-name.js';
-import { getInputConstructorName } from '../helpers/get-input-constructor-name.js';
+import { getInputConstructor } from '../helpers/get-input-constructor.js';
 import { getMethodFieldName } from '../helpers/get-method-field-name.js';
 import {
   getServiceFieldName,
@@ -65,7 +65,7 @@ function printMethod(schema: Schema<PluginOptions>, method: DescMethod) {
 
     f.print`${indent}if (!context.${fieldName}) throw new Error('${fieldName} is not provided.');`;
     f.print`${indent}return context.${fieldName}.${method.localName}(`;
-    f.print`${indent}  ${getInputConstructorName(method.input)}(input),`;
+    f.print`${indent}  ${getInputConstructor(f, method.input)}(input),`;
     f.print`${indent}  { headers: context.${requestHeadersFieldName} },`;
     f.print`${indent});`;
   }

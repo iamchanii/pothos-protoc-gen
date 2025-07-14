@@ -2,6 +2,7 @@ import { create } from '@bufbuild/protobuf';
 import {
   CodeGeneratorRequestSchema,
   file_google_protobuf_empty,
+  file_google_protobuf_struct,
   file_google_protobuf_timestamp,
   file_google_protobuf_wrappers,
 } from '@bufbuild/protobuf/wkt';
@@ -13,6 +14,7 @@ const fileDescriptors = [
   file_google_protobuf_wrappers,
   file_google_protobuf_empty,
   file_google_protobuf_timestamp,
+  file_google_protobuf_struct,
   file_user,
   file_board,
 ];

@@ -4,6 +4,7 @@ package user.v1;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
 
 // Top-level enum for user status.
 enum UserStatus {
@@ -48,6 +49,8 @@ message User {
     }
     AddressType type = 5;
   }
+
+  google.protobuf.Struct metadata = 9;
 }
 
 // Message for querying users. References User indirectly.

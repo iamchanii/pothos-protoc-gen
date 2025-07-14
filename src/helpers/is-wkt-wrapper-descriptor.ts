@@ -14,6 +14,8 @@ export function isWktWrapperDescriptor(
 ): descriptor is WktWrapperDesc {
   return (
     descriptor.kind === 'message' &&
+    descriptor.typeName !== 'google.protobuf.Value' &&
+    descriptor.typeName !== 'google.protobuf.ListValue' &&
     /google.protobuf.*Value$/.test(descriptor.typeName)
   );
 }

@@ -6,6 +6,7 @@ export * from './user_pothos.js';
 export * from './board_pothos.js';
 export * from './google/protobuf/empty_pothos.js';
 export * from './google/protobuf/timestamp_pothos.js';
+export * from './google/protobuf/struct_pothos.js';
 export * from './generated-map-entries.js';
 export interface GeneratedPothosContext {
   userV1UserService: Client<typeof UserService>;

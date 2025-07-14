@@ -211,6 +211,87 @@ input GoogleProtobufEmptyInput {
 }
 
 """
+`ListValue` is a wrapper around a repeated field of values.
+
+ The JSON representation for `ListValue` is JSON array.
+"""
+type GoogleProtobufListValue {
+  """
+  Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
+  """
+  _: Boolean
+
+  """Repeated field of dynamically typed values."""
+  values: [GoogleProtobufValue!]
+}
+
+"""
+`ListValue` is a wrapper around a repeated field of values.
+
+ The JSON representation for `ListValue` is JSON array.
+"""
+input GoogleProtobufListValueInput {
+  """
+  Fake field because GraphQL does not support empty input. Do not use, It does nothing.
+  """
+  _: Boolean
+
+  """Repeated field of dynamically typed values."""
+  values: [GoogleProtobufValueInput!]
+}
+
+"""
+`NullValue` is a singleton enumeration to represent the null value for the
+ `Value` type union.
+
+ The JSON representation for `NullValue` is JSON `null`.
+"""
+enum GoogleProtobufNullValue {
+  """Null value."""
+  NULL_VALUE
+}
+
+"""
+`Struct` represents a structured data value, consisting of fields
+ which map to dynamically typed values. In some languages, `Struct`
+ might be supported by a native representation. For example, in
+ scripting languages like JS a struct is represented as an
+ object. The details of that representation are described together
+ with the proto support for the language.
+
+ The JSON representation for `Struct` is JSON object.
+"""
+type GoogleProtobufStruct {
+  """
+  Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
+  """
+  _: Boolean
+
+  """Unordered map of dynamically typed values."""
+  fields: [String_GoogleProtobufValueMapEntry!]
+}
+
+"""
+`Struct` represents a structured data value, consisting of fields
+ which map to dynamically typed values. In some languages, `Struct`
+ might be supported by a native representation. For example, in
+ scripting languages like JS a struct is represented as an
+ object. The details of that representation are described together
+ with the proto support for the language.
+
+ The JSON representation for `Struct` is JSON object.
+"""
+input GoogleProtobufStructInput {
+  """
+  Fake field because GraphQL does not support empty input. Do not use, It does nothing.
+  """
+  _: Boolean
+
+  """Unordered map of dynamically typed values."""
+  fields: [String_GoogleProtobufValueMapEntryInput!]
+}
+
+"""
 A Timestamp represents a point in time independent of any time zone or local
  calendar, encoded as a count of seconds and fractions of seconds at
  nanosecond resolution. The count is relative to an epoch at UTC midnight on
@@ -436,6 +517,72 @@ input GoogleProtobufTimestampInput {
   seconds: String
 }
 
+"""
+`Value` represents a dynamically typed value which can be either
+ null, a number, a string, a boolean, a recursive struct value, or a
+ list of values. A producer of value is expected to set one of these
+ variants. Absence of any variant indicates an error.
+
+ The JSON representation for `Value` is JSON value.
+"""
+type GoogleProtobufValue {
+  """
+  Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
+  """
+  _: Boolean
+
+  """Represents a boolean value."""
+  boolValue: Boolean
+
+  """Represents a repeated `Value`."""
+  listValue: GoogleProtobufListValue
+
+  """Represents a null value."""
+  nullValue: GoogleProtobufNullValue
+
+  """Represents a double value."""
+  numberValue: Float
+
+  """Represents a string value."""
+  stringValue: String
+
+  """Represents a structured value."""
+  structValue: GoogleProtobufStruct
+}
+
+"""
+`Value` represents a dynamically typed value which can be either
+ null, a number, a string, a boolean, a recursive struct value, or a
+ list of values. A producer of value is expected to set one of these
+ variants. Absence of any variant indicates an error.
+
+ The JSON representation for `Value` is JSON value.
+"""
+input GoogleProtobufValueInput {
+  """
+  Fake field because GraphQL does not support empty input. Do not use, It does nothing.
+  """
+  _: Boolean
+
+  """Represents a boolean value."""
+  boolValue: Boolean
+
+  """Represents a repeated `Value`."""
+  listValue: GoogleProtobufListValueInput
+
+  """Represents a null value."""
+  nullValue: GoogleProtobufNullValue
+
+  """Represents a double value."""
+  numberValue: Float
+
+  """Represents a string value."""
+  stringValue: String
+
+  """Represents a structured value."""
+  structValue: GoogleProtobufStructInput
+}
+
 """Key-value pair for the map field viewCounts of INT32."""
 type IntMapEntry {
   key: String!
@@ -554,6 +701,18 @@ input String_BoardV1Post_AttachmentMapEntryInput {
   value: BoardV1Post_AttachmentInput!
 }
 
+"""Key-value pair for the map field fields of google.protobuf.Value."""
+type String_GoogleProtobufValueMapEntry {
+  key: String!
+  value: GoogleProtobufValue!
+}
+
+"""Key-value pair for the map field fields of google.protobuf.Value."""
+input String_GoogleProtobufValueMapEntryInput {
+  key: String!
+  value: GoogleProtobufValueInput!
+}
+
 """
 Key-value pair for the map field accountSettings of user.v1.UserStatus.
 """
@@ -605,6 +764,7 @@ type UserV1User {
 
   """Map field with scalar value type."""
   loginCounts: [IntMapEntry!]
+  metadata: GoogleProtobufStruct
   name: String
   rawId: String
   status: UserV1UserStatus
@@ -640,6 +800,7 @@ input UserV1UserInput {
 
   """Map field with scalar value type."""
   loginCounts: [IntMapEntryInput!]
+  metadata: GoogleProtobufStructInput
   name: String
   status: UserV1UserStatus
 }

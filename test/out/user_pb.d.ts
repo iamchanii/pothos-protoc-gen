@@ -2,7 +2,7 @@
 // @generated from file user.proto (package user.v1, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf';
+import type { JsonObject, Message } from '@bufbuild/protobuf';
 import type {
   GenEnum,
   GenFile,
@@ -72,6 +72,11 @@ export declare type User = Message<'user.v1.User'> & {
    * @generated from field: map<string, user.v1.User.Address> addresses = 8;
    */
   addresses: { [key: string]: User_Address };
+
+  /**
+   * @generated from field: google.protobuf.Struct metadata = 9;
+   */
+  metadata?: JsonObject;
 };
 
 /**

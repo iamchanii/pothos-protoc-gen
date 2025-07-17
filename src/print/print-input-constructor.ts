@@ -48,7 +48,7 @@ function printInputConstructor(
     f.print`${indent}${oneof.localName}:`;
     for (const field of oneof.fields) {
       const indent = '      '; // 6 spaces
-      f.print`${indent}input?.${field.localName} ? { case: '${field.localName}', value: ${getValueExpression(field)} } :`;
+      f.print`${indent}typeof input?.${field.localName} !== 'undefined' ? { case: '${field.localName}', value: ${getValueExpression(field)} } :`;
     }
     f.print`      undefined,`;
   }

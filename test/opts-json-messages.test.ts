@@ -8,7 +8,7 @@ test('Generate files', () => {
   const request = makeCodeGenerateRequest(
     makePluginParameter({
       builderPath: '../builder',
-      removeTypeName: true,
+      jsonMessages: new Set(['google.protobuf.Struct']),
     }),
   );
   const response = pothosProtocGenPlugin.run(request);

@@ -50,7 +50,11 @@ function printObjectTypeRef(
   for (const field of message.fields) {
     const indent = '    '; // 4 spaces
     const fieldType = getObjectFieldType(field);
-    const resolveExpression = getObjectFieldResolverExpression(f, field);
+    const resolveExpression = getObjectFieldResolverExpression(
+      schema,
+      f,
+      field,
+    );
 
     f.print(f.jsDoc(field, indent));
     f.print`${indent}${field.localName}: t.field({`;

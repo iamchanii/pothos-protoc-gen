@@ -14,6 +14,5 @@ plugins:
       - ts_nocheck=true
       - builder_path=../builder.js
       - print_preamble=true
-      - remove_type_name=true
 inputs:
   - directory: ./test/proto

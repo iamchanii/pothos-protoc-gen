@@ -33,8 +33,10 @@ export function makePluginParameter(options: Partial<PluginOptions>): string {
     parameters.push('disable_add_raw_id_field=true');
   }
 
-  if (options.removeTypeName) {
-    parameters.push('remove_type_name=true');
+  if (options.jsonMessages) {
+    parameters.push(
+      `json_messages=${Array.from(options.jsonMessages).join(',')}`,
+    );
   }
 
   if (options.printPreamble) {

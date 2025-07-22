@@ -56,11 +56,17 @@ function printInputConstructor(
   f.print`  });`;
   f.print();
 
-  if (schema.options.removeTypeName) {
-    f.print`  delete message.$typeName;`;
+  if (schema.options.jsonMessages.has(message.typeName)) {
+    f.print`  return ${f.runtime.toJson}(${f.importSchema(message)}, message, {`;
+    f.print`    alwaysEmitImplicit: ${schema.options.jsonOptions.alwaysEmitImplicit},`;
+    f.print`    enumAsInteger: ${schema.options.jsonOptions.enumAsInteger},`;
+    f.print`    useProtoFieldName: ${schema.options.jsonOptions.useProtoFieldName},`;
+    f.print`    ignoreUnknownFields: ${schema.options.jsonOptions.ignoreUnknownFields},`;
+    f.print`  });`;
+  } else {
+    f.print`  return message;`;
   }
 
-  f.print`  return message;`;
   f.print`}`;
   f.print();
 

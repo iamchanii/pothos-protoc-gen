@@ -1,3 +1,5 @@
+import type { JsonReadOptions, JsonWriteOptions } from '@bufbuild/protobuf';
+
 type RawPluginOptions = { key: string; value: string }[];
 
 export interface PluginOptions {
@@ -7,8 +9,9 @@ export interface PluginOptions {
   includeServices: Set<string>;
   disableProcessIdField: boolean;
   disableAddRawIdField: boolean;
-  removeTypeName: boolean;
   printPreamble: boolean;
+  jsonOptions: JsonWriteOptions & JsonReadOptions;
+  jsonMessages: Set<string>;
 }
 
 /**
@@ -29,8 +32,14 @@ export function parseOptions(rawOptions: RawPluginOptions): PluginOptions {
     includeServices: new Set(),
     disableProcessIdField: false,
     disableAddRawIdField: false,
-    removeTypeName: false,
     printPreamble: false,
+    jsonOptions: {
+      alwaysEmitImplicit: false,
+      enumAsInteger: false,
+      useProtoFieldName: false,
+      ignoreUnknownFields: false,
+    },
+    jsonMessages: new Set(),
   };
 
   for (const { key, value } of rawOptions) {
@@ -58,12 +67,32 @@ export function parseOptions(rawOptions: RawPluginOptions): PluginOptions {
       result.disableAddRawIdField = true;
     }
 
-    if (key === 'remove_type_name') {
-      result.removeTypeName = true;
+    if (key === 'json_options') {
+      if (value.includes('always_emit_implicit')) {
+        result.jsonOptions.alwaysEmitImplicit = true;
+      }
+
+      if (value.includes('enum_as_integer')) {
+        result.jsonOptions.enumAsInteger = true;
+      }
+
+      if (value.includes('use_proto_field_name')) {
+        result.jsonOptions.useProtoFieldName = true;
+      }
+
+      if (value.includes('ignore_unknown_fields')) {
+        result.jsonOptions.ignoreUnknownFields = true;
+      }
     }
 
     if (key === 'print_preamble') {
       result.printPreamble = true;
+    }
+
+    if (key === 'json_messages') {
+      for (const message of value.split(',')) {
+        result.jsonMessages.add(message);
+      }
     }
   }
 

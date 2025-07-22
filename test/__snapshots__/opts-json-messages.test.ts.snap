@@ -4,10 +4,11 @@ exports[`Generate files 1`] = `
 [
   {
     "content": "import { builder } from "../builder";
-import { create, enumFromJson } from "@bufbuild/protobuf";
+import { create, enumFromJson, fromJson } from "@bufbuild/protobuf";
 import type { User, User_Address, UserList, UserQuery, UserStatus } from "./user_pb";
 import { User_Address_AddressTypeSchema, User_AddressSchema, UserQuerySchema, UserSchema, UserStatusSchema } from "./user_pb";
 import { encodeBase64 } from "@pothos/core";
+import { StructSchema } from "./google/protobuf/struct_pb";
 import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos";
 import { makeGoogleProtobufStructInput } from "./google/protobuf/struct_pothos";
 import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos";
@@ -177,7 +178,7 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
      */
     metadata: t.field({
       type: "GoogleProtobufStruct",
-      resolve: (parent) => parent.metadata,
+      resolve: (parent) => fromJson(StructSchema, parent.metadata, { alwaysEmitImplicit: false, enumAsInteger: false, useProtoFieldName: false, ignoreUnknownFields: false,}),
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -526,7 +527,6 @@ export function makeUserV1UserQueryInput(input: any): UserQuery {
     endDate: input?.endDate ? makeGoogleProtobufTimestampInput(input.endDate) : null,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -574,7 +574,6 @@ export function makeUserV1UserInput(input: any): User {
     metadata: input?.metadata ? makeGoogleProtobufStructInput(input.metadata) : null,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -605,7 +604,6 @@ export function makeUserV1User_AddressInput(input: any): User_Address {
     type: input?.type,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -730,7 +728,7 @@ builder.mutationField('userV1UserServiceDeleteUser', t => t.field({
   },
   {
     "content": "import { builder } from "../../../builder";
-import { create, enumFromJson } from "@bufbuild/protobuf";
+import { create, enumFromJson, toJson } from "@bufbuild/protobuf";
 import type { ListValue, Struct, Value } from "./struct_pb";
 import { ListValueSchema, NullValueSchema, StructSchema, ValueSchema } from "./struct_pb";
 
@@ -986,8 +984,12 @@ export function makeGoogleProtobufStructInput(input: any): Struct {
     fields: input?.fields ? Object.fromEntries(input?.fields?.map(({ key, value }) => [key, makeGoogleProtobufValueInput(value)])) : null,
   });
 
-  delete message.$typeName;
-  return message;
+  return toJson(StructSchema, message, {
+    alwaysEmitImplicit: false,
+    enumAsInteger: false,
+    useProtoFieldName: false,
+    ignoreUnknownFields: false,
+  });
 }
 
 /**
@@ -1008,7 +1010,6 @@ export function makeGoogleProtobufValueInput(input: any): Value {
       undefined,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -1023,7 +1024,6 @@ export function makeGoogleProtobufListValueInput(input: any): ListValue {
     values: input?.values ? input.values.map(makeGoogleProtobufValueInput) : null,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -1649,7 +1649,6 @@ export function makeBoardV1PostQueryInput(input: any): PostQuery {
     endDate: input?.endDate ? makeGoogleProtobufTimestampInput(input.endDate) : null,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -1701,7 +1700,6 @@ export function makeBoardV1PostInput(input: any): Post {
     attachments: input?.attachments ? Object.fromEntries(input?.attachments?.map(({ key, value }) => [key, makeBoardV1Post_AttachmentInput(value)])) : null,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -1724,7 +1722,6 @@ export function makeBoardV1Post_AttachmentInput(input: any): Post_Attachment {
     type: input?.type,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -1755,7 +1752,6 @@ export function makeBoardV1CommentInput(input: any): Comment {
     createdAt: input?.createdAt ? makeGoogleProtobufTimestampInput(input.createdAt) : null,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -1984,7 +1980,6 @@ export function makeGoogleProtobufTimestampInput(input: any): Timestamp {
     nanos: input?.nanos,
   });
 
-  delete message.$typeName;
   return message;
 }
 
@@ -2026,7 +2021,6 @@ export function makeGoogleProtobufEmptyInput(input: any): Empty {
   const message = create(EmptySchema, {
   });
 
-  delete message.$typeName;
   return message;
 }
 

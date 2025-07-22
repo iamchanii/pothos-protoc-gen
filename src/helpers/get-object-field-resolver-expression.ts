@@ -1,5 +1,6 @@
 import { type DescEnum, type DescField, ScalarType } from '@bufbuild/protobuf';
-import type { GeneratedFile, Printable } from '@bufbuild/protoplugin';
+import type { GeneratedFile, Printable, Schema } from '@bufbuild/protoplugin';
+import type { PluginOptions } from '../plugin-options.ts';
 
 /**
  * Generates an expression for resolving a field on an object.
@@ -10,6 +11,7 @@ import type { GeneratedFile, Printable } from '@bufbuild/protoplugin';
  * @remarks This function handles different field types, including oneof, map, enum, scalar, and list.
  */
 export function getObjectFieldResolverExpression(
+  schema: Schema<PluginOptions>,
   f: GeneratedFile,
   field: DescField,
 ): Printable {
@@ -64,8 +66,28 @@ export function getObjectFieldResolverExpression(
           return `(parent) => parent.${field.localName}`;
       }
 
-    default:
+    case 'message':
+      if (schema.options.jsonMessages.has(field.message.typeName)) {
+        return [
+          '(parent) => ',
+          f.runtime.fromJson,
+          '(',
+          f.importSchema(field.message),
+          ', ',
+          `parent.${field.localName}, {`,
+          ` alwaysEmitImplicit: ${schema.options.jsonOptions.alwaysEmitImplicit},`,
+          ` enumAsInteger: ${schema.options.jsonOptions.enumAsInteger},`,
+          ` useProtoFieldName: ${schema.options.jsonOptions.useProtoFieldName},`,
+          ` ignoreUnknownFields: ${schema.options.jsonOptions.ignoreUnknownFields},`,
+          '})',
+        ];
+      }
+
       return `(parent) => parent.${field.localName}`;
+
+    default:
+      field satisfies never;
+      throw new Error('Invalid field kind');
   }
 }
 

@@ -33,5 +33,13 @@ export function makePluginParameter(options: Partial<PluginOptions>): string {
     parameters.push('disable_add_raw_id_field=true');
   }
 
+  if (options.removeTypeName) {
+    parameters.push('remove_type_name=true');
+  }
+
+  if (options.printPreamble) {
+    parameters.push('print_preamble=true');
+  }
+
   return parameters.join(',');
 }

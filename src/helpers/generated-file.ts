@@ -29,7 +29,11 @@ export function getGeneratedFile(
 
   if (generatedFile === undefined) {
     generatedFile = schema.generateFile(`${file.name}_pothos.ts`);
-    generatedFile.preamble(file);
+
+    if (schema.options.printPreamble) {
+      generatedFile.preamble(file);
+    }
+
     extendGeneratedFile(schema, generatedFile);
 
     generatedFileMap.set(file.name, generatedFile);

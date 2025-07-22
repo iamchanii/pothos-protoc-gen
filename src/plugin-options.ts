@@ -7,6 +7,8 @@ export interface PluginOptions {
   includeServices: Set<string>;
   disableProcessIdField: boolean;
   disableAddRawIdField: boolean;
+  removeTypeName: boolean;
+  printPreamble: boolean;
 }
 
 /**
@@ -27,6 +29,8 @@ export function parseOptions(rawOptions: RawPluginOptions): PluginOptions {
     includeServices: new Set(),
     disableProcessIdField: false,
     disableAddRawIdField: false,
+    removeTypeName: false,
+    printPreamble: false,
   };
 
   for (const { key, value } of rawOptions) {
@@ -52,6 +56,14 @@ export function parseOptions(rawOptions: RawPluginOptions): PluginOptions {
 
     if (key === 'disable_add_raw_id_field') {
       result.disableAddRawIdField = true;
+    }
+
+    if (key === 'remove_type_name') {
+      result.removeTypeName = true;
+    }
+
+    if (key === 'print_preamble') {
+      result.printPreamble = true;
     }
   }
 

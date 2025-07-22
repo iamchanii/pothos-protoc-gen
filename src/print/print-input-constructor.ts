@@ -33,7 +33,7 @@ function printInputConstructor(
 
   f.print(f.jsDoc(description));
   f.print`${f.export('function', functionName)}(input: any): ${f.importShape(message)} {`;
-  f.print`  return ${f.runtime.create}(${f.importSchema(message)}, {`;
+  f.print`  const message = ${f.runtime.create}(${f.importSchema(message)}, {`;
 
   const indent = '    '; // 4 spaces
 
@@ -54,6 +54,13 @@ function printInputConstructor(
   }
 
   f.print`  });`;
+  f.print();
+
+  if (schema.options.removeTypeName) {
+    f.print`  delete message.$typeName;`;
+  }
+
+  f.print`  return message;`;
   f.print`}`;
   f.print();
 

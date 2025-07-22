@@ -7,6 +7,7 @@ exports[`Generate files 1`] = `
 import { create, enumFromJson } from "@bufbuild/protobuf";
 import type { User, User_Address, UserList, UserQuery, UserStatus } from "./user_pb";
 import { User_Address_AddressTypeSchema, User_AddressSchema, UserQuerySchema, UserSchema, UserStatusSchema } from "./user_pb";
+import { encodeBase64 } from "@pothos/core";
 import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos";
 import { makeGoogleProtobufStructInput } from "./google/protobuf/struct_pothos";
 import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos";
@@ -97,8 +98,9 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
      * @generated from field: string id = 1;
      */
     id: t.field({
-      type: "String",
-      resolve: (parent) => parent.id,
+      type: 'ID',
+      nullable: false,
+      resolve: (parent) => encodeBase64(\`UserV1User:\${parent.id}\`),
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -524,6 +526,7 @@ export function makeUserV1UserQueryInput(input: any): UserQuery {
     endDate: input?.endDate ? makeGoogleProtobufTimestampInput(input.endDate) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -571,6 +574,7 @@ export function makeUserV1UserInput(input: any): User {
     metadata: input?.metadata ? makeGoogleProtobufStructInput(input.metadata) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -601,6 +605,7 @@ export function makeUserV1User_AddressInput(input: any): User_Address {
     type: input?.type,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -981,6 +986,7 @@ export function makeGoogleProtobufStructInput(input: any): Struct {
     fields: input?.fields ? Object.fromEntries(input?.fields?.map(({ key, value }) => [key, makeGoogleProtobufValueInput(value)])) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1002,6 +1008,7 @@ export function makeGoogleProtobufValueInput(input: any): Value {
       undefined,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1016,6 +1023,7 @@ export function makeGoogleProtobufListValueInput(input: any): ListValue {
     values: input?.values ? input.values.map(makeGoogleProtobufValueInput) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1027,6 +1035,7 @@ export function makeGoogleProtobufListValueInput(input: any): ListValue {
 import { create, enumFromJson } from "@bufbuild/protobuf";
 import type { Comment, Post, Post_Attachment, PostList, PostQuery, PostStatus } from "./board_pb";
 import { CommentSchema, Post_Attachment_AttachmentTypeSchema, Post_AttachmentSchema, PostQuerySchema, PostSchema, PostStatusSchema } from "./board_pb";
+import { encodeBase64 } from "@pothos/core";
 import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos";
 import { makeUserV1UserInput } from "./user_pothos";
 import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos";
@@ -1117,8 +1126,9 @@ export const BoardV1PostRef = builder.objectRef<Post>('BoardV1Post').implement({
      * @generated from field: string id = 1;
      */
     id: t.field({
-      type: "String",
-      resolve: (parent) => parent.id,
+      type: 'ID',
+      nullable: false,
+      resolve: (parent) => encodeBase64(\`BoardV1Post:\${parent.id}\`),
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -1290,8 +1300,9 @@ export const BoardV1CommentRef = builder.objectRef<Comment>('BoardV1Comment').im
      * @generated from field: string id = 1;
      */
     id: t.field({
-      type: "String",
-      resolve: (parent) => parent.id,
+      type: 'ID',
+      nullable: false,
+      resolve: (parent) => encodeBase64(\`BoardV1Comment:\${parent.id}\`),
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -1638,6 +1649,7 @@ export function makeBoardV1PostQueryInput(input: any): PostQuery {
     endDate: input?.endDate ? makeGoogleProtobufTimestampInput(input.endDate) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1689,6 +1701,7 @@ export function makeBoardV1PostInput(input: any): Post {
     attachments: input?.attachments ? Object.fromEntries(input?.attachments?.map(({ key, value }) => [key, makeBoardV1Post_AttachmentInput(value)])) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1711,6 +1724,7 @@ export function makeBoardV1Post_AttachmentInput(input: any): Post_Attachment {
     type: input?.type,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1741,6 +1755,7 @@ export function makeBoardV1CommentInput(input: any): Comment {
     createdAt: input?.createdAt ? makeGoogleProtobufTimestampInput(input.createdAt) : null,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -1969,6 +1984,7 @@ export function makeGoogleProtobufTimestampInput(input: any): Timestamp {
     nanos: input?.nanos,
   });
 
+  delete message.$typeName;
   return message;
 }
 
@@ -2010,6 +2026,7 @@ export function makeGoogleProtobufEmptyInput(input: any): Empty {
   const message = create(EmptySchema, {
   });
 
+  delete message.$typeName;
   return message;
 }
 

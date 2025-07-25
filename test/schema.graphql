@@ -1,39 +1,53 @@
-"""Message representing a comment on a post."""
+"""
+Message representing a comment on a post.
+"""
 type BoardV1Comment {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
   """
   _: Boolean
 
-  """Author information imported from user.v1 package"""
+  """
+  Author information imported from user.v1 package
+  """
   author: UserV1User
   content: String
   createdAt: GoogleProtobufTimestamp
   id: ID!
 
-  """Reference to the post this comment belongs to."""
+  """
+  Reference to the post this comment belongs to.
+  """
   postId: String
   rawId: String
 }
 
-"""Message representing a comment on a post."""
+"""
+Message representing a comment on a post.
+"""
 input BoardV1CommentInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.
   """
   _: Boolean
 
-  """Author information imported from user.v1 package"""
+  """
+  Author information imported from user.v1 package
+  """
   author: UserV1UserInput
   content: String
   createdAt: GoogleProtobufTimestampInput
   id: String
 
-  """Reference to the post this comment belongs to."""
+  """
+  Reference to the post this comment belongs to.
+  """
   postId: String
 }
 
-"""Message representing a post on the board."""
+"""
+Message representing a post on the board.
+"""
 type BoardV1Post {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
@@ -42,11 +56,11 @@ type BoardV1Post {
 
   """
   Address field with message value type.
-  
-  
+
    Deprecated field, should not be used in new code.
   """
-  attachment: BoardV1Post_Attachment @deprecated(reason: "Deprecated. See the comments for more details.")
+  attachment: BoardV1Post_Attachment
+    @deprecated(reason: "Deprecated. See the comments for more details.")
 
   """
   Map field with message value type.
@@ -54,7 +68,9 @@ type BoardV1Post {
   """
   attachments: [String_BoardV1Post_AttachmentMapEntry!]
 
-  """Author information imported from user.v1 package"""
+  """
+  Author information imported from user.v1 package
+  """
   author: UserV1User
   content: String
   createdAt: GoogleProtobufTimestamp
@@ -76,14 +92,18 @@ type BoardV1Post {
   viewCounts: [IntMapEntry!]
 }
 
-"""Nested enum for attachment type."""
+"""
+Nested enum for attachment type.
+"""
 enum BoardV1PostAttachment_AttachmentType {
   DOCUMENT
   IMAGE
   VIDEO
 }
 
-"""Message representing a post on the board."""
+"""
+Message representing a post on the board.
+"""
 input BoardV1PostInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.
@@ -92,11 +112,11 @@ input BoardV1PostInput {
 
   """
   Address field with message value type.
-  
-  
+
    Deprecated field, should not be used in new code.
   """
-  attachment: BoardV1Post_AttachmentInput @deprecated(reason: "Deprecated. See the comments for more details.")
+  attachment: BoardV1Post_AttachmentInput
+    @deprecated(reason: "Deprecated. See the comments for more details.")
 
   """
   Map field with message value type.
@@ -104,7 +124,9 @@ input BoardV1PostInput {
   """
   attachments: [String_BoardV1Post_AttachmentMapEntryInput!]
 
-  """Author information imported from user.v1 package"""
+  """
+  Author information imported from user.v1 package
+  """
   author: UserV1UserInput
   content: String
   createdAt: GoogleProtobufTimestampInput
@@ -125,7 +147,9 @@ input BoardV1PostInput {
   viewCounts: [IntMapEntryInput!]
 }
 
-"""Message representing a list of posts."""
+"""
+Message representing a list of posts.
+"""
 type BoardV1PostList {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
@@ -135,7 +159,9 @@ type BoardV1PostList {
   totalPosts: Int
 }
 
-"""Message for querying posts."""
+"""
+Message for querying posts.
+"""
 input BoardV1PostQueryInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.
@@ -148,7 +174,9 @@ input BoardV1PostQueryInput {
   startDate: GoogleProtobufTimestampInput
 }
 
-"""Top-level enum representing the status of a post."""
+"""
+Top-level enum representing the status of a post.
+"""
 enum BoardV1PostStatus {
   ARCHIVED
   DRAFT
@@ -156,7 +184,9 @@ enum BoardV1PostStatus {
   UNKNOWN
 }
 
-"""Nested message representing an attachment to the post."""
+"""
+Nested message representing an attachment to the post.
+"""
 type BoardV1Post_Attachment {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
@@ -167,7 +197,9 @@ type BoardV1Post_Attachment {
   url: String
 }
 
-"""Nested message representing an attachment to the post."""
+"""
+Nested message representing an attachment to the post.
+"""
 input BoardV1Post_AttachmentInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.
@@ -221,7 +253,9 @@ type GoogleProtobufListValue {
   """
   _: Boolean
 
-  """Repeated field of dynamically typed values."""
+  """
+  Repeated field of dynamically typed values.
+  """
   values: [GoogleProtobufValue!]
 }
 
@@ -236,7 +270,9 @@ input GoogleProtobufListValueInput {
   """
   _: Boolean
 
-  """Repeated field of dynamically typed values."""
+  """
+  Repeated field of dynamically typed values.
+  """
   values: [GoogleProtobufValueInput!]
 }
 
@@ -247,7 +283,9 @@ input GoogleProtobufListValueInput {
  The JSON representation for `NullValue` is JSON `null`.
 """
 enum GoogleProtobufNullValue {
-  """Null value."""
+  """
+  Null value.
+  """
   NULL_VALUE
 }
 
@@ -267,7 +305,9 @@ type GoogleProtobufStruct {
   """
   _: Boolean
 
-  """Unordered map of dynamically typed values."""
+  """
+  Unordered map of dynamically typed values.
+  """
   fields: [String_GoogleProtobufValueMapEntry!]
 }
 
@@ -287,7 +327,9 @@ input GoogleProtobufStructInput {
   """
   _: Boolean
 
-  """Unordered map of dynamically typed values."""
+  """
+  Unordered map of dynamically typed values.
+  """
   fields: [String_GoogleProtobufValueMapEntryInput!]
 }
 
@@ -531,22 +573,34 @@ type GoogleProtobufValue {
   """
   _: Boolean
 
-  """Represents a boolean value."""
+  """
+  Represents a boolean value.
+  """
   boolValue: Boolean
 
-  """Represents a repeated `Value`."""
+  """
+  Represents a repeated `Value`.
+  """
   listValue: GoogleProtobufListValue
 
-  """Represents a null value."""
+  """
+  Represents a null value.
+  """
   nullValue: GoogleProtobufNullValue
 
-  """Represents a double value."""
+  """
+  Represents a double value.
+  """
   numberValue: Float
 
-  """Represents a string value."""
+  """
+  Represents a string value.
+  """
   stringValue: String
 
-  """Represents a structured value."""
+  """
+  Represents a structured value.
+  """
   structValue: GoogleProtobufStruct
 }
 
@@ -564,77 +618,115 @@ input GoogleProtobufValueInput {
   """
   _: Boolean
 
-  """Represents a boolean value."""
+  """
+  Represents a boolean value.
+  """
   boolValue: Boolean
 
-  """Represents a repeated `Value`."""
+  """
+  Represents a repeated `Value`.
+  """
   listValue: GoogleProtobufListValueInput
 
-  """Represents a null value."""
+  """
+  Represents a null value.
+  """
   nullValue: GoogleProtobufNullValue
 
-  """Represents a double value."""
+  """
+  Represents a double value.
+  """
   numberValue: Float
 
-  """Represents a string value."""
+  """
+  Represents a string value.
+  """
   stringValue: String
 
-  """Represents a structured value."""
+  """
+  Represents a structured value.
+  """
   structValue: GoogleProtobufStructInput
 }
 
-"""Key-value pair for the map field viewCounts of INT32."""
+"""
+Key-value pair for the map field viewCounts of INT32.
+"""
 type IntMapEntry {
   key: String!
   value: Int!
 }
 
-"""Key-value pair for the map field viewCounts of INT32."""
+"""
+Key-value pair for the map field viewCounts of INT32.
+"""
 input IntMapEntryInput {
   key: String!
   value: Int!
 }
 
 type Mutation {
-  """Adds a comment to a post."""
+  """
+  Adds a comment to a post.
+  """
   boardV1BoardServiceAddComment(
-    """Message representing a comment on a post."""
+    """
+    Message representing a comment on a post.
+    """
     input: BoardV1CommentInput!
   ): BoardV1Comment
 
-  """Creates a new post."""
+  """
+  Creates a new post.
+  """
   boardV1BoardServiceCreatePost(
-    """Message representing a post on the board."""
+    """
+    Message representing a post on the board.
+    """
     input: BoardV1PostInput!
   ): BoardV1Post
 
-  """Deletes a post."""
+  """
+  Deletes a post.
+  """
   boardV1BoardServiceDeletePost(
-    """Message representing a post on the board."""
+    """
+    Message representing a post on the board.
+    """
     input: BoardV1PostInput!
   ): GoogleProtobufEmpty
 
-  """Creates a new user."""
+  """
+  Creates a new user.
+  """
   userV1UserServiceCreateUser(
-    """Message representing a user."""
+    """
+    Message representing a user.
+    """
     input: UserV1UserInput!
   ): UserV1User
 
-  """Deletes a user."""
+  """
+  Deletes a user.
+  """
   userV1UserServiceDeleteUser(
-    """Message representing a user."""
+    """
+    Message representing a user.
+    """
     input: UserV1UserInput!
   ): GoogleProtobufEmpty
 }
 
 type Query {
-  """Retrieves a single post."""
+  """
+  Retrieves a single post.
+  """
   boardV1BoardServiceGetPost(
     """
     A generic empty message that you can re-use to avoid defining duplicated
      empty messages in your APIs. A typical example is to use it as the request
      or the response type of an API method. For instance:
-    
+
          service Foo {
            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
          }
@@ -642,19 +734,25 @@ type Query {
     input: GoogleProtobufEmptyInput!
   ): BoardV1Post
 
-  """Retrieves a list of posts based on query parameters."""
+  """
+  Retrieves a list of posts based on query parameters.
+  """
   boardV1BoardServiceListPosts(
-    """Message for querying posts."""
+    """
+    Message for querying posts.
+    """
     input: BoardV1PostQueryInput!
   ): BoardV1PostList
 
-  """Retrieves a single user."""
+  """
+  Retrieves a single user.
+  """
   userV1UserServiceGetUser(
     """
     A generic empty message that you can re-use to avoid defining duplicated
      empty messages in your APIs. A typical example is to use it as the request
      or the response type of an API method. For instance:
-    
+
          service Foo {
            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
          }
@@ -662,9 +760,13 @@ type Query {
     input: GoogleProtobufEmptyInput!
   ): UserV1User
 
-  """Retrieves a list of users based on query parameters."""
+  """
+  Retrieves a list of users based on query parameters.
+  """
   userV1UserServiceListUsers(
-    """Message for querying users. References User indirectly."""
+    """
+    Message for querying users. References User indirectly.
+    """
     input: UserV1UserQueryInput!
   ): UserV1UserList
 }
@@ -701,13 +803,17 @@ input String_BoardV1Post_AttachmentMapEntryInput {
   value: BoardV1Post_AttachmentInput!
 }
 
-"""Key-value pair for the map field fields of google.protobuf.Value."""
+"""
+Key-value pair for the map field fields of google.protobuf.Value.
+"""
 type String_GoogleProtobufValueMapEntry {
   key: String!
   value: GoogleProtobufValue!
 }
 
-"""Key-value pair for the map field fields of google.protobuf.Value."""
+"""
+Key-value pair for the map field fields of google.protobuf.Value.
+"""
 input String_GoogleProtobufValueMapEntryInput {
   key: String!
   value: GoogleProtobufValueInput!
@@ -729,40 +835,53 @@ input String_UserV1UserStatusMapEntryInput {
   value: UserV1UserStatus!
 }
 
-"""Key-value pair for the map field addresses of user.v1.User.Address."""
+"""
+Key-value pair for the map field addresses of user.v1.User.Address.
+"""
 type String_UserV1User_AddressMapEntry {
   key: String!
   value: UserV1User_Address!
 }
 
-"""Key-value pair for the map field addresses of user.v1.User.Address."""
+"""
+Key-value pair for the map field addresses of user.v1.User.Address.
+"""
 input String_UserV1User_AddressMapEntryInput {
   key: String!
   value: UserV1User_AddressInput!
 }
 
-"""Message representing a user."""
+"""
+Message representing a user.
+"""
 type UserV1User {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
   """
   _: Boolean
 
-  """Map field with enum value type."""
+  """
+  Map field with enum value type.
+  """
   accountSettings: [String_UserV1UserStatusMapEntry!]
 
   """
   Address field with message value type.
    Deprecated field, should not be used in new code.
   """
-  address: UserV1User_Address @deprecated(reason: "Deprecated. See the comments for more details.")
+  address: UserV1User_Address
+    @deprecated(reason: "Deprecated. See the comments for more details.")
 
-  """Map field with message value type."""
+  """
+  Map field with message value type.
+  """
   addresses: [String_UserV1User_AddressMapEntry!]
   createdAt: GoogleProtobufTimestamp
   id: ID!
 
-  """Map field with scalar value type."""
+  """
+  Map field with scalar value type.
+  """
   loginCounts: [IntMapEntry!]
   metadata: GoogleProtobufStruct
   name: String
@@ -770,42 +889,55 @@ type UserV1User {
   status: UserV1UserStatus
 }
 
-"""Nested enum within Address for address type."""
+"""
+Nested enum within Address for address type.
+"""
 enum UserV1UserAddress_AddressType {
   HOME
   OTHER
   WORK
 }
 
-"""Message representing a user."""
+"""
+Message representing a user.
+"""
 input UserV1UserInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.
   """
   _: Boolean
 
-  """Map field with enum value type."""
+  """
+  Map field with enum value type.
+  """
   accountSettings: [String_UserV1UserStatusMapEntryInput!]
 
   """
   Address field with message value type.
    Deprecated field, should not be used in new code.
   """
-  address: UserV1User_AddressInput @deprecated(reason: "Deprecated. See the comments for more details.")
+  address: UserV1User_AddressInput
+    @deprecated(reason: "Deprecated. See the comments for more details.")
 
-  """Map field with message value type."""
+  """
+  Map field with message value type.
+  """
   addresses: [String_UserV1User_AddressMapEntryInput!]
   createdAt: GoogleProtobufTimestampInput
   id: String
 
-  """Map field with scalar value type."""
+  """
+  Map field with scalar value type.
+  """
   loginCounts: [IntMapEntryInput!]
   metadata: GoogleProtobufStructInput
   name: String
   status: UserV1UserStatus
 }
 
-"""Message representing a list of users."""
+"""
+Message representing a list of users.
+"""
 type UserV1UserList {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
@@ -815,7 +947,9 @@ type UserV1UserList {
   users: [UserV1User!]
 }
 
-"""Message for querying users. References User indirectly."""
+"""
+Message for querying users. References User indirectly.
+"""
 input UserV1UserQueryInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.
@@ -828,7 +962,9 @@ input UserV1UserQueryInput {
   startDate: GoogleProtobufTimestampInput
 }
 
-"""Top-level enum for user status."""
+"""
+Top-level enum for user status.
+"""
 enum UserV1UserStatus {
   ACTIVE
   BANNED
@@ -836,7 +972,9 @@ enum UserV1UserStatus {
   UNKNOWN
 }
 
-"""Nested message representing an address."""
+"""
+Nested message representing an address.
+"""
 type UserV1User_Address {
   """
   Fake field because GraphQL does not support empty objects. Do not query, use __typename instead.
@@ -849,7 +987,9 @@ type UserV1User_Address {
   type: UserV1UserAddress_AddressType
 }
 
-"""Nested message representing an address."""
+"""
+Nested message representing an address.
+"""
 input UserV1User_AddressInput {
   """
   Fake field because GraphQL does not support empty input. Do not use, It does nothing.

@@ -56,6 +56,7 @@ export function getObjectFieldResolverExpression(
 
     case 'list':
       switch (field.listKind) {
+        case 'scalar':
         case 'enum':
           return [
             `(parent) => parent.${field.localName}.map(value => `,

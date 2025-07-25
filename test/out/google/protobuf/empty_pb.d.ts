@@ -32,8 +32,8 @@
 // @generated from file google/protobuf/empty.proto (package google.protobuf, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf';
 import type { GenFile, GenMessage } from '@bufbuild/protobuf/codegenv1';
+import type { Message } from '@bufbuild/protobuf';
 
 /**
  * Describes the file google/protobuf/empty.proto.

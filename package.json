@@ -12,7 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/iamchanii/pothos-protoc-gen.git"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "bin": {
     "pothos-protoc-gen": "./dist/plugin.js"
   },
@@ -27,7 +29,13 @@
     "docs:preview": "vitepress preview docs"
   },
   "author": "Chanhee Lee <contact@imch.dev>",
-  "keywords": ["graphql", "protobuf", "buf", "pothos", "typescript"],
+  "keywords": [
+    "graphql",
+    "protobuf",
+    "buf",
+    "pothos",
+    "typescript"
+  ],
   "dependencies": {
     "@bufbuild/protobuf": "^2.2.3",
     "@bufbuild/protoplugin": "^2.2.3",
@@ -35,7 +43,7 @@
     "remeda": "^2.21.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.1.2",
     "@bufbuild/protoc-gen-es": "^2.2.5",
     "@pothos/core": "^4.5.1",
     "@total-typescript/tsconfig": "^1.0.4",
@@ -48,7 +56,12 @@
     "vitest": "^3.0.9"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "lefthook"],
-    "ignoredBuiltDependencies": ["lefthook"]
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "lefthook"
+    ],
+    "ignoredBuiltDependencies": [
+      "lefthook"
+    ]
   }
 }

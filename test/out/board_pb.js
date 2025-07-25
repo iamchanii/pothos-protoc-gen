@@ -2,35 +2,46 @@
 // @generated from file board.proto (package board.v1, syntax proto3)
 /* eslint-disable */
 
-import { enumDesc, fileDesc, messageDesc, serviceDesc, tsEnum } from "@bufbuild/protobuf/codegenv1";
-import { file_google_protobuf_timestamp } from "./google/protobuf/timestamp_pb";
-import { file_google_protobuf_empty } from "./google/protobuf/empty_pb";
-import { file_user } from "./user_pb";
+import {
+  enumDesc,
+  fileDesc,
+  messageDesc,
+  serviceDesc,
+  tsEnum,
+} from '@bufbuild/protobuf/codegenv1';
+import { file_google_protobuf_empty } from './google/protobuf/empty_pb';
+import { file_google_protobuf_timestamp } from './google/protobuf/timestamp_pb';
+import { file_user } from './user_pb';
 
 /**
  * Describes the file board.proto.
  */
-export const file_board = /*@__PURE__*/
-  fileDesc("Cgtib2FyZC5wcm90bxIIYm9hcmQudjEi9gUKBFBvc3QSCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSHQoGYXV0aG9yGAMgASgLMg0udXNlci52MS5Vc2VyEg8KB2NvbnRlbnQYBCABKAkSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASJAoGc3RhdHVzGAYgASgOMhQuYm9hcmQudjEuUG9zdFN0YXR1cxIzCgt2aWV3X2NvdW50cxgHIAMoCzIeLmJvYXJkLnYxLlBvc3QuVmlld0NvdW50c0VudHJ5Ej8KEXJlYWN0aW9uX3N0YXR1c2VzGAggAygLMiQuYm9hcmQudjEuUG9zdC5SZWFjdGlvblN0YXR1c2VzRW50cnkSMQoKYXR0YWNobWVudBgJIAEoCzIZLmJvYXJkLnYxLlBvc3QuQXR0YWNobWVudEICGAESNAoLYXR0YWNobWVudHMYCiADKAsyHy5ib2FyZC52MS5Qb3N0LkF0dGFjaG1lbnRzRW50cnkaMQoPVmlld0NvdW50c0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoBToCOAEaTQoVUmVhY3Rpb25TdGF0dXNlc0VudHJ5EgsKA2tleRgBIAEoCRIjCgV2YWx1ZRgCIAEoDjIULmJvYXJkLnYxLlBvc3RTdGF0dXM6AjgBGk0KEEF0dGFjaG1lbnRzRW50cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkuYm9hcmQudjEuUG9zdC5BdHRhY2htZW50OgI4ARqcAQoKQXR0YWNobWVudBILCgN1cmwYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSNgoEdHlwZRgDIAEoDjIoLmJvYXJkLnYxLlBvc3QuQXR0YWNobWVudC5BdHRhY2htZW50VHlwZSI0Cg5BdHRhY2htZW50VHlwZRIJCgVJTUFHRRAAEgkKBVZJREVPEAESDAoIRE9DVU1FTlQQAiKGAQoHQ29tbWVudBIKCgJpZBgBIAEoCRIPCgdwb3N0X2lkGAIgASgJEh0KBmF1dGhvchgDIAEoCzINLnVzZXIudjEuVXNlchIPCgdjb250ZW50GAQgASgJEi4KCmNyZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIqkBCglQb3N0UXVlcnkSDwoHa2V5d29yZBgBIAEoCRITCgtwYWdlX251bWJlchgCIAEoBRIYChByZXN1bHRzX3Blcl9wYWdlGAMgASgFEi4KCnN0YXJ0X2RhdGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI+CghQb3N0TGlzdBIdCgVwb3N0cxgBIAMoCzIOLmJvYXJkLnYxLlBvc3QSEwoLdG90YWxfcG9zdHMYAiABKAUqQQoKUG9zdFN0YXR1cxILCgdVTktOT1dOEAASCQoFRFJBRlQQARINCglQVUJMSVNIRUQQAhIMCghBUkNISVZFRBADMo8CCgxCb2FyZFNlcnZpY2USMQoHR2V0UG9zdBIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoOLmJvYXJkLnYxLlBvc3QSNAoJTGlzdFBvc3RzEhMuYm9hcmQudjEuUG9zdFF1ZXJ5GhIuYm9hcmQudjEuUG9zdExpc3QSLAoKQ3JlYXRlUG9zdBIOLmJvYXJkLnYxLlBvc3QaDi5ib2FyZC52MS5Qb3N0EjQKCkRlbGV0ZVBvc3QSDi5ib2FyZC52MS5Qb3N0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EjIKCkFkZENvbW1lbnQSES5ib2FyZC52MS5Db21tZW50GhEuYm9hcmQudjEuQ29tbWVudGIGcHJvdG8z", [file_google_protobuf_timestamp, file_google_protobuf_empty, file_user]);
+export const file_board =
+  /*@__PURE__*/
+  fileDesc(
+    'Cgtib2FyZC5wcm90bxIIYm9hcmQudjEi9gUKBFBvc3QSCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSHQoGYXV0aG9yGAMgASgLMg0udXNlci52MS5Vc2VyEg8KB2NvbnRlbnQYBCABKAkSLgoKY3JlYXRlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASJAoGc3RhdHVzGAYgASgOMhQuYm9hcmQudjEuUG9zdFN0YXR1cxIzCgt2aWV3X2NvdW50cxgHIAMoCzIeLmJvYXJkLnYxLlBvc3QuVmlld0NvdW50c0VudHJ5Ej8KEXJlYWN0aW9uX3N0YXR1c2VzGAggAygLMiQuYm9hcmQudjEuUG9zdC5SZWFjdGlvblN0YXR1c2VzRW50cnkSMQoKYXR0YWNobWVudBgJIAEoCzIZLmJvYXJkLnYxLlBvc3QuQXR0YWNobWVudEICGAESNAoLYXR0YWNobWVudHMYCiADKAsyHy5ib2FyZC52MS5Qb3N0LkF0dGFjaG1lbnRzRW50cnkaMQoPVmlld0NvdW50c0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoBToCOAEaTQoVUmVhY3Rpb25TdGF0dXNlc0VudHJ5EgsKA2tleRgBIAEoCRIjCgV2YWx1ZRgCIAEoDjIULmJvYXJkLnYxLlBvc3RTdGF0dXM6AjgBGk0KEEF0dGFjaG1lbnRzRW50cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkuYm9hcmQudjEuUG9zdC5BdHRhY2htZW50OgI4ARqcAQoKQXR0YWNobWVudBILCgN1cmwYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSNgoEdHlwZRgDIAEoDjIoLmJvYXJkLnYxLlBvc3QuQXR0YWNobWVudC5BdHRhY2htZW50VHlwZSI0Cg5BdHRhY2htZW50VHlwZRIJCgVJTUFHRRAAEgkKBVZJREVPEAESDAoIRE9DVU1FTlQQAiKGAQoHQ29tbWVudBIKCgJpZBgBIAEoCRIPCgdwb3N0X2lkGAIgASgJEh0KBmF1dGhvchgDIAEoCzINLnVzZXIudjEuVXNlchIPCgdjb250ZW50GAQgASgJEi4KCmNyZWF0ZWRfYXQYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIqkBCglQb3N0UXVlcnkSDwoHa2V5d29yZBgBIAEoCRITCgtwYWdlX251bWJlchgCIAEoBRIYChByZXN1bHRzX3Blcl9wYWdlGAMgASgFEi4KCnN0YXJ0X2RhdGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI+CghQb3N0TGlzdBIdCgVwb3N0cxgBIAMoCzIOLmJvYXJkLnYxLlBvc3QSEwoLdG90YWxfcG9zdHMYAiABKAUqQQoKUG9zdFN0YXR1cxILCgdVTktOT1dOEAASCQoFRFJBRlQQARINCglQVUJMSVNIRUQQAhIMCghBUkNISVZFRBADMo8CCgxCb2FyZFNlcnZpY2USMQoHR2V0UG9zdBIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoOLmJvYXJkLnYxLlBvc3QSNAoJTGlzdFBvc3RzEhMuYm9hcmQudjEuUG9zdFF1ZXJ5GhIuYm9hcmQudjEuUG9zdExpc3QSLAoKQ3JlYXRlUG9zdBIOLmJvYXJkLnYxLlBvc3QaDi5ib2FyZC52MS5Qb3N0EjQKCkRlbGV0ZVBvc3QSDi5ib2FyZC52MS5Qb3N0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EjIKCkFkZENvbW1lbnQSES5ib2FyZC52MS5Db21tZW50GhEuYm9hcmQudjEuQ29tbWVudGIGcHJvdG8z',
+    [file_google_protobuf_timestamp, file_google_protobuf_empty, file_user],
+  );
 
 /**
  * Describes the message board.v1.Post.
  * Use `create(PostSchema)` to create a new message.
  */
-export const PostSchema = /*@__PURE__*/
-  messageDesc(file_board, 0);
+export const PostSchema = /*@__PURE__*/ messageDesc(file_board, 0);
 
 /**
  * Describes the message board.v1.Post.Attachment.
  * Use `create(Post_AttachmentSchema)` to create a new message.
  */
-export const Post_AttachmentSchema = /*@__PURE__*/
+export const Post_AttachmentSchema =
+  /*@__PURE__*/
   messageDesc(file_board, 0, 0);
 
 /**
  * Describes the enum board.v1.Post.Attachment.AttachmentType.
  */
-export const Post_Attachment_AttachmentTypeSchema = /*@__PURE__*/
+export const Post_Attachment_AttachmentTypeSchema =
+  /*@__PURE__*/
   enumDesc(file_board, 0, 0, 0);
 
 /**
@@ -38,49 +49,43 @@ export const Post_Attachment_AttachmentTypeSchema = /*@__PURE__*/
  *
  * @generated from enum board.v1.Post.Attachment.AttachmentType
  */
-export const Post_Attachment_AttachmentType = /*@__PURE__*/
+export const Post_Attachment_AttachmentType =
+  /*@__PURE__*/
   tsEnum(Post_Attachment_AttachmentTypeSchema);
 
 /**
  * Describes the message board.v1.Comment.
  * Use `create(CommentSchema)` to create a new message.
  */
-export const CommentSchema = /*@__PURE__*/
-  messageDesc(file_board, 1);
+export const CommentSchema = /*@__PURE__*/ messageDesc(file_board, 1);
 
 /**
  * Describes the message board.v1.PostQuery.
  * Use `create(PostQuerySchema)` to create a new message.
  */
-export const PostQuerySchema = /*@__PURE__*/
-  messageDesc(file_board, 2);
+export const PostQuerySchema = /*@__PURE__*/ messageDesc(file_board, 2);
 
 /**
  * Describes the message board.v1.PostList.
  * Use `create(PostListSchema)` to create a new message.
  */
-export const PostListSchema = /*@__PURE__*/
-  messageDesc(file_board, 3);
+export const PostListSchema = /*@__PURE__*/ messageDesc(file_board, 3);
 
 /**
  * Describes the enum board.v1.PostStatus.
  */
-export const PostStatusSchema = /*@__PURE__*/
-  enumDesc(file_board, 0);
+export const PostStatusSchema = /*@__PURE__*/ enumDesc(file_board, 0);
 
 /**
  * Top-level enum representing the status of a post.
  *
  * @generated from enum board.v1.PostStatus
  */
-export const PostStatus = /*@__PURE__*/
-  tsEnum(PostStatusSchema);
+export const PostStatus = /*@__PURE__*/ tsEnum(PostStatusSchema);
 
 /**
  * Service for board operations.
  *
  * @generated from service board.v1.BoardService
  */
-export const BoardService = /*@__PURE__*/
-  serviceDesc(file_board, 0);
-
+export const BoardService = /*@__PURE__*/ serviceDesc(file_board, 0);

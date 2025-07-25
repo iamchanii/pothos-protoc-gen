@@ -2,16 +2,16 @@
 // @generated from file board.proto (package board.v1, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf';
 import type {
   GenEnum,
   GenFile,
   GenMessage,
   GenService,
 } from '@bufbuild/protobuf/codegenv1';
-import type { EmptySchema } from './google/protobuf/empty_pb';
-import type { Timestamp } from './google/protobuf/timestamp_pb';
+import type { Message } from '@bufbuild/protobuf';
 import type { User } from './user_pb';
+import type { Timestamp } from './google/protobuf/timestamp_pb';
+import type { EmptySchema } from './google/protobuf/empty_pb';
 
 /**
  * Describes the file board.proto.

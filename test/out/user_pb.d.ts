@@ -77,6 +77,11 @@ export declare type User = Message<'user.v1.User'> & {
    * @generated from field: google.protobuf.Struct metadata = 9;
    */
   metadata?: JsonObject;
+
+  /**
+   * @generated from field: repeated int64 favorite_numbers = 10;
+   */
+  favoriteNumbers: bigint[];
 };
 
 /**

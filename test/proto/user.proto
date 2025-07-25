@@ -52,7 +52,7 @@ message User {
 
   google.protobuf.Struct metadata = 9;
 
-  // repeated int64 favorite_numbers = 10;
+  repeated int64 favorite_numbers = 10;
 }
 
 // Message for querying users. References User indirectly.

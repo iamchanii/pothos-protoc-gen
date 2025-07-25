@@ -228,6 +228,16 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       description: undefined,
       deprecationReason: undefined,
     }),
+    /**
+     * @generated from field: repeated int64 favorite_numbers = 10;
+     */
+    favoriteNumbers: t.field({
+      type: ['String'],
+      resolve: (parent) =>
+        parent.favoriteNumbers.map((value) => value?.toString()),
+      description: undefined,
+      deprecationReason: undefined,
+    }),
   }),
 });
 
@@ -525,6 +535,14 @@ export const UserV1UserInputRef = builder
         description: undefined,
         deprecationReason: undefined,
       }),
+      /**
+       * @generated from field: repeated int64 favorite_numbers = 10;
+       */
+      favoriteNumbers: t.field({
+        type: ['String'],
+        description: undefined,
+        deprecationReason: undefined,
+      }),
     }),
   });
 
@@ -726,6 +744,10 @@ export function makeUserV1UserInput(input: any): User {
     metadata: input?.metadata
       ? makeGoogleProtobufStructInput(input.metadata)
       : null,
+    /**
+     * @generated from field: repeated int64 favorite_numbers = 10;
+     */
+    favoriteNumbers: input?.favoriteNumbers,
   });
 
   return message;

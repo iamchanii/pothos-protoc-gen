@@ -21,12 +21,8 @@ export function printFileImport(
   files: Iterable<DescFile>,
 ) {
   const f = getPothosIndexGeneratedFile(schema);
-  const importExtension =
-    schema.options.importExtension === 'none'
-      ? ''
-      : `.${schema.options.importExtension}`;
 
   for (const file of files) {
-    f.print`export * from './${file.name}_pothos${importExtension}';`;
+    f.print`export * from './${file.name}_pothos.ts';`;
   }
 }

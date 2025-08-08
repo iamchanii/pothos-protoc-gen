@@ -1,9 +1,5 @@
 import type { DescFile } from '@bufbuild/protobuf';
-import type {
-  GeneratedFile,
-  ImportSymbol,
-  Schema,
-} from '@bufbuild/protoplugin';
+import type { GeneratedFile, Schema } from '@bufbuild/protoplugin';
 import type { PluginOptions } from '../plugin-options.js';
 import { extendGeneratedFile } from './extend-generated-file.js';
 

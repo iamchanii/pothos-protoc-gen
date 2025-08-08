@@ -42,7 +42,7 @@ export function getInputConstructor(
 
   Object.assign(importSymbol, {
     name: constructorName,
-    from: importSymbol.from.replace(/_pb\.(.+)$/, '_pothos.$1'),
+    from: importSymbol.from.replace(/_pb\.(.+)$/, '_pothos.ts'),
   });
 
   Object.assign(importSymbol, {

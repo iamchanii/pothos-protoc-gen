@@ -14,10 +14,6 @@ import type { PluginOptions } from '../plugin-options.js';
  */
 export function printPothosMapEntriesImport(schema: Schema<PluginOptions>) {
   const f = getPothosIndexGeneratedFile(schema);
-  const importExtension =
-    schema.options.importExtension === 'none'
-      ? ''
-      : `.${schema.options.importExtension}`;
 
-  f.print`export * from './generated-map-entries${importExtension}';`;
+  f.print`export * from './generated-map-entries.ts';`;
 }

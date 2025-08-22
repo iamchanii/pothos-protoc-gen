@@ -120,7 +120,14 @@ function getEnumValueResolveExpr(
   enum_: DescEnum,
   valueExpr: string,
 ): Printable {
-  return [f.importEnumFromJson, '(', f.importSchema(enum_), `, ${valueExpr})`];
+  return [
+    `${valueExpr} ? `,
+    f.importEnumFromJson,
+    '(',
+    f.importSchema(enum_),
+    `, ${valueExpr})`,
+    ' : null',
+  ];
 }
 
 function isBigIntScalarType(scalarType: ScalarType) {

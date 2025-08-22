@@ -2,48 +2,35 @@
 // @generated from file user.proto (package user.v1, syntax proto3)
 /* eslint-disable */
 
-import {
-  enumDesc,
-  fileDesc,
-  messageDesc,
-  serviceDesc,
-  tsEnum,
-} from '@bufbuild/protobuf/codegenv1';
-import { file_google_protobuf_empty } from './google/protobuf/empty_pb';
-import { file_google_protobuf_struct } from './google/protobuf/struct_pb';
-import { file_google_protobuf_timestamp } from './google/protobuf/timestamp_pb';
+import { enumDesc, fileDesc, messageDesc, serviceDesc, tsEnum } from "@bufbuild/protobuf/codegenv1";
+import { file_google_protobuf_timestamp } from "./google/protobuf/timestamp_pb";
+import { file_google_protobuf_empty } from "./google/protobuf/empty_pb";
+import { file_google_protobuf_struct } from "./google/protobuf/struct_pb";
 
 /**
  * Describes the file user.proto.
  */
-export const file_user =
-  /*@__PURE__*/
-  fileDesc(
-    'Cgp1c2VyLnByb3RvEgd1c2VyLnYxIoIGCgRVc2VyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIwoGc3RhdHVzGAMgASgOMhMudXNlci52MS5Vc2VyU3RhdHVzEi4KCmNyZWF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjQKDGxvZ2luX2NvdW50cxgFIAMoCzIeLnVzZXIudjEuVXNlci5Mb2dpbkNvdW50c0VudHJ5EjwKEGFjY291bnRfc2V0dGluZ3MYBiADKAsyIi51c2VyLnYxLlVzZXIuQWNjb3VudFNldHRpbmdzRW50cnkSKgoHYWRkcmVzcxgHIAEoCzIVLnVzZXIudjEuVXNlci5BZGRyZXNzQgIYARIvCglhZGRyZXNzZXMYCCADKAsyHC51c2VyLnYxLlVzZXIuQWRkcmVzc2VzRW50cnkSKQoIbWV0YWRhdGEYCSABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0EhgKEGZhdm9yaXRlX251bWJlcnMYCiADKAMaMgoQTG9naW5Db3VudHNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAU6AjgBGksKFEFjY291bnRTZXR0aW5nc0VudHJ5EgsKA2tleRgBIAEoCRIiCgV2YWx1ZRgCIAEoDjITLnVzZXIudjEuVXNlclN0YXR1czoCOAEaRwoOQWRkcmVzc2VzRW50cnkSCwoDa2V5GAEgASgJEiQKBXZhbHVlGAIgASgLMhUudXNlci52MS5Vc2VyLkFkZHJlc3M6AjgBGqoBCgdBZGRyZXNzEg4KBnN0cmVldBgBIAEoCRIMCgRjaXR5GAIgASgJEg0KBXN0YXRlGAMgASgJEhMKC3Bvc3RhbF9jb2RlGAQgASgJEi8KBHR5cGUYBSABKA4yIS51c2VyLnYxLlVzZXIuQWRkcmVzcy5BZGRyZXNzVHlwZSIsCgtBZGRyZXNzVHlwZRIICgRIT01FEAASCAoEV09SSxABEgkKBU9USEVSEAIirQEKCVVzZXJRdWVyeRITCgtzZWFyY2hfdGVybRgBIAEoCRITCgtwYWdlX251bWJlchgCIAEoBRIYChByZXN1bHRzX3Blcl9wYWdlGAMgASgFEi4KCnN0YXJ0X2RhdGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI9CghVc2VyTGlzdBIcCgV1c2VycxgBIAMoCzINLnVzZXIudjEuVXNlchITCgt0b3RhbF91c2VycxgCIAEoBSo/CgpVc2VyU3RhdHVzEgsKB1VOS05PV04QABIKCgZBQ1RJVkUQARIMCghJTkFDVElWRRACEgoKBkJBTk5FRBADMtQBCgtVc2VyU2VydmljZRIwCgdHZXRVc2VyEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gg0udXNlci52MS5Vc2VyEjIKCUxpc3RVc2VycxISLnVzZXIudjEuVXNlclF1ZXJ5GhEudXNlci52MS5Vc2VyTGlzdBIqCgpDcmVhdGVVc2VyEg0udXNlci52MS5Vc2VyGg0udXNlci52MS5Vc2VyEjMKCkRlbGV0ZVVzZXISDS51c2VyLnYxLlVzZXIaFi5nb29nbGUucHJvdG9idWYuRW1wdHliBnByb3RvMw',
-    [
-      file_google_protobuf_timestamp,
-      file_google_protobuf_empty,
-      file_google_protobuf_struct,
-    ],
-  );
+export const file_user = /*@__PURE__*/
+  fileDesc("Cgp1c2VyLnByb3RvEgd1c2VyLnYxIoIGCgRVc2VyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIwoGc3RhdHVzGAMgASgOMhMudXNlci52MS5Vc2VyU3RhdHVzEi4KCmNyZWF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjQKDGxvZ2luX2NvdW50cxgFIAMoCzIeLnVzZXIudjEuVXNlci5Mb2dpbkNvdW50c0VudHJ5EjwKEGFjY291bnRfc2V0dGluZ3MYBiADKAsyIi51c2VyLnYxLlVzZXIuQWNjb3VudFNldHRpbmdzRW50cnkSKgoHYWRkcmVzcxgHIAEoCzIVLnVzZXIudjEuVXNlci5BZGRyZXNzQgIYARIvCglhZGRyZXNzZXMYCCADKAsyHC51c2VyLnYxLlVzZXIuQWRkcmVzc2VzRW50cnkSKQoIbWV0YWRhdGEYCSABKAsyFy5nb29nbGUucHJvdG9idWYuU3RydWN0EhgKEGZhdm9yaXRlX251bWJlcnMYCiADKAMaMgoQTG9naW5Db3VudHNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAU6AjgBGksKFEFjY291bnRTZXR0aW5nc0VudHJ5EgsKA2tleRgBIAEoCRIiCgV2YWx1ZRgCIAEoDjITLnVzZXIudjEuVXNlclN0YXR1czoCOAEaRwoOQWRkcmVzc2VzRW50cnkSCwoDa2V5GAEgASgJEiQKBXZhbHVlGAIgASgLMhUudXNlci52MS5Vc2VyLkFkZHJlc3M6AjgBGqoBCgdBZGRyZXNzEg4KBnN0cmVldBgBIAEoCRIMCgRjaXR5GAIgASgJEg0KBXN0YXRlGAMgASgJEhMKC3Bvc3RhbF9jb2RlGAQgASgJEi8KBHR5cGUYBSABKA4yIS51c2VyLnYxLlVzZXIuQWRkcmVzcy5BZGRyZXNzVHlwZSIsCgtBZGRyZXNzVHlwZRIICgRIT01FEAASCAoEV09SSxABEgkKBU9USEVSEAIirQEKCVVzZXJRdWVyeRITCgtzZWFyY2hfdGVybRgBIAEoCRITCgtwYWdlX251bWJlchgCIAEoBRIYChByZXN1bHRzX3Blcl9wYWdlGAMgASgFEi4KCnN0YXJ0X2RhdGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCI9CghVc2VyTGlzdBIcCgV1c2VycxgBIAMoCzINLnVzZXIudjEuVXNlchITCgt0b3RhbF91c2VycxgCIAEoBSo/CgpVc2VyU3RhdHVzEgsKB1VOS05PV04QABIKCgZBQ1RJVkUQARIMCghJTkFDVElWRRACEgoKBkJBTk5FRBADMtQBCgtVc2VyU2VydmljZRIwCgdHZXRVc2VyEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gg0udXNlci52MS5Vc2VyEjIKCUxpc3RVc2VycxISLnVzZXIudjEuVXNlclF1ZXJ5GhEudXNlci52MS5Vc2VyTGlzdBIqCgpDcmVhdGVVc2VyEg0udXNlci52MS5Vc2VyGg0udXNlci52MS5Vc2VyEjMKCkRlbGV0ZVVzZXISDS51c2VyLnYxLlVzZXIaFi5nb29nbGUucHJvdG9idWYuRW1wdHliBnByb3RvMw", [file_google_protobuf_timestamp, file_google_protobuf_empty, file_google_protobuf_struct]);
 
 /**
  * Describes the message user.v1.User.
  * Use `create(UserSchema)` to create a new message.
  */
-export const UserSchema = /*@__PURE__*/ messageDesc(file_user, 0);
+export const UserSchema = /*@__PURE__*/
+  messageDesc(file_user, 0);
 
 /**
  * Describes the message user.v1.User.Address.
  * Use `create(User_AddressSchema)` to create a new message.
  */
-export const User_AddressSchema = /*@__PURE__*/ messageDesc(file_user, 0, 0);
+export const User_AddressSchema = /*@__PURE__*/
+  messageDesc(file_user, 0, 0);
 
 /**
  * Describes the enum user.v1.User.Address.AddressType.
  */
-export const User_Address_AddressTypeSchema =
-  /*@__PURE__*/
+export const User_Address_AddressTypeSchema = /*@__PURE__*/
   enumDesc(file_user, 0, 0, 0);
 
 /**
@@ -51,37 +38,42 @@ export const User_Address_AddressTypeSchema =
  *
  * @generated from enum user.v1.User.Address.AddressType
  */
-export const User_Address_AddressType =
-  /*@__PURE__*/
+export const User_Address_AddressType = /*@__PURE__*/
   tsEnum(User_Address_AddressTypeSchema);
 
 /**
  * Describes the message user.v1.UserQuery.
  * Use `create(UserQuerySchema)` to create a new message.
  */
-export const UserQuerySchema = /*@__PURE__*/ messageDesc(file_user, 1);
+export const UserQuerySchema = /*@__PURE__*/
+  messageDesc(file_user, 1);
 
 /**
  * Describes the message user.v1.UserList.
  * Use `create(UserListSchema)` to create a new message.
  */
-export const UserListSchema = /*@__PURE__*/ messageDesc(file_user, 2);
+export const UserListSchema = /*@__PURE__*/
+  messageDesc(file_user, 2);
 
 /**
  * Describes the enum user.v1.UserStatus.
  */
-export const UserStatusSchema = /*@__PURE__*/ enumDesc(file_user, 0);
+export const UserStatusSchema = /*@__PURE__*/
+  enumDesc(file_user, 0);
 
 /**
  * Top-level enum for user status.
  *
  * @generated from enum user.v1.UserStatus
  */
-export const UserStatus = /*@__PURE__*/ tsEnum(UserStatusSchema);
+export const UserStatus = /*@__PURE__*/
+  tsEnum(UserStatusSchema);
 
 /**
  * Service with multiple RPC calls.
  *
  * @generated from service user.v1.UserService
  */
-export const UserService = /*@__PURE__*/ serviceDesc(file_user, 0);
+export const UserService = /*@__PURE__*/
+  serviceDesc(file_user, 0);
+

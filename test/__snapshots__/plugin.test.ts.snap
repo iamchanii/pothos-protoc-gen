@@ -8,9 +8,10 @@ import { create, enumFromJson } from "@bufbuild/protobuf";
 import type { User, User_Address, UserList, UserQuery, UserStatus } from "./user_pb";
 import { User_Address_AddressTypeSchema, User_AddressSchema, UserQuerySchema, UserSchema, UserStatusSchema } from "./user_pb";
 import { encodeBase64 } from "@pothos/core";
-import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos";
-import { makeGoogleProtobufStructInput } from "./google/protobuf/struct_pothos";
-import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos";
+import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos.ts";
+import { makeGoogleProtobufStructInput } from "./google/protobuf/struct_pothos.ts";
+import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos.ts";
+import { makeUserV1UserInput as makeUserV1UserInput$1, makeUserV1UserQueryInput as makeUserV1UserQueryInput$1 } from "./user_pothos.ts";
 
 /**
  * @generated from enum user.v1.UserStatus
@@ -122,7 +123,7 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
      */
     status: t.field({
       type: "UserV1UserStatus",
-      resolve: (parent) => enumFromJson(UserStatusSchema, parent.status),
+      resolve: (parent) => parent.status ? enumFromJson(UserStatusSchema, parent.status) : null,
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -181,6 +182,15 @@ export const UserV1UserRef = builder.objectRef<User>('UserV1User').implement({
       description: undefined,
       deprecationReason: undefined,
     }),
+    /**
+     * @generated from field: repeated int64 favorite_numbers = 10;
+     */
+    favoriteNumbers: t.field({
+      type: ["String"],
+      resolve: (parent) => parent.favoriteNumbers.map(value => (value)?.toString()),
+      description: undefined,
+      deprecationReason: undefined,
+    }),
   }),
 });
 
@@ -233,7 +243,7 @@ export const UserV1User_AddressRef = builder.objectRef<User_Address>('UserV1User
      */
     type: t.field({
       type: "UserV1UserAddress_AddressType",
-      resolve: (parent) => enumFromJson(User_Address_AddressTypeSchema, parent.type),
+      resolve: (parent) => parent.type ? enumFromJson(User_Address_AddressTypeSchema, parent.type) : null,
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -423,6 +433,14 @@ export const UserV1UserInputRef = builder.inputRef<User>('UserV1UserInput').impl
       description: undefined,
       deprecationReason: undefined,
     }),
+    /**
+     * @generated from field: repeated int64 favorite_numbers = 10;
+     */
+    favoriteNumbers: t.field({
+      type: ["String"],
+      description: undefined,
+      deprecationReason: undefined,
+    }),
   }),
 });
 
@@ -571,6 +589,10 @@ export function makeUserV1UserInput(input: any): User {
      * @generated from field: google.protobuf.Struct metadata = 9;
      */
     metadata: input?.metadata ? makeGoogleProtobufStructInput(input.metadata) : null,
+    /**
+     * @generated from field: repeated int64 favorite_numbers = 10;
+     */
+    favoriteNumbers: input?.favoriteNumbers,
   });
 
   return message;
@@ -658,7 +680,7 @@ builder.queryField('userV1UserServiceListUsers', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.userV1UserService) throw new Error('userV1UserService is not provided.');
     return context.userV1UserService.listUsers(
-      makeUserV1UserQueryInput(input),
+      makeUserV1UserQueryInput$1(input),
       { headers: context.userV1UserServiceRequestHeaders },
     );
   },
@@ -687,7 +709,7 @@ builder.mutationField('userV1UserServiceCreateUser', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.userV1UserService) throw new Error('userV1UserService is not provided.');
     return context.userV1UserService.createUser(
-      makeUserV1UserInput(input),
+      makeUserV1UserInput$1(input),
       { headers: context.userV1UserServiceRequestHeaders },
     );
   },
@@ -716,7 +738,7 @@ builder.mutationField('userV1UserServiceDeleteUser', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.userV1UserService) throw new Error('userV1UserService is not provided.');
     return context.userV1UserService.deleteUser(
-      makeUserV1UserInput(input),
+      makeUserV1UserInput$1(input),
       { headers: context.userV1UserServiceRequestHeaders },
     );
   },
@@ -781,7 +803,7 @@ export const GoogleProtobufValueRef = builder.objectRef<Value>('GoogleProtobufVa
      */
     nullValue: t.field({
       type: "GoogleProtobufNullValue",
-      resolve: (parent) => {const oneofVal = parent.kind.value;return parent.kind.case === 'nullValue' ? enumFromJson(NullValueSchema, oneofVal): null},
+      resolve: (parent) => {const oneofVal = parent.kind.value;return parent.kind.case === 'nullValue' ? oneofVal ? enumFromJson(NullValueSchema, oneofVal) : null: null},
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -1030,9 +1052,10 @@ import { create, enumFromJson } from "@bufbuild/protobuf";
 import type { Comment, Post, Post_Attachment, PostList, PostQuery, PostStatus } from "./board_pb";
 import { CommentSchema, Post_Attachment_AttachmentTypeSchema, Post_AttachmentSchema, PostQuerySchema, PostSchema, PostStatusSchema } from "./board_pb";
 import { encodeBase64 } from "@pothos/core";
-import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos";
-import { makeUserV1UserInput } from "./user_pothos";
-import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos";
+import { makeGoogleProtobufTimestampInput } from "./google/protobuf/timestamp_pothos.ts";
+import { makeUserV1UserInput } from "./user_pothos.ts";
+import { makeGoogleProtobufEmptyInput } from "./google/protobuf/empty_pothos.ts";
+import { makeBoardV1CommentInput as makeBoardV1CommentInput$1, makeBoardV1PostInput as makeBoardV1PostInput$1, makeBoardV1PostQueryInput as makeBoardV1PostQueryInput$1 } from "./board_pothos.ts";
 
 /**
  * @generated from enum board.v1.PostStatus
@@ -1171,7 +1194,7 @@ export const BoardV1PostRef = builder.objectRef<Post>('BoardV1Post').implement({
      */
     status: t.field({
       type: "BoardV1PostStatus",
-      resolve: (parent) => enumFromJson(PostStatusSchema, parent.status),
+      resolve: (parent) => parent.status ? enumFromJson(PostStatusSchema, parent.status) : null,
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -1246,7 +1269,7 @@ export const BoardV1Post_AttachmentRef = builder.objectRef<Post_Attachment>('Boa
      */
     type: t.field({
       type: "BoardV1PostAttachment_AttachmentType",
-      resolve: (parent) => enumFromJson(Post_Attachment_AttachmentTypeSchema, parent.type),
+      resolve: (parent) => parent.type ? enumFromJson(Post_Attachment_AttachmentTypeSchema, parent.type) : null,
       description: undefined,
       deprecationReason: undefined,
     }),
@@ -1801,7 +1824,7 @@ builder.queryField('boardV1BoardServiceListPosts', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.boardV1BoardService) throw new Error('boardV1BoardService is not provided.');
     return context.boardV1BoardService.listPosts(
-      makeBoardV1PostQueryInput(input),
+      makeBoardV1PostQueryInput$1(input),
       { headers: context.boardV1BoardServiceRequestHeaders },
     );
   },
@@ -1830,7 +1853,7 @@ builder.mutationField('boardV1BoardServiceCreatePost', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.boardV1BoardService) throw new Error('boardV1BoardService is not provided.');
     return context.boardV1BoardService.createPost(
-      makeBoardV1PostInput(input),
+      makeBoardV1PostInput$1(input),
       { headers: context.boardV1BoardServiceRequestHeaders },
     );
   },
@@ -1859,7 +1882,7 @@ builder.mutationField('boardV1BoardServiceDeletePost', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.boardV1BoardService) throw new Error('boardV1BoardService is not provided.');
     return context.boardV1BoardService.deletePost(
-      makeBoardV1PostInput(input),
+      makeBoardV1PostInput$1(input),
       { headers: context.boardV1BoardServiceRequestHeaders },
     );
   },
@@ -1888,7 +1911,7 @@ builder.mutationField('boardV1BoardServiceAddComment', t => t.field({
   resolve: (_root, { input }, context) => {
     if (!context.boardV1BoardService) throw new Error('boardV1BoardService is not provided.');
     return context.boardV1BoardService.addComment(
-      makeBoardV1CommentInput(input),
+      makeBoardV1CommentInput$1(input),
       { headers: context.boardV1BoardServiceRequestHeaders },
     );
   },
@@ -2054,12 +2077,12 @@ export const IntMapEntryInputRef = builder.inputRef<{ key: string; value: number
 import type { UserService } from "./user_pb";
 import type { BoardService } from "./board_pb";
 
-export * from './user_pothos';
-export * from './board_pothos';
-export * from './google/protobuf/empty_pothos';
-export * from './google/protobuf/timestamp_pothos';
-export * from './google/protobuf/struct_pothos';
-export * from './generated-map-entries';
+export * from './user_pothos.ts';
+export * from './board_pothos.ts';
+export * from './google/protobuf/empty_pothos.ts';
+export * from './google/protobuf/timestamp_pothos.ts';
+export * from './google/protobuf/struct_pothos.ts';
+export * from './generated-map-entries.ts';
 export interface GeneratedPothosContext {
   userV1UserService: Client<typeof UserService>;
   userV1UserServiceRequestHeaders?: HeadersInit;
